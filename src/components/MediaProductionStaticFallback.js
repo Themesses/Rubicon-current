@@ -7,6 +7,7 @@ import { BgImage } from "gbimage-bridge"
 const StyledBanner = styled.div`
   display: flex;
   position: relative;
+  overflow: hidden;
   .masthead {
     display: flex;
     position: relative;
@@ -16,7 +17,7 @@ const StyledBanner = styled.div`
     justify-content: flex-start;
     align-items: center;
     opacity: 1 !important;
-    z-index: 999;
+    /* z-index: 999; */
   }
   span {
     color: var(--gold);
@@ -43,22 +44,25 @@ const StyledBanner = styled.div`
     position: absolute;
     inset: -0.1em 0 -0.1em 0;
     background: transparent;
-    z-index: -1;
     background: transparent;
     background: linear-gradient(90deg, #161616 25%, rgba(22, 22, 22, 0) 60%),
-        linear-gradient(180deg, #161616 1%, rgba(22, 22, 22, 0) 30%),
-        linear-gradient(0deg, #161616 4%, rgba(22, 22, 22, 0) 25%);
+      linear-gradient(180deg, #161616 1%, rgba(22, 22, 22, 0) 30%),
+      linear-gradient(0deg, #161616 4%, rgba(22, 22, 22, 0) 25%);
   }
-  .foareground-image {
+  .foreground-image {
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    border: 1px solid red;
-    top: 0;
+    max-width: 80vw;
+
+    top: 0%;
+    right: 0%;
+    transform: translate( 15%, -11%);
     z-index: -1;
   }
 `
 
 const MediaProductionStaticFallback = () => {
-
   const { backgroundImage } = useStaticQuery(
     graphql`
       query {
@@ -81,27 +85,25 @@ const MediaProductionStaticFallback = () => {
     <StyledBanner>
       <BgImage image={pluginImage} className="masthead">
         <div className="gradient-overlay">
-          <div className="parallax-content-wrapper">
-          <div className="headline-wrapper">
-            <h2>
-              media production
-              <br />
-              for quality clients
-            </h2>
-            <p >
-              <span>Rubicon</span>, your limitless source
-              <br />
-              for creative audio/visuals.
-            </p>
+            <div className="headline-wrapper">
+              <h2>
+                media production
+                <br />
+                for quality clients
+              </h2>
+              <p>
+                <span>Rubicon</span>, your limitless source
+                <br />
+                for creative audio/visuals.
+              </p>
+            </div>
+            <StaticImage
+              className="foreground-image"
+              src="../assets/images/globeandhand4.webp"
+              placeholder="none"
+              alt="hand holding a glass globe"
+            />
           </div>
-        {/* <StaticImage
-          className="foreground-image"
-          src="../assets/images/globeandhand4.webp"
-          placeholder="none"
-          alt="hand holding a glass globe"
-        /> */}
-        </div>
-        </div>
       </BgImage>
     </StyledBanner>
   )
