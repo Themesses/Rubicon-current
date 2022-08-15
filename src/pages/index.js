@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import Header from "../components/Header"
 import StaticHeader from "../components/StaticHeader"
 import MediaProduction from "../components/MediaProduction"
+import MediaProductionNew from "../components/MediaProductionNew"
 import MediaProductionStaticFallback from "../components/MediaProductionStaticFallback"
 import ClientGallery from "../components/ClientGallery"
 import VideoLogos from "../components/VideoLogos"
@@ -265,11 +266,13 @@ const Agency = () => {
             initial="hidden"
             animate="visible"
           >
-            {!isJank ? (
+            {/* {!isJank ? ( */}
               <MediaProduction isMobilePortrait={isMobilePortrait} />
-            ) : (
-              <MediaProductionStaticFallback isMobilePortrait={isMobilePortrait} />
-            )}
+              {/* <MediaProductionNew isMobilePortrait={isMobilePortrait} /> */}
+              
+            {/* // ) : ( */}
+              {/* <MediaProductionStaticFallback isMobilePortrait={isMobilePortrait} /> */}
+            {/* )} */}
             <ClientGallery isJank={isJank} />
             <>
               {!isBottom && isMobilePortrait ? (
