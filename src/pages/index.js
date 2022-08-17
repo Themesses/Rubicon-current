@@ -267,8 +267,8 @@ const Agency = () => {
             animate="visible"
           >
             {/* {!isJank ? ( */}
-              <MediaProduction isMobilePortrait={isMobilePortrait} />
-              {/* <MediaProductionNew isMobilePortrait={isMobilePortrait} /> */}
+              {/* <MediaProduction isMobilePortrait={isMobilePortrait} /> */}
+              <MediaProductionNew isMobilePortrait={isMobilePortrait} />
               
             {/* // ) : ( */}
               {/* <MediaProductionStaticFallback isMobilePortrait={isMobilePortrait} /> */}

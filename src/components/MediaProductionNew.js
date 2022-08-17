@@ -88,25 +88,34 @@ const StyledBanner = styled.div`
     position: absolute;
     inset: -0.1em 0 -0.1em 0;
     background: transparent;
-    z-index: -1;   
-    background: linear-gradient(90deg, #161616 25%, rgba(22, 22, 22, 0) 60%);
+    z-index: -1;
+    background: linear-gradient(90deg, #161616 25%, rgba(22, 22, 22, 0) 60%),
+      linear-gradient(180deg, #161616 1%, rgba(22, 22, 22, 0) 30%),
+      linear-gradient(0deg, #161616 4%, rgba(22, 22, 22, 0) 25%);
   }
   .foreground-image {
-    position: absolute;
+    display:none;
+    position: relative;
     transform: translateY(-10%);
   }
   .sphere-wrapper {
     position: absolute;
     top: 30.9%;
-    left: 31.1%;   
+
+    left: 31.1%;
+    width: 20.5vw;
+    height: 20.5vw;
 
     opacity: 100%;
     z-index: -1;
 
+    /* clip-path: circle(50%);
+    border-radius: 50%; */
+
     // make a circle for the sphere
     mask-image: radial-gradient(circle, white 100%, black, 100%);
     -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
-    // transform: rotate(0.000001deg);
+    transform: rotate(0.000001deg);
     -webkit-transform: rotate(0.000001deg);
     border-radius: 50% !important;
     -webkit-border-radius: 50%;
@@ -151,55 +160,66 @@ const StyledBanner = styled.div`
       aspect-ratio: 2.6/1;
     }
   }
-`
-const background = {
-  children: (
-    <video
+  `
+  const background = {
+    translateY: [-30, -5],
+    children: (
+      <video
       autoPlay
-      loop
-      muted
-      playsInline
-      // preload="auto"
-      src={videoLarge}
-      className="parallax-video"
-    />
-  ),
-}
-const foreground = {
-  // translateY: [0, 19],
-  translateX: [21, 21],
-  rotate: [-5, 5],
-  scale: [0.85, 0.85],
-}
+        loop
+        muted
+        playsInline
+        src={videoLarge}
+        className="parallax-video"
+        onPlay={() => {
+            const playButton = document.getElementsByClassName("foreground-image");
+            if(playButton) playButton[0].style.display = "flex"
+        }}
+        />      
+    ),
+  }
+  
+  const handForeground = {
+    translateY: [0, 19],
+    translateX: [21, 21],
+    rotate: [-5, 5],
+    scale: [0.85, 0.85],
+  }
+    
+  const foreground = { 
+    translateY: [0, 19],
+    translateX: [21, 21],
+    rotate: [-5, 5],
+    scale: [0.85, 0.85],
+  }
+  const gradientOverlay = {
+    expanded: false,
+    children: <div className="gradient-overlay" />,
+  }
 
-const gradientOverlay = {
-  expanded: false,
-  children: <div className="gradient-overlay" />,
-}
-
-const headline = {
-  translateY: [2, -2],
-}
+  const headline = {
+    translateY: [2, -2],
+  }
 
 const MediaProduction = () => {
   const { ref, inView } = useInView({
     threshold: 1,
     rootMargin: "-32% 0px -32% 0px",
   })
-
+  
   const flairRef = useRef(null)
   useEffect(() => {
     const flair = flairRef.current
-    if (inView && flair) {
-      flair.style.opacity = "1"
-    }
-    if (!inView && flair) {
-      flair.style.opacity = "0"
-    }
+      if (inView && flair) {
+        flair.style.opacity = "1"
+      }
+      if (!inView && flair) {
+        flair.style.opacity = "0"
+      }
 
   }, [inView, flairRef])
 
-  
+
   // adgjust parallax banner x rotation based on device type
   const { isMac } = useDeviceDetect()
   return (
@@ -209,35 +229,39 @@ const MediaProduction = () => {
         layers={[
           {
             ...background,
-            rotateX: [-35, 35],
+            rotateX: isMac && [-35, 35],
           },
-        foreground,
-        {
+          {
             ...foreground,
             children: (
               <>
-                <StaticImage
-                  className="foreground-image"
-                  src="../assets/images/globeandhand4.webp"
-                  placeholder="none"
-                  alt="hand holding a glass globe"
-                />
                 <div className="sphere-wrapper">
                     <video
                       style={{
-                        position:"absolute",                       
+                        transform: "rotate(180deg) translateX(50%)",
                       }}
                       width="500%"
                       muted
                       autoPlay
                       loop
                       playsInline
-                      src={video}
+                      src={video}                      
                     />
                   <div className="flare" ref={flairRef}/>
-                </div>
+                </div>                
               </>
             ),
+          },
+          {
+            ...handForeground,
+            children: (
+              <StaticImage
+                  className="foreground-image"
+                  src="../assets/images/globeandhand4.webp"
+                  placeholder="none"
+                  alt="hand holding a glass globe"
+              />           
+            )
           },
           gradientOverlay,
           {
@@ -249,7 +273,7 @@ const MediaProduction = () => {
                   <br />
                   for quality clients
                 </h2>
-                <p ref={ref}>                
+                <p ref={ref}>
                   <span>Rubicon</span>, your
                   limitless source
                   <br />

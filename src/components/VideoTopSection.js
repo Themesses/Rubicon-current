@@ -149,6 +149,10 @@ const StyledImage = styled.div`
       height: 59px;
       width: 90px;
     }
+    ${StyledSection}:hover & .play-icon .gold-play-button{    
+      margin-left: 11px;
+      margin-top: 3px;
+    }
   }
 `
 
@@ -179,7 +183,7 @@ const StyledBanner = styled.div`
     height: 100%;
     width: 100%;
   }
-
+  
   .poster22-overlay{
     display: none;
   }
@@ -230,7 +234,7 @@ const renderVideo = ({
               layers={[
                 {               
                   children: (
-                    <video
+                    <video                   
                       id="posterOverlayOpening"
                       autoPlay
                       muted
