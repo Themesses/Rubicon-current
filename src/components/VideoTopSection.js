@@ -3,6 +3,8 @@ import PropTypes from "prop-types"
 import { ParallaxProvider, ParallaxBanner } from "react-scroll-parallax";
 import posterOpeningLoopVideo from "../assets/video/poster-opening-loop-video.mp4";
 import posterOpeningVideo from "../assets/video/poster-opening-video.mp4";
+import WhitePlayButton from "../assets/images/WhitePlayButton.svg";
+import YellowPlayButton from "../assets/images/YellowPlayButton.svg";
 import grayPlayButton from "../assets/images/Triangle.svg";
 import goldPlayButton from "../assets/images/GoldPlayButton.svg";
 import { motion } from "framer-motion"
@@ -96,7 +98,7 @@ const StyledImage = styled.div`
     background-color: transparent;
     z-index: 99;
     margin-left: -55px;
-    margin-top: 2px;
+    margin-top: 0px;
   }
 
   .play-icon .gray-play-button {
@@ -109,8 +111,8 @@ const StyledImage = styled.div`
   }
 
   .play-icon .gold-play-button svg{   
-    height: 74px;
-    width: 67px;
+    // height: 74px;
+    // width: 67px;
   }
 
   ${StyledSection}:hover & .play-icon {
@@ -121,15 +123,17 @@ const StyledImage = styled.div`
   }
   
   ${StyledSection}:hover & svg path{
-    stroke: var(--gold);
-    filter: brightness(110%) drop-shadow(2px 2px 5px #ffb800) ;
+    // stroke: var(--gold);
+    // filter: brightness(110%) drop-shadow(2px 2px 5px #ffb800);
+    // -webkit-transform: scale(2.25, 2.25);
+    // transform: scale(2.25, 2.25);
   }
 
   ${StyledSection}:hover & .play-icon .gold-play-button{
     display: block;  
     z-index: 102;
-    margin-left: 1.2px;
-    margin-top: 0.5px;
+    margin-left: 23px;
+    margin-top: 5px;
   }
 
   ${StyledSection}:hover & .play-icon .gray-play-button{
@@ -191,6 +195,16 @@ const StyledBanner = styled.div`
     }
   }
 `
+
+const rubiGlowAnimationVariants = {
+  hidden: {
+    filter: "drop-shadow(0 0 0 var(--black)",
+  },
+  visible: {
+    filter: "drop-shadow(0 0 0.3em var(--gold)",
+  },
+}
+
 const renderVideo = ({
   noControls,
   src,
@@ -307,8 +321,19 @@ const renderVideo = ({
                   }}
                   onClick={handleToggleVideo}
                   >
-                    <img src={goldPlayButton} alt="play-Video" className="gold-play-button" />
-                    <img src={grayPlayButton} alt="play-Video" className="gray-play-button" />
+
+                  <motion.img
+                    variants={rubiGlowAnimationVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="gold-play-button"
+                    src={YellowPlayButton}
+                  />
+
+                    
+                  <img src={WhitePlayButton} alt="play-Video" className="gray-play-button" />
+                    {/* <img src={goldPlayButton} alt="play-Video" className="gold-play-button" />
+                    <img src={grayPlayButton} alt="play-Video" className="gray-play-button" /> */}
                 </motion.button>
               </StyledImage>
             </div>
