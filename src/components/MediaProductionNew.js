@@ -1,4 +1,4 @@
-import React, {  useEffect, useRef } from "react"
+import React, {  useEffect, useRef, useState } from "react"
 import { ParallaxBanner } from "react-scroll-parallax"
 import {  StaticImage } from "gatsby-plugin-image"
 import video from "../assets/video/waterfall.mp4"
@@ -163,11 +163,16 @@ const StyledBanner = styled.div`
 `
 
 const MediaProduction = () => {
+  const [waterfallVideo, setWaterfallVideo] = useState(false);
+  const [reverseVideo, setReverseVideo] = useState(false);
+  const [handImage, setHandImage] = useState(false);
+  const [v4, setV4] = useState(false);
+
   const { ref, inView } = useInView({
     threshold: 1,
     rootMargin: "-32% 0px -32% 0px",
   })
-  
+
   const flairRef = useRef(null)
   useEffect(() => {
     const flair = flairRef.current
@@ -177,8 +182,11 @@ const MediaProduction = () => {
       if (!inView && flair) {
         flair.style.opacity = "0"
       }
-
   }, [inView, flairRef]);
+
+  useEffect(() => {
+    loadAllITems();
+  }, [waterfallVideo, reverseVideo, handImage, v4]);
 
 
   const background = {
@@ -190,14 +198,37 @@ const MediaProduction = () => {
         muted
         playsInline
         src={videoLarge}
-        className="parallax-video"
+        className="parallax-video main-video"
         onPlay={() => {
-            const playButton = document.getElementsByClassName("foreground-image");
-            if(playButton) playButton[0].style.display = "flex"
-            flairRef.current.style.display = "inline-block"
+          setWaterfallVideo(true);
+          const playButton = document.getElementsByClassName("foreground-image");
+          if(playButton) playButton[0].style.display = "flex"
+          flairRef.current.style.display = "inline-block"
+        }}
+        style={{
+          opacity: 0,
+          visibility: "hidden"
         }}
         />      
     ),
+  }
+
+  const loadAllITems = () => {
+    if(waterfallVideo && reverseVideo && handImage){
+      const mainVideo = document.getElementsByClassName("main-video");
+      const sphereVideo = document.getElementsByClassName("sphere-video");
+      const foregroundImage = document.getElementsByClassName("foreground-image");
+      if(mainVideo && sphereVideo && foregroundImage){
+        mainVideo[0].style.opacity = 1
+        mainVideo[0].style.visibility = "visible"
+        sphereVideo[0].style.opacity = 1
+        sphereVideo[0].style.visibility = "visible"
+        foregroundImage[0].style.opacity = 1
+        foregroundImage[0].style.visibility = "visible"
+        flairRef.current.style.opacity = 1
+        flairRef.current.style.visibility = "visible"
+      }
+    }
   }
 
   const handForeground = {
@@ -239,17 +270,27 @@ const MediaProduction = () => {
               <>
                 <div className="sphere-wrapper">
                     <video
+                      className="sphere-video"
                       style={{
                         transform: "rotate(180deg) translateX(50%)",
+                        opacity: 0,
+                        visibility: "hidden"
                       }}
                       width="500%"
                       muted
                       autoPlay
                       loop
                       playsInline
-                      src={video}                      
+                      src={video}     
+                      onPlay={() => {
+                        setReverseVideo(true);
+                      }}                 
                     />
-                  <div className="flare" ref={flairRef}/>
+                  <div className="flare" style={{
+                        opacity: 0,
+                        visibility: "hidden"
+                      }} 
+                      ref={flairRef}/>
                 </div>                
               </>
             ),
@@ -258,10 +299,17 @@ const MediaProduction = () => {
             ...handForeground,
             children: (
               <StaticImage
+                  style={{
+                    opacity: 0,
+                    visibility: "hidden"
+                  }}
                   className="foreground-image"
                   src="../assets/images/globeandhand4.webp"
                   placeholder="none"
                   alt="hand holding a glass globe"
+                  onLoad={() => {
+                    setHandImage(true);
+                  }} 
               />           
             )
           },
