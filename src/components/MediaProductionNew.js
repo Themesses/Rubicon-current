@@ -190,7 +190,7 @@ const MediaProduction = () => {
 
 
   const background = {
-    translateY: [-30, -5],
+    translateY: [-30, 20],
     children: (
       <video
       autoPlay
