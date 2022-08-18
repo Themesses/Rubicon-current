@@ -182,12 +182,21 @@ const StyledBanner = styled.div`
     z-index: 1;
     height: 100%;
     width: 100%;
-  }
-  
-  .poster22-overlay{
-    display: none;
+    margin-top: -15px;
   }
 
+  .poster22-overlay{
+    display: none;
+
+    margin-top: -15px;
+
+  }
+
+  @media screen and (max-width: 1200px) {
+    .main-parallax-banner {
+      aspect-ratio: 1/1;
+    }
+  }
   @media screen and (max-width: 920px) {
     .main-parallax-banner {
       aspect-ratio: 1/1;
@@ -199,7 +208,6 @@ const StyledBanner = styled.div`
     }
   }
 `
-
 const rubiGlowAnimationVariants = {
   hidden: {
     filter: "drop-shadow(0 0 0 var(--black)",
@@ -234,7 +242,7 @@ const renderVideo = ({
               layers={[
                 {               
                   children: (
-                    <video                   
+                    <video
                       id="posterOverlayOpening"
                       autoPlay
                       muted
@@ -375,15 +383,22 @@ const renderVideo = ({
             posterOpening[0].style.display = "block"
             videoClass[0].style.height = "100%"
             initialVideo[0].style.width = "90%"
+            initialVideo[0].style.opacity = 0
+            initialVideo[0].style.visibility = "hidden"
           }}
+          src={src}
           style={{
             position: "relative",
             width: "90%",
-            maxHeight: "100%",
+            maxHeight: "100vh",
+            objectFit: "fill",
+            opacity: 0,
+            display: "block",
+            visibility: "hidden",
           }}
         >
-          <source src={src} type="video/mp4"  />
-        </video>
+        {/* <source src={src} type="video/mp4"  /> */}
+      </video>
       </div>
     ) : (
       <video src={src} onClick={handleToggleVideo} controls controlsList="nodownload"></video>
@@ -419,6 +434,8 @@ export default function VideoTopSection({ src, poster, noControls, onEnded }) {
     posterOpening[0].style.display = "none"
     videoClass[0].style.height = "95%"
     initialVideo[0].style.width = "100%"
+    initialVideo[0].style.opacity = 1
+    initialVideo[0].style.visibility = "visible"
     playButton[0].style.display = "none"
     console.log("navigation", navigation)
     navigation ? console.log('there', navigation): console.log ('not', navigation)
@@ -432,6 +449,8 @@ const handlePause = () => {
     posterOverlay[0].style.display = "block"
     videoClass[0].style.height = "100%"
     initialVideo[0].style.width = "100%"
+    initialVideo[0].style.opacity = 1
+    initialVideo[0].style.visibility = "visible"
     playButton[0].style.display = "flex"
   }
 

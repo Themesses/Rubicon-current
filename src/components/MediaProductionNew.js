@@ -122,7 +122,7 @@ const StyledBanner = styled.div`
     -moz-border-radius: 50%;
   }
   .flare {
-    display: inline-block;
+    display: none;
     position: absolute;
     left: 35%;
     top: 50%;
@@ -160,7 +160,27 @@ const StyledBanner = styled.div`
       aspect-ratio: 2.6/1;
     }
   }
-  `
+`
+
+const MediaProduction = () => {
+  const { ref, inView } = useInView({
+    threshold: 1,
+    rootMargin: "-32% 0px -32% 0px",
+  })
+  
+  const flairRef = useRef(null)
+  useEffect(() => {
+    const flair = flairRef.current
+      if (inView && flair) {
+        flair.style.opacity = "1"
+      }
+      if (!inView && flair) {
+        flair.style.opacity = "0"
+      }
+
+  }, [inView, flairRef]);
+
+
   const background = {
     translateY: [-30, -5],
     children: (
@@ -174,11 +194,12 @@ const StyledBanner = styled.div`
         onPlay={() => {
             const playButton = document.getElementsByClassName("foreground-image");
             if(playButton) playButton[0].style.display = "flex"
+            flairRef.current.style.display = "inline-block"
         }}
         />      
     ),
   }
-  
+
   const handForeground = {
     translateY: [0, 19],
     translateX: [21, 21],
@@ -200,25 +221,6 @@ const StyledBanner = styled.div`
   const headline = {
     translateY: [2, -2],
   }
-
-const MediaProduction = () => {
-  const { ref, inView } = useInView({
-    threshold: 1,
-    rootMargin: "-32% 0px -32% 0px",
-  })
-  
-  const flairRef = useRef(null)
-  useEffect(() => {
-    const flair = flairRef.current
-      if (inView && flair) {
-        flair.style.opacity = "1"
-      }
-      if (!inView && flair) {
-        flair.style.opacity = "0"
-      }
-
-  }, [inView, flairRef])
-
 
   // adgjust parallax banner x rotation based on device type
   const { isMac } = useDeviceDetect()
