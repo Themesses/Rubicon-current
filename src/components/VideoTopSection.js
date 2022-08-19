@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 import { ParallaxProvider, ParallaxBanner } from "react-scroll-parallax";
 import posterOpeningLoopVideo from "../assets/video/poster-opening-loop-video.mp4";
@@ -10,6 +10,35 @@ import goldPlayButton from "../assets/images/GoldPlayButton.svg";
 import { motion } from "framer-motion"
 import styled from "styled-components"
 const isBrowser = typeof window !== "undefined"
+
+
+const StyledCloseIcon = styled.div`
+  .close {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 24px;
+    height: 24px;
+    opacity: 1;
+    z-index: 100;
+    cursor: pointer;
+    display: none;
+  }
+  .close:before, .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 24px;
+    width: 2px;
+    background-color: #333;
+  }
+  .close:before {
+    transform: rotate(45deg);
+  }
+  .close:after {
+    transform: rotate(-45deg);
+  }
+`
 
 const StyledSection = styled.div`
   @keyframes fadein {
@@ -223,7 +252,8 @@ const renderVideo = ({
   vidButtonRef,
   vidRef,
   handleToggleVideo,
-  handlePause,
+  onEnded,
+  handleVideoEnd,
 }) => (
   <>
     {noControls ?
@@ -351,41 +381,16 @@ const renderVideo = ({
             </div>
           </motion.div>
         </StyledSection>
+        <StyledCloseIcon>
+          <div className="close" onClick={handleVideoEnd}>
+          </div>
+        </StyledCloseIcon>
         <video
           ref={vidRef}
           className="initialVideo"
           controlsList="nodownload"
           preload="metadata" 
-          onEnded={() => {
-            const posterOverlay = isBrowser
-            ? document.getElementsByClassName("poster22-overlay")
-            : "";
-
-            const playButton = isBrowser
-            ? document.getElementsByClassName("play-button")
-            : ""
-
-            const posterOpening = isBrowser
-            ? document.getElementsByClassName("posterOverlayOpening")
-            : "";
-
-            const videoClass = isBrowser
-            ? document.getElementsByClassName("video-class")
-            : ""
-            const initialVideo = isBrowser ? document.getElementsByClassName("initialVideo") : "";
-
-            vidButtonRef.current.classList.remove("is-playing")
-            vidButtonRef.current.style.display = "flex"
-            vidRef.current.load()
-            vidRef.current.controls = false
-            playButton[0].style.display = "flex"
-            posterOverlay[0].style.display = "block"
-            posterOpening[0].style.display = "block"
-            videoClass[0].style.height = "100%"
-            initialVideo[0].style.width = "90%"
-            initialVideo[0].style.opacity = 0
-            initialVideo[0].style.visibility = "hidden"
-          }}
+          onEnded={handleVideoEnd}
           src={src}
           style={{
             position: "relative",
@@ -395,16 +400,18 @@ const renderVideo = ({
             opacity: 0,
             display: "block",
             visibility: "hidden",
+            zIndex: 2
           }}
         >
-        {/* <source src={src} type="video/mp4"  /> */}
-      </video>
+          {/* <source src={src} type="video/mp4"  /> */}
+        </video>
       </div>
     ) : (
       <video src={src} onClick={handleToggleVideo} controls controlsList="nodownload"></video>
     )}
   </>
 )
+
 
 export default function VideoTopSection({ src, poster, noControls, onEnded }) {
   const vidRef = useRef(null)
@@ -422,8 +429,58 @@ export default function VideoTopSection({ src, poster, noControls, onEnded }) {
   const playButton = isBrowser
     ? document.getElementsByClassName("play-button")
     : ""
+  
+  const closeIcon = isBrowser
+    ? document.getElementsByClassName("close")
+    : ""
   const initialVideo = isBrowser ? document.getElementsByClassName("initialVideo") : "";
 
+  useEffect(() => {
+    function handleEsc(event) {
+      if (event.keyCode === 27) {
+        handleVideoEnd()
+      }
+    }
+    window.addEventListener("keydown", handleEsc)
+    return (_) => {
+      window.removeEventListener("keydown", handleEsc)
+    }
+
+  }, [])
+
+
+  const handleVideoEnd = () => {
+    console.log("VIDEO ENDED")
+    const posterOverlay = isBrowser
+    ? document.getElementsByClassName("poster22-overlay")
+    : "";
+
+    const playButton = isBrowser
+    ? document.getElementsByClassName("play-button")
+    : ""
+
+    const posterOpening = isBrowser
+    ? document.getElementsByClassName("posterOverlayOpening")
+    : "";
+
+    const videoClass = isBrowser
+    ? document.getElementsByClassName("video-class")
+    : ""
+
+    vidButtonRef.current.classList.remove("is-playing")
+    vidButtonRef.current.style.display = "flex"
+    vidRef.current.load()
+    vidRef.current.controls = false
+    playButton[0].style.display = "flex"
+    posterOverlay[0].style.display = "block"
+    posterOpening[0].style.display = "block"
+    videoClass[0].style.height = "100%"
+    videoClass[0].style.zIndex = 1
+    initialVideo[0].style.width = "90%"
+    initialVideo[0].style.opacity = 0
+    closeIcon[0].style.display = "none"
+    initialVideo[0].style.visibility = "hidden"
+  }
 
   const handlePlay = () => {
     vidRef.current.play()
@@ -437,6 +494,7 @@ export default function VideoTopSection({ src, poster, noControls, onEnded }) {
     initialVideo[0].style.opacity = 1
     initialVideo[0].style.visibility = "visible"
     playButton[0].style.display = "none"
+    closeIcon[0].style.display = "block"
     console.log("navigation", navigation)
     navigation ? console.log('there', navigation): console.log ('not', navigation)
 }
@@ -451,10 +509,12 @@ const handlePause = () => {
     initialVideo[0].style.width = "100%"
     initialVideo[0].style.opacity = 1
     initialVideo[0].style.visibility = "visible"
+    closeIcon[0].style.display = "block"
     playButton[0].style.display = "flex"
   }
 
   const handleToggleVideo = () => {
+    videoClass[0].style.zIndex = 0
     vidRef.current.paused ? handlePlay() : handlePause()
   }
     
@@ -468,6 +528,7 @@ const handlePause = () => {
         vidRef,
         handleToggleVideo,
         onEnded,
+        handleVideoEnd,
       })}
     </>
   )
