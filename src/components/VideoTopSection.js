@@ -396,7 +396,7 @@ const renderVideo = ({
             position: "relative",
             width: "90%",
             maxHeight: "100vh",
-            objectFit: "fill",
+            // objectFit: "fill",
             opacity: 0,
             display: "block",
             visibility: "hidden",
@@ -495,6 +495,12 @@ export default function VideoTopSection({ src, poster, noControls, onEnded }) {
     initialVideo[0].style.visibility = "visible"
     playButton[0].style.display = "none"
     closeIcon[0].style.display = "block"
+    
+    initialVideo[0].style.minWidth = "100%"
+    initialVideo[0].style.minHeight = "100%"
+    initialVideo[0].style.right = "0"
+    initialVideo[0].style.bottom = "0"
+
     console.log("navigation", navigation)
     navigation ? console.log('there', navigation): console.log ('not', navigation)
 }
@@ -511,6 +517,11 @@ const handlePause = () => {
     initialVideo[0].style.visibility = "visible"
     closeIcon[0].style.display = "block"
     playButton[0].style.display = "flex"
+
+    initialVideo[0].style.minWidth = "100%"
+    initialVideo[0].style.minHeight = "100%"
+    initialVideo[0].style.right = "0"
+    initialVideo[0].style.bottom = "0"
   }
 
   const handleToggleVideo = () => {
