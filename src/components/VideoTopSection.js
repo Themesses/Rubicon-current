@@ -3,8 +3,8 @@ import PropTypes from "prop-types"
 import { ParallaxProvider, ParallaxBanner } from "react-scroll-parallax";
 import posterOpeningLoopVideo from "../assets/video/poster-opening-loop-video.mp4";
 import posterOpeningVideo from "../assets/video/poster-opening-video.mp4";
-import WhitePlayButton from "../assets/images/WhitePlayButton.svg";
-import YellowPlayButton from "../assets/images/YellowPlayButton.svg";
+import WhitePlayButton from "../assets/images/WhitePlayButton2022-08-22.svg";
+import YellowPlayButton from "../assets/images/YellowPlayButton2022-08-22.svg";
 import grayPlayButton from "../assets/images/Triangle.svg";
 import goldPlayButton from "../assets/images/GoldPlayButton.svg";
 import { motion } from "framer-motion"
@@ -90,7 +90,7 @@ const StyledButton = styled.div`
   }
 
   ${StyledSection}:hover & svg path{
-    fill: #ffffff;
+    fill: var(--beige);
   }
 
   @media screen and (max-width: 1200px) {
@@ -126,7 +126,7 @@ const StyledImage = styled.div`
     border-radius: 0.5rem;
     background-color: transparent;
     z-index: 99;
-    margin-left: -55px;
+    margin-left: -52px;
     margin-top: 0px;
   }
 
@@ -214,6 +214,10 @@ const StyledBanner = styled.div`
     margin-top: -15px;
   }
 
+  .poster22-overlay,.posterOverlayOpening {    
+    object-fit: cover;
+  }
+
   .poster22-overlay{
     display: none;
 
@@ -230,10 +234,16 @@ const StyledBanner = styled.div`
     .main-parallax-banner {
       aspect-ratio: 1/1;
     }
+    .video-class {
+      width:89%
+    }
   }
   @media screen and (max-width: 520px) {
     .main-parallax-banner {
       aspect-ratio: 1/1;
+    }
+    .video-class {
+      width:89%;
     }
   }
 `
@@ -245,6 +255,16 @@ const rubiGlowAnimationVariants = {
     filter: "drop-shadow(0 0 0.3em var(--gold)",
   },
 }
+
+  const VideoStyledBanner = styled.div`
+    @media screen and (min-width: 1200px) {
+      @media screen and (min-height: 876px) {
+        .initialVideo {
+          width:100% !important
+        }
+      }
+    }
+  `
 
 const renderVideo = ({
   noControls,
@@ -385,26 +405,28 @@ const renderVideo = ({
           <div className="close" onClick={handleVideoEnd}>
           </div>
         </StyledCloseIcon>
-        <video
-          ref={vidRef}
-          className="initialVideo"
-          controlsList="nodownload"
-          preload="metadata" 
-          onEnded={handleVideoEnd}
-          src={src}
-          style={{
-            position: "relative",
-            width: "90%",
-            maxHeight: "100vh",
-            // objectFit: "fill",
-            opacity: 0,
-            display: "block",
-            visibility: "hidden",
-            zIndex: 2
-          }}
-        >
-          {/* <source src={src} type="video/mp4"  /> */}
-        </video>
+        <VideoStyledBanner>       
+          <video
+            ref={vidRef}
+            className="initialVideo"
+            controlsList="nodownload"
+            preload="metadata" 
+            onEnded={handleVideoEnd}
+            src={src}
+            style={{
+              position: "relative",
+              width: "90%",
+              maxHeight: "100vh",
+              // objectFit: "fill",
+              opacity: 0,
+              display: "block",
+              visibility: "hidden",
+              zIndex: 2
+            }}
+          >
+            {/* <source src={src} type="video/mp4"  /> */}
+          </video>
+        </VideoStyledBanner>
       </div>
     ) : (
       <video src={src} onClick={handleToggleVideo} controls controlsList="nodownload"></video>
