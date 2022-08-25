@@ -3,8 +3,8 @@ import PropTypes from "prop-types"
 import { ParallaxProvider, ParallaxBanner } from "react-scroll-parallax";
 import posterOpeningLoopVideo from "../assets/video/poster-opening-loop-video.mp4";
 import posterOpeningVideo from "../assets/video/poster-opening-video.mp4";
-import WhitePlayButton from "../assets/images/WhitePlayButton2022-08-22.svg";
-import YellowPlayButton from "../assets/images/YellowPlayButton2022-08-22.svg";
+import WhitePlayButton from "../assets/images/WhitePlayButton.svg";
+import YellowPlayButton from "../assets/images/YellowPlayButton.svg";
 import grayPlayButton from "../assets/images/Triangle.svg";
 import goldPlayButton from "../assets/images/GoldPlayButton.svg";
 import { motion } from "framer-motion"
@@ -264,6 +264,11 @@ const rubiGlowAnimationVariants = {
         }
       }
     }
+    @media screen and (min-width: 620px) and (max-width: 920px) {
+      .initialVideoDiv {
+        height:100vh 
+      }      
+    }
   `
 
 const renderVideo = ({
@@ -405,27 +410,29 @@ const renderVideo = ({
           <div className="close" onClick={handleVideoEnd}>
           </div>
         </StyledCloseIcon>
-        <VideoStyledBanner>       
-          <video
-            ref={vidRef}
-            className="initialVideo"
-            controlsList="nodownload"
-            preload="metadata" 
-            onEnded={handleVideoEnd}
-            src={src}
-            style={{
-              position: "relative",
-              width: "90%",
-              maxHeight: "100vh",
-              // objectFit: "fill",
-              opacity: 0,
-              display: "block",
-              visibility: "hidden",
-              zIndex: 2
-            }}
-          >
-            {/* <source src={src} type="video/mp4"  /> */}
-          </video>
+        <VideoStyledBanner>    
+          <div className="initialVideoDiv">
+            <video
+              ref={vidRef}
+              className="initialVideo"
+              controlsList="nodownload"
+              preload="metadata" 
+              onEnded={handleVideoEnd}
+              src={src}
+              style={{
+                position: "relative",
+                width: "90%",
+                maxHeight: "100vh",
+                // objectFit: "fill",
+                opacity: 0,
+                display: "block",
+                visibility: "hidden",
+                zIndex: 2
+              }}
+            >
+              {/* <source src={src} type="video/mp4"  /> */}
+            </video>
+          </div>
         </VideoStyledBanner>
       </div>
     ) : (
