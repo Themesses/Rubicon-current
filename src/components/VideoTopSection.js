@@ -256,20 +256,20 @@ const rubiGlowAnimationVariants = {
   },
 }
 
-  const VideoStyledBanner = styled.div`
-    @media screen and (min-width: 1200px) {
-      @media screen and (min-height: 876px) {
-        .initialVideo {
-          width:100% !important
-        }
+const VideoStyledBanner = styled.div`
+  @media screen and (min-width: 1200px) {
+    @media screen and (min-height: 876px) {
+      .initialVideo {
+        width:100% !important
       }
     }
-    @media screen and (min-width: 620px) and (max-width: 920px) {
-      .initialVideoDiv {
-        height:100vh 
-      }      
-    }
-  `
+  }
+  @media screen and (min-width: 620px){
+    .initialVideoDiv {
+      height:100vh 
+    }      
+  }
+`
 
 const renderVideo = ({
   noControls,
