@@ -3,9 +3,9 @@ module.exports = {
     title: `rubiconstory`,
     siteUrl: `https://www.rubiconstory.com`,
   },
-  flags: {
-    DEV_SSR: true,
-  },
+  // flags: {
+  //   DEV_SSR: true,
+  // },
   plugins: [
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
@@ -19,10 +19,10 @@ module.exports = {
       resolve: `gatsby-plugin-webfonts`,
       options: {
         fonts: {
-          google2: [
+          google: [
             {
               family: "Lexend Deca",
-              axes: "wght@200;400;500",
+              variants: ["100,200,300,400,500"],
             },
           ],
         },

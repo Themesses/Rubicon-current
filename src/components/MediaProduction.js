@@ -1,6 +1,6 @@
-import React, {  useEffect, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { ParallaxBanner } from "react-scroll-parallax"
-import {  StaticImage } from "gatsby-plugin-image"
+import { StaticImage } from "gatsby-plugin-image"
 import video from "../assets/video/waterfall.mp4"
 import videoLarge from "../assets/video/waterfall.mp4"
 import styled from "styled-components"
@@ -96,9 +96,9 @@ const StyledBanner = styled.div`
     /* background: */
     background: linear-gradient(90deg, #161616 25%, rgba(22, 22, 22, 0) 60%),
       /* linear-gradient(-90deg, #161616 1%, rgba(22, 22, 22, 0) 30%), */
-      linear-gradient(180deg, #161616 1%, rgba(22, 22, 22, 0) 30%),
+        linear-gradient(180deg, #161616 1%, rgba(22, 22, 22, 0) 30%),
       /* radial-gradient(circle at 65% 50%, rgba(22,22,22, 0) 25%, #161616 55%), */
-      linear-gradient(0deg, #161616 4%, rgba(22, 22, 22, 0) 25%);
+        linear-gradient(0deg, #161616 4%, rgba(22, 22, 22, 0) 25%);
   }
   .foreground-image {
     position: relative;
@@ -134,9 +134,9 @@ const StyledBanner = styled.div`
     left: 35%;
     top: 50%;
     width: 10%;
-    background: rgba(255, 255, 250, .7);
+    background: rgba(255, 255, 250, 0.7);
     transform: scale(2.1);
-    box-shadow: 0 0 8px 5px rgba(255, 255, 250, .8);
+    box-shadow: 0 0 8px 5px rgba(255, 255, 250, 0.8);
     transition: opacity 0.5s ease-in-out;
     &:after,
     &:before {
@@ -175,17 +175,17 @@ const background = {
   // scale: [1.2, 1.2, 1.2, 1.2],
   // shouldAlwaysCompleteAnimation: true,
   // expanded: false,
-  children: (
-    <video
-      autoPlay
-      loop
-      muted
-      playsInline
-      // preload="auto"
-      src={videoLarge}
-      className="parallax-video"
-    />
-  ),
+  // children: (
+  //   <video
+  //     autoPlay
+  //     loop
+  //     muted
+  //     playsInline
+  //     // preload="auto"
+  //     src={videoLarge}
+  //     className="parallax-video"
+  //   />
+  // ),
 }
 const foreground = {
   // image: `${image}`,
@@ -239,11 +239,45 @@ const headline = {
 }
 
 const MediaProduction = () => {
-  const { ref, inView } = useInView({
+  const [ ref, inView ] = useInView({
     threshold: 1,
     rootMargin: "-32% 0px -32% 0px",
   })
 
+  const [ ref2, inView2 ] = useInView({
+    threshold: 0.1,
+  })
+  const [ ref3, inView3 ] = useInView({
+    threshold: 0.1,
+  })
+
+  useEffect(() => {
+    if (inView2) {
+      // alert("in view")
+      console.log("inView video")
+    } else {
+      console.log("out of view video")
+    }
+  }, [inView2])
+  useEffect(() => {
+    if (inView3) {
+      // alert("in view")
+      console.log("inView sphere")
+    } else {
+      console.log("out of view sphere")
+    }
+  }, [inView3])
+
+  // useEffect(() => {
+  //   //check if content is loaded
+  //   if (inView) {
+  //     // console.log("in view") or something
+  //   } else {
+  //     // console.log("not in view") or something
+  //   }
+  // })
+
+  const videoReflectionRef = useRef(null)
   const flairRef = useRef(null)
   useEffect(() => {
     const flair = flairRef.current
@@ -253,7 +287,6 @@ const MediaProduction = () => {
     if (!inView && flair) {
       flair.style.opacity = "0"
     }
-
   }, [inView, flairRef])
 
   // useEffect(() => {
@@ -274,6 +307,18 @@ const MediaProduction = () => {
           {
             ...background,
             rotateX: isMac && [-35, 35],
+            children: (
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                  src={videoLarge}
+                  className="parallax-video"
+                  ref={ref2}
+                />
+            ),
           },
           // foreground,
           {
@@ -286,27 +331,26 @@ const MediaProduction = () => {
                   placeholder="none"
                   alt="hand holding a glass globe"
                 />
-                <div className="sphere-wrapper">
+                <div className="sphere-wrapper" ref={ref3}>
                   {/* <Parallax rotateZ={[-10, 10]}> */}
-                    <video
-                      style={{
-                        transform: "rotate(180deg) translateX(50%)",
-                      }}
-                      width="500%"
-                      muted
-                      autoPlay
-                      loop
-                      playsInline
-                      src={video}
-                      // poster={image}
-                    />
+                  <video
+                    style={{
+                      transform: "rotate(180deg) translateX(50%)",
+                    }}
+                    width="500%"
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
+                    src={video}
+                    ref={videoReflectionRef}
+                    // poster={image}
+                  />
                   {/* </Parallax> */}
-                  <div className="flare" ref={flairRef}/>
+                  <div className="flare" ref={flairRef} />
                 </div>
               </>
             ),
-
-
           },
           gradientOverlay,
           {
@@ -320,8 +364,7 @@ const MediaProduction = () => {
                 </h2>
                 <p ref={ref}>
                   {/* <span className="shimmer-rubicon">Rubicon</span>, your */}
-                  <span>Rubicon</span>, your
-                  limitless source
+                  <span>Rubicon</span>, your limitless source
                   <br />
                   for creative audio/visuals.
                 </p>

@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react"
 import Header from "../components/Header"
 import StaticHeader from "../components/StaticHeader"
 import MediaProduction from "../components/MediaProduction"
+import MediaProductionNew from "../components/MediaProductionNew"
 import MediaProductionStaticFallback from "../components/MediaProductionStaticFallback"
+import ModalMore from "../components/ModalMore"
+import ModalSayHey from "../components/ModalSayHey"
+import ModalAboutUs from "../components/ModalAboutUs"
 import ClientGallery from "../components/ClientGallery"
 import VideoLogos from "../components/VideoLogos"
 import OriginalStories from "../components/OriginalStories"
@@ -16,6 +20,7 @@ import VideoLogosMobile from "../components/VideoLogosMobile"
 import VideoLogosMobileLandscape from "../components/VideoLogosMobileLandscape"
 import Navigation from "../components/Navigation"
 import jankcb from "../components/functions/jankcb.js"
+import ClientCarousel from "../components/ClientCarousel"
 // import useDeviceDetect from "../components/hooks/useDeviceDetect"
 
 const isBrowser = typeof window !== "undefined"
@@ -40,7 +45,7 @@ const AnimatedSection = styled(motion.div)`
   display: flex;
   flex-direction: column;
 `
-const Agency = () => {
+const Agency = ({ isVideoVisible }) => {
   // state for checking if user scrolled to the bottom of the page
   const [isBottom, setIsBottom] = useState(false)
   // state for checking if it's a first render
@@ -64,6 +69,14 @@ const Agency = () => {
   // state for checking FPS loss, if true then parallax replaced with static fallback (MediaProductionStaticFallback - incomplete)
   const [isJank, setIsJank] = useState(false)
 
+  // state for toggling the nav
+  const [showNav, setShowNav] = useState(false)
+
+  // state for toggling the modal
+  const [showModalMore, setShowModalMore] = useState(false)
+  const [showSayHeyModal, setShowSayHeyModal] = useState(false)
+  const [showAboutUsModal, setShowAboutUsModal] = useState(false)
+  console.log("is video visible", isVideoVisible)
 
   // intersection observer hook for checking if user scrolled to the bottom of the page via handleResize()
   const { ref, inView } = useInView({
@@ -134,9 +147,9 @@ const Agency = () => {
       setIsDesktop(true)
     }
     if (
+      dimensions.height < dimensions.width &&
       dimensions.width < 920 &&
-      dimensions.width > 500 &&
-      dimensions.height < dimensions.width
+      dimensions.width > 500
     ) {
       console.log("mobile landscape")
       setIsMobileLandscape(true)
@@ -172,7 +185,7 @@ const Agency = () => {
       // smooth scroll on safari not working atm
       window.requestAnimationFrame(() => {
         window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
-      },)
+      })
     } else {
       return
     }
@@ -204,34 +217,45 @@ const Agency = () => {
     isWindowTop,
   ])
 
-
   //scroll event listenenr for scroll shimmer on page load
 
   //shimmer is activated on scroll and passess through the main title. Due to perf issues currently turned off.
-  // useEffect(() => {
-  //   window.addEventListener(
-  //     "scroll",
-  //     () => {
-  //       document.body.style.setProperty(
-  //         "--scroll",
-  //         window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
-  //       )
-  //     },
-  //     { passive: true }
-  //   )
-  //   return () =>
-  //     window.removeEventListener(
-  //       "scroll",
-  //       () => {
-  //         document.body.style.setProperty(
-  //           "--scroll",
-  //           window.pageYOffset /
-  //             (document.body.offsetHeight - window.innerHeight)
-  //         )
-  //       },
-  //       { passive: true }
-  //     )
-  // }, [])
+  useEffect(() => {
+    window.addEventListener(
+      "scroll",
+      () => {
+        document.body.style.setProperty(
+          "--scroll",
+          window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
+        )
+      },
+      { passive: true }
+    )
+    return () =>
+      window.removeEventListener(
+        "scroll",
+        () => {
+          document.body.style.setProperty(
+            "--scroll",
+            window.pageYOffset /
+              (document.body.offsetHeight - window.innerHeight)
+          )
+        },
+        { passive: true }
+      )
+  }, [])
+
+  useEffect(() => {
+    //select body and set overflow to hidden when modal is open
+
+    if (showSayHeyModal || showAboutUsModal || showModalMore) {
+      document.body.style.overflow = "hidden"
+      document.body.style.paddingRight = "12px"
+    } else {
+      document.body.style.overflow = "auto"
+      document.body.style.paddingRight = "0px"
+    }
+  }, [showSayHeyModal, showAboutUsModal, showModalMore])
 
   const componentAnimation = {
     hidden: { y: 30, opacity: 0 },
@@ -241,10 +265,14 @@ const Agency = () => {
   return (
     // <AnimatePresence exitBeforeEnter>
     <ParallaxProvider>
-
       {isFirstLoad && isWindowTop && !isMobilePortrait && !isMobileLandscape ? (
         <>
-          <Navigation isFirstLoad={isFirstLoad} />
+          <Navigation
+            isFirstLoad={isFirstLoad}
+            isMobilePortrait={isMobilePortrait}
+            isDesktop={isDesktop}
+            isMedium={isMedium}
+          />
           <Header
             isFirstLoad={isFirstLoad}
             setIsFirstLoad={setIsFirstLoad}
@@ -257,7 +285,13 @@ const Agency = () => {
       ) : (
         // {/* //if it's not the first load, the rest of the page is animated with framer-motion and the header is swapped for a static header */}
         <>
-          <Navigation isFirstLoad={isFirstLoad} />
+          <Navigation
+            isFirstLoad={isFirstLoad}
+            setShowSayHeyModal={setShowSayHeyModal}
+            setShowAboutUsModal={setShowAboutUsModal}
+            isVideoVisible={isVideoVisible.isVideoVisible}
+          />
+
           <StaticHeader />
 
           <AnimatedSection
@@ -265,16 +299,35 @@ const Agency = () => {
             initial="hidden"
             animate="visible"
           >
+            <ModalMore
+              showModalMore={showModalMore}
+              setShowModalMore={setShowModalMore}
+            />
+            <ModalSayHey
+              showSayHeyModal={showSayHeyModal}
+              setShowSayHeyModal={setShowSayHeyModal}
+            />
+            <ModalAboutUs
+              showAboutUsModal={showAboutUsModal}
+              setShowAboutUsModal={setShowAboutUsModal}
+            />
             {!isJank ? (
-              <MediaProduction isMobilePortrait={isMobilePortrait} />
+              <MediaProductionNew
+                isMobilePortrait={isMobilePortrait}
+                setShowModalMore={setShowModalMore}
+              />
             ) : (
-              <MediaProductionStaticFallback isMobilePortrait={isMobilePortrait} />
+              <MediaProductionStaticFallback
+                isMobilePortrait={isMobilePortrait}
+                setShowModalMore={setShowModalMore}
+              />
             )}
-            <ClientGallery isJank={isJank} />
             <>
               {!isBottom && isMobilePortrait ? (
                 <>
                   <VideoLogosMobile />
+                  <ClientGallery isJank={isJank} />
+                  <ClientCarousel dimensions={dimensions} />
                   <OriginalStoriesMobile />
                 </>
               ) : !isBottom && isMobileLandscape ? (
@@ -283,12 +336,21 @@ const Agency = () => {
                   <OriginalStories />
                 </>
               ) : !isBottom && isMedium ? (
-                <VideoLogosMiddle isBottom={isBottom} />
+                <>
+                  <VideoLogosMiddle isBottom={isBottom} />
+                  <ClientGallery />
+                  <ClientCarousel dimensions={dimensions} />
+                </>
               ) : !isBottom && isDesktop ? (
-                <VideoLogos isBottom={isBottom} />
+                <>
+                  <VideoLogos isBottom={isBottom} />
+                  <ClientGallery />
+                  <ClientCarousel dimensions={dimensions} />
+                </>
               ) : isBottom && !isMobilePortrait && !isMobileLandscape ? (
                 <OriginalStories isBottom={isBottom} />
               ) : (
+                // <ClientGallery />
                 <div>no match</div>
               )}
 

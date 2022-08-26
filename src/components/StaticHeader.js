@@ -11,7 +11,7 @@ const StyledHeader = styled.header`
   align-items: center;
 
   // scroll title shimmer conntect to scroll listener on index page
-  /* .shimmer-header {
+  .shimmer-header {
     display: inline;
     text-align: center;
     color: rgba(255, 255, 255, 0.1);
@@ -39,7 +39,7 @@ const StyledHeader = styled.header`
     100% {
       background-position: top left;
     }
-  } */
+  }
 
   h1 {
     font-size: var(--h1);
@@ -96,8 +96,8 @@ const StaticHeader = () => {
 
   return (
     <StyledHeader>
-      {/* <h1 className="shimmer-header">creativity & execution</h1> */}
-      <h1>creativity & execution</h1>
+      <h1 className="shimmer-header">creativity & execution</h1>
+      {/* <h1>creativity & execution</h1> */}
       {/* <h1>creativity & execution</h1> */}
       <h2>for those looking to tell the story</h2>
     </StyledHeader>

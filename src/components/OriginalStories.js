@@ -87,6 +87,15 @@ const StyledBackgrounds = styled.section`
     align-items: center;
     opacity: 1 !important;
     z-index: 20;
+    overflow: hidden;
+    /* border: 1px solid red; */
+  }
+  .masthead::before,
+  .masthead::after {
+    margin-left: 25%;
+    margin-top: 2%;
+    width: 75vw !important;
+    /* background-position: 48% center; */
   }
   .gradient {
     display: flex;

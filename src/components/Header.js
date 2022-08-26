@@ -128,30 +128,30 @@ const Header = ({ isFirstLoad, isScrollFired, setIsScrollFired, setIsFirstLoad, 
   }
 
   //scroll event listenenr for scroll shimmer on page load
-  // useEffect(() => {
-  //   window.addEventListener(
-  //     "scroll",
-  //     () => {
-  //       document.body.style.setProperty(
-  //         "--scroll",
-  //         window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
-  //       )
-  //     },
-  //     { passive: true }
-  //   )
-  //   return () =>
-  //     window.removeEventListener(
-  //       "scroll",
-  //       () => {
-  //         document.body.style.setProperty(
-  //           "--scroll",
-  //           window.pageYOffset /
-  //             (document.body.offsetHeight - window.innerHeight)
-  //         )
-  //       },
-  //       { passive: true }
-  //     )
-  // }, [])
+  useEffect(() => {
+    window.addEventListener(
+      "scroll",
+      () => {
+        document.body.style.setProperty(
+          "--scroll",
+          window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
+        )
+      },
+      { passive: true }
+    )
+    return () =>
+      window.removeEventListener(
+        "scroll",
+        () => {
+          document.body.style.setProperty(
+            "--scroll",
+            window.pageYOffset /
+              (document.body.offsetHeight - window.innerHeight)
+          )
+        },
+        { passive: true }
+      )
+  }, [])
 
   useEffect(() => {
     if (isScrollFired) {

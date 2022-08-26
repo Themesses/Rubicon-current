@@ -32,13 +32,14 @@ const StyledBanner = styled.div`
   h2 {
     font-size: clamp(1.5rem, 2.8vw, 4rem);
     display: block;
-    margin-bottom: 1em;
+    /* margin-bottom: 1em; */
     line-height: 1.3;
   }
   p {
     font-size: clamp(1.5rem, 2vw, 2.6rem);
     max-width: 100%;
-    margin: 0;
+    /* margin: 0; */
+    margin: 1em 0;
   }
   .gradient-overlay {
     position: absolute;
@@ -60,9 +61,23 @@ const StyledBanner = styled.div`
     transform: translate( 15%, -11%);
     z-index: -1;
   }
+  button {
+    background: transparent;
+    color: var(--beige);
+    font-size: clamp(1.5rem, 2vw, 1.8rem);
+    border: 1px solid var(--beige);
+    padding: 0.8em 1.2em;
+    border-radius: 0.3em;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: var(--beige);
+    color: var(--black);
+  }
 `
 
-const MediaProductionStaticFallback = () => {
+const MediaProductionStaticFallback = ({setShowModalMore}) => {
   const { backgroundImage } = useStaticQuery(
     graphql`
       query {
@@ -92,10 +107,11 @@ const MediaProductionStaticFallback = () => {
                 for quality clients
               </h2>
               <p>
-                <span>Rubicon</span>, your limitless source
+                <span>Rubicon</span> — your limitless source for
                 <br />
-                for creative audio/visuals.
+                creative audio/visual storytelling.
               </p>
+              <button onClick={() => setShowModalMore(true)}>more...</button>
             </div>
             <StaticImage
               className="foreground-image"
