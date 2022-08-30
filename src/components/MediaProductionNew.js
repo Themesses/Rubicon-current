@@ -66,19 +66,19 @@ const StyledBanner = styled.div`
     /* border: 1px solid red; */
   }
   button {
-      background: transparent;
-      color: var(--beige);
-      font-size: clamp(1.5rem, 2vw, 1.8rem);
-      border: 1px solid var(--beige);
-      padding: 0.8em 1.2em;
-      border-radius: 0.3em;
-      transition: 0.3s;
-    }
+    background: transparent;
+    color: var(--beige);
+    font-size: clamp(1.5rem, 2vw, 1.8rem);
+    border: 1px solid var(--beige);
+    padding: 0.8em 1.2em;
+    border-radius: 0.3em;
+    transition: 0.3s;
+  }
 
-    button:hover {
-      background: var(--beige);
-      color: var(--black);
-    }
+  button:hover {
+    background: var(--beige);
+    color: var(--black);
+  }
   h2 {
     font-size: clamp(1.5rem, 2.8vw, 4rem);
     display: block;
@@ -163,21 +163,41 @@ const StyledBanner = styled.div`
       left: 10%;
       box-shadow: 0 0 10px 5px rgba(255, 255, 250, 1);
     }
-
   }
   @media screen and (max-width: 920px) {
     .main-parallax-banner {
       aspect-ratio: 2.8/1;
     }
   }
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 620px) {
     .main-parallax-banner {
-      aspect-ratio: 2.6/1;
+      aspect-ratio: 2.7/1;
+      /* height: 50vh; */
     }
+    .headline-wrapper {
+      padding-left: 1em;
+    }
+    .flare {
+      &:after,
+      &:before {
+        box-shadow: 0 0 5px 2px rgba(255, 255, 250, 1),
+          0 0 2px 7px rgba(255, 255, 250, 0.3);
+      }
+    }
+    p {
+      margin: .5em 0;
+    }
+  button {
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    border: 1px solid var(--beige);
+    padding: 0.5em .8em;
+    border-radius: 0.3em;
+    transition: 0.3s;
+  }
   }
 `
 
-const MediaProduction = ({setShowModalMore}) => {
+const MediaProduction = ({ setShowModalMore }) => {
   const [waterfallVideo, setWaterfallVideo] = useState(false)
   const [reverseVideo, setReverseVideo] = useState(false)
   const [handImage, setHandImage] = useState(false)

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
 import { getSrc } from "gatsby-plugin-image"
-import { motion} from "framer-motion"
+import { motion, AnimatePresence} from "framer-motion"
 
 const StyledSectionLogoScroll = styled.section`
   position: relative;
@@ -80,7 +80,7 @@ const StyledSectionLogoScroll = styled.section`
   } */
 `
 
-const ImageCanvas = ({ scrollHeight, numFrames, width, height }) => {
+const ImageCanvas = ({ scrollHeight, numFrames, width, height, setTrigger, }) => {
   const { allFile } = useStaticQuery(graphql`
     query {
       allFile(filter: { relativeDirectory: { eq: "framesv2middle" } }) {
@@ -88,7 +88,7 @@ const ImageCanvas = ({ scrollHeight, numFrames, width, height }) => {
           base
           childImageSharp {
             gatsbyImageData(
-              webpOptions: { quality: 55 }
+              webpOptions: { quality: 70 }
               quality: 50
               width: 600
             )
@@ -115,14 +115,25 @@ const ImageCanvas = ({ scrollHeight, numFrames, width, height }) => {
       setImages((prevImages) => [...prevImages, img])
     }
   }
+  //set frame number for toggling the title
+  useEffect(() => {
+    if (frameIndex <= 630) {
+      setTrigger(true)
+    }
+    if (frameIndex > 630) {
+      setTrigger(false)
+    }
+  }, [frameIndex])
 
   const handleScroll = () => {
     const scrollFraction =
-      window.innerWidth < 600
-        ? (window.scrollY - window.innerHeight - 150) /
-          (scrollHeight - window.innerHeight)
-        : (window.scrollY - window.innerHeight * 2.1) /
-          (scrollHeight - window.innerHeight + 1000)
+      // window.innerWidth < 600
+      //   ? (window.scrollY - window.innerHeight - 150) /
+      //     (scrollHeight - window.innerHeight)
+      //   : (window.scrollY - window.innerHeight * 2.1) /
+      //     (scrollHeight - window.innerHeight + 1000)
+      (window.scrollY - window.innerHeight * 1.1) /
+      (scrollHeight - window.innerHeight + 1000)
     const index = Math.min(numFrames - 1, Math.ceil(scrollFraction * numFrames))
 
     if (index <= 0 || index > numFrames) {
@@ -171,12 +182,13 @@ const ImageCanvas = ({ scrollHeight, numFrames, width, height }) => {
 }
 
 const VideoLogosMiddle = ({ isBottom }) => {
+  const [trigger, setTrigger] = useState(false)
   //   const { isVideoTitleHidden, setIsVideoTitleHidden} = useContext(Context)
   //   const [isMobileLandscape, setIsMobileLandscape] = useState(false)
   //   const [isMobilePortrait, setIsMobilePortrait] = useState(false)
   //   const [width, setWidth] = useState()
   //   const [height, setHeight] = useState(700)
-  const [scrollHeight, setScrollHeight] = useState(8000)
+  // const [scrollHeight, setScrollHeight] = useState(8000)
 
   const wrapperVariants = {
     initial: {
@@ -206,10 +218,22 @@ const VideoLogosMiddle = ({ isBottom }) => {
           <div>
             <StyledSectionLogoScroll>
               <div className="sticky-title" id="videoscroll-title">
-                <h3>
-                  delivered 700++ <span className="custom">custom projects</span>{" "}
-                  for
-                </h3>
+                <AnimatePresence>
+                  {trigger && (
+                    <motion.h3
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ ease: "easeOut", duration: 0.3 }}
+                      exit={{ opacity: 0}}
+                    >
+                      delivered 700+{" "}
+                      <span className="custom shimmer-logos">
+                        custom projects
+                      </span>{" "}
+                      for
+                    </motion.h3>
+                  )}
+                </AnimatePresence>
               </div>
               <div id="video-scroll">
                 <ImageCanvas
@@ -217,8 +241,9 @@ const VideoLogosMiddle = ({ isBottom }) => {
                   width="600"
                   height="500"
                   // height="7745"
-                  numFrames={475}
+                  numFrames={670}
                   id="video-scroll"
+                  setTrigger={setTrigger}
                 />
               </div>
             </StyledSectionLogoScroll>

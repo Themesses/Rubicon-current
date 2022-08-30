@@ -69,6 +69,9 @@ const StyledNavigation = styled.div`
   top: 0;
   height: 70px;
   z-index: 999;
+  @media screen and (max-width: 620px) {
+    height: 40px
+  }
 `
 const StyledCta = styled.div`
   .nav-rubi-cta {
@@ -138,13 +141,14 @@ const StyledCta = styled.div`
     font-size: clamp(1.8rem, 1.6vw, 2.3rem);
   }
 
-  /* @media screen and (max-width: 600px) {
+  @media screen and (max-width: 620px) {
     margin: 0;
     padding: 0;
-    transform: translateX(-45px);
+    /* transform: translateX(-5px); */
     .nav-rubi-cta {
       margin-right: 0em;
       display: flex;
+
       height: 40px;
     }
     .rubi-cta-list {
@@ -159,7 +163,7 @@ const StyledCta = styled.div`
     a {
       text-decoration: none;
       color: var(--gold);
-      font-size: clamp(1.8rem, 1.6vw, 2.3rem);
+      font-size: clamp(1.6rem, 1.6vw, 2.3rem);
       transition: 0.3s;
 
       &:hover,
@@ -170,9 +174,9 @@ const StyledCta = styled.div`
     .button-rubi {
       background-color: transparent;
       padding: 0;
-      height: 1.7em;
-      width: 1.7em;
-      transform: translateY(5px);
+      height: 2.3em;
+      width: 2.3em;
+      transform: translateY(6px);
     }
     img {
       width: 100%;
@@ -183,13 +187,13 @@ const StyledCta = styled.div`
       background-color: transparent;
       padding: 0;
       width: max-content;
-      font-size: clamp(1.8rem, 1.6vw, 2.3rem);
+      font-size: clamp(1.6rem, 1.6vw, 2.3rem);
       text-align: center;
       display: inline-block;
       height: max-content;
       margin-top: 0 !important;
     }
-  } */
+  }
 `
 const StyledNavigationHidden = styled(StyledNavigation)`
   visibility: hidden;

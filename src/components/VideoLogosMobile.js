@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
 import { getSrc } from "gatsby-plugin-image"
-import { motion} from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
 const StyledSectionLogoScroll = styled.section`
   position: relative;
@@ -10,67 +10,32 @@ const StyledSectionLogoScroll = styled.section`
   background: #161616;
   /* background: white; */
   padding-bottom: 0;
-  .video-end {
+  /* .video-end {
     height: 1px;
     transform: translateY(-100vh);
     z-index: 999;
-  }
+  } */
+
   .sticky-title {
     position: sticky;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* top: 10%; */
-    top: 5%;
+    top: 10%;
     height: 5rem;
-    /* padding-top: 5rem; */
-    margin-top: 8rem;
-    /* opacity: 0; */
-    /* transition: opacity 0.3s; */
+    margin-top: 10rem;
     h3 {
       font-size: var(--h3-banner-clamp);
     }
-    .shimmer-custom {
-      display: inline;
-      text-align: center;
-      color: rgba(255, 255, 255, 0.1);
-      background: linear-gradient(
-        140deg,
-        rgba(255, 185, 4, 0.5) 35%,
-        rgba(255, 255, 255, 0.6) 50%,
-        rgba(255, 185, 4, 0.5) 65% 100%
-      );
-      background-size: 600% 400%;
-      /* animation-name: shimmer; */
-      /* animation-duration: 2s; */
-      -webkit-background-clip: text;
-      -moz-background-clip: text;
-      background-clip: text;
-      animation: shimmer-custom 0.1s infinite;
-      animation-play-state: paused;
-      animation-delay: calc(var(--scroll) * -0.4s);
-      /* animation-iteration-count: 1; */
-      background-repeat: no-repeat;
-      background-position: 0 0;
-      background-color: rgba(255, 185, 4, 1);
-    }
 
-    @keyframes shimmer-custom {
-      0% {
-        background-position: top left;
-      }
-      100% {
-        background-position: top right;
-      }
-    }
   }
   canvas {
     margin: 0 auto;
     /* padding-top: 1em; */
     position: sticky;
     z-index: -1;
-    top: 15%;
+    top: 25%;
     display: block;
   }
 
@@ -81,7 +46,13 @@ const StyledSectionLogoScroll = styled.section`
   } */
 `
 
-const ImageCanvas = ({ scrollHeight, numFrames, width, height }) => {
+const ImageCanvas = ({
+  scrollHeight,
+  numFrames,
+  width,
+  height,
+  setTrigger,
+}) => {
   const { allFile } = useStaticQuery(graphql`
     query {
       allFile(filter: { relativeDirectory: { eq: "framesv2mobile" } }) {
@@ -116,15 +87,24 @@ const ImageCanvas = ({ scrollHeight, numFrames, width, height }) => {
       setImages((prevImages) => [...prevImages, img])
     }
   }
+  useEffect(() => {
+    if (frameIndex <= 420) {
+      setTrigger(true)
+    }
+    if (frameIndex > 420) {
+      setTrigger(false)
+    }
+  }, [frameIndex])
 
   const handleScroll = () => {
     const scrollFraction =
-      (window.scrollY - window.innerHeight) / (scrollHeight - window.innerHeight + 1100)
-      // window.innerWidth < 600
-      //   ? (window.scrollY - window.innerHeight - 150) /
-      //     (scrollHeight - window.innerHeight)
-      //   : (window.scrollY - window.innerHeight * 2.1) /
-      //     (scrollHeight - window.innerHeight + 1000)
+      (window.scrollY - window.innerHeight  * .4) /
+      (scrollHeight - window.innerHeight + 600)
+    // window.innerWidth < 600
+    //   ? (window.scrollY - window.innerHeight - 150) /
+    //     (scrollHeight - window.innerHeight)
+    //   : (window.scrollY - window.innerHeight * 2.1) /
+    //     (scrollHeight - window.innerHeight + 1000)
     const index = Math.min(numFrames - 1, Math.ceil(scrollFraction * numFrames))
 
     if (index <= 0 || index > numFrames) {
@@ -173,60 +153,71 @@ const ImageCanvas = ({ scrollHeight, numFrames, width, height }) => {
 }
 
 const VideoLogosMobile = ({ isBottom }) => {
+  const [trigger, setTrigger] = useState(false)
   //   const { isVideoTitleHidden, setIsVideoTitleHidden} = useContext(Context)
   //   const [isMobileLandscape, setIsMobileLandscape] = useState(false)
   //   const [isMobilePortrait, setIsMobilePortrait] = useState(false)
   //   const [width, setWidth] = useState()
   //   const [height, setHeight] = useState(700)
-  const [scrollHeight, setScrollHeight] = useState(8000)
+  // const [scrollHeight, setScrollHeight] = useState(8000)
 
   const wrapperVariants = {
     initial: {
       opacity: 0,
-      transition: { duration: .5 }
+      transition: { duration: 0.5 },
     },
     animate: {
       opacity: 1,
-      transition: { duration: .5, staggerChildren: .1 }
+      transition: { duration: 0.5, staggerChildren: 0.1 },
     },
     exit: {
       opacity: 0,
-      transition: {  duration: 1 }
-    }
+      transition: { duration: 1 },
+    },
   }
   return (
     <>
-      {!isBottom && (
+      {/* {!isBottom && (
         <motion.div
           key="video-logos"
-          // transition={{ duration: 3}}
-          // initial={{ opacity: 0 }}
-          // animate={{ opacity: 1 }}
-          // exit={{ opacity: 0 }}
+          transition={{ duration: 3}}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           {...wrapperVariants}
-        >
-          <div>
-            <StyledSectionLogoScroll>
-              <div className="sticky-title" id="videoscroll-title">
-                <h3>
-                  delivered 700+ <span className="custom">custom projects</span>{" "}
+        > */}
+      <div>
+        <StyledSectionLogoScroll>
+          <div className="sticky-title" id="videoscroll-title">
+            <AnimatePresence>
+              {trigger && (
+                <motion.h3
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ ease: "easeOut", duration: 0.3 }}
+                  exit={{ opacity: 0 }}
+                >
+                  delivered 700+{" "}
+                  <span className="custom shimmer-logos">custom projects</span>{" "}
                   for
-                </h3>
-              </div>
-              <div id="video-scroll">
-                <ImageCanvas
-                  scrollHeight={4500}
-                  width="360"
-                  height="470"
-                  // height="7745"
-                  numFrames={352}
-                  id="video-scroll"
-                />
-              </div>
-            </StyledSectionLogoScroll>
+                </motion.h3>
+              )}
+            </AnimatePresence>
           </div>
-        </motion.div>
-      )}
+          <div id="video-scroll">
+            <ImageCanvas
+              scrollHeight={5000}
+              width="360"
+              height="470"
+              numFrames={500}
+              setTrigger={setTrigger}
+              id="video-scroll"
+            />
+          </div>
+        </StyledSectionLogoScroll>
+      </div>
+      {/* </motion.div> */}
+      {/* // )} */}
       {/* </> */}
     </>
   )

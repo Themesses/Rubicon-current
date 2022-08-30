@@ -28,7 +28,7 @@ window.jankcb = function(callback) {
     var ticks = 0;
     var misses = 0;
     var rAF = window.requestAnimationFrame;
-    var minFps = 38;
+    var minFps = 30;
     var maxMisses = 6;
 
     var updateFps = function(timestamp) {

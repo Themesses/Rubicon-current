@@ -174,9 +174,22 @@ const Background = styled.div`
       font-weight: 200;
     }
   }
-  @media screen and (max-width: 602px) {
+  @media screen and (max-width: 620px) {
     .modal-wrapper {
       min-width: 50vw;
+      ul {
+        font-size: 14px;
+      }
+      .with-border {
+        gap: .3em;
+      }
+      .with-border li {
+        font-size: 12px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 `

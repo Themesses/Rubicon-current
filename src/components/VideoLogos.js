@@ -47,8 +47,8 @@ const StyledSectionLogoScroll = styled.section`
       rgba(255, 255, 255, 0.7) 50%,
       rgba(255, 185, 4, 0.7) 60% 100%
     );
-    background-size: 300% 300%;
-    animation: shimmer-logos 2s infinite;
+    background-size: 500% 200%;
+    animation: shimmer-logos 1s;
     animation-play-state: paused;
     animation-delay: calc(var(--scroll) * -1s);
     -webkit-background-clip: text;
@@ -60,10 +60,11 @@ const StyledSectionLogoScroll = styled.section`
   }
   @keyframes shimmer-logos {
     0% {
-      background-position: top right;
+      /* background-position: top center; */
+      background-position: 80% top;
     }
     100% {
-      background-position: top left;
+      background-position: left top;
     }
   }
 `
@@ -236,7 +237,7 @@ const VideoLogos = ({ isBottom }) => {
                   height="430"
                   // height="7745"
                   // numFrames={485}
-                  numFrames={698}
+                  numFrames={685}
                   id="video-scroll"
                   setTrigger={setTrigger}
                 />
