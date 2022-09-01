@@ -197,11 +197,7 @@ const StyledBackgrounds = styled.section`
     }
   }
   @media screen and (max-width: 649px) and (min-width: 551px) {
-    border: 1px solid green;
     .masthead {
-      border: 1px solid red;
-      /* width: 90vw; */
-      /* height: 90vh; */
       background: linear-gradient(90deg, #161616 42%, transparent 85%);
     }
     .masthead .flex-wrapper {
@@ -215,7 +211,7 @@ const StyledBackgrounds = styled.section`
       font-size: 1.5rem;
     }
   }
-  @media screen and (max-width: 550px) {
+  @media screen and (max-width: 620px) {
     margin-top: 25vh;
     padding: 0;
     .masthead {
@@ -238,7 +234,7 @@ const StyledBackgrounds = styled.section`
     }
     .masthead::before,
     .masthead::after {
-      background-position: 78% !important;
+      background-position: 58% !important;
     }
     .masthead .flex-wrapper {
       padding-left: 2rem;

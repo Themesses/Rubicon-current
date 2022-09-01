@@ -189,9 +189,7 @@ const StyledBackgrounds = styled.section`
     }
   }
   @media screen and (max-width: 649px) and (min-width: 551px) {
-    border: 1px solid green;
     .masthead {
-      border: 1px solid red;
       background: linear-gradient(90deg, #161616 42%, transparent 85%);
     }
     .masthead .flex-wrapper {
@@ -204,6 +202,14 @@ const StyledBackgrounds = styled.section`
     .masthead .flex-wrapper p {
       font-size: 1.5rem;
     }
+  .masthead::before,
+  .masthead::after {
+    margin-left: 25%;
+    margin-top: 25%;
+    /* width: 65vw !important; */
+    height: 55vh !important;
+    background-position: 38% center !important;
+  }
   }
   @media screen and (max-width: 550px) {
     margin-top: 25vh;

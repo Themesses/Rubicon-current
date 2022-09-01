@@ -347,12 +347,13 @@ const Agency = ({ isVideoVisible }) => {
                   <ClientGallery />
                   <ClientCarousel dimensions={dimensions} />
                 </>
-              ) : isBottom && !isMobilePortrait && !isMobileLandscape ? (
+              ) : isBottom && !isMobilePortrait && !isMobileLandscape && !isMedium? (
                 <OriginalStories isBottom={isBottom} />
-              ) : (
+              ) : isBottom && isMedium ?  (
+                <OriginalStoriesMobile isBottom={isBottom} />
                 // <ClientGallery />
-                <div>no match</div>
-              )}
+                // <div>no match</div>
+              ) : <div>no match</div>}
 
               <StyledBottom ref={ref} className="bottom" />
             </>
