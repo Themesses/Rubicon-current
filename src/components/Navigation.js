@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import Icon from "../assets/images/rubi-icon.png"
@@ -81,7 +81,18 @@ const StyledCta = styled.div`
     height: 70px;
     /* width: 40%; */
   }
+  @keyframes slideInFromRight {
+    0%   { transform: translateX(0); }
+    40%  { transform: translateX(-15px); }
+    100% { transform: translateX(10); }
+  }
   .rubi-cta-list {
+    display: none;
+    flex-direction: row;
+    align-items: center;
+    list-style: none;
+  }
+  .rubi-cta-list-two {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -90,6 +101,14 @@ const StyledCta = styled.div`
     /* border: 1px solid red; */
     /* opacity: 0;
     transform: translateX(40px); */
+  }
+
+  @media screen and (min-width: 920px) {
+    .nav-rubi-ct:hover, .button-rubi:hover {
+      .rubi-cta-list {
+        display: flex;
+      }
+    }
   }
   li {
     margin-right: 0.8em;
@@ -148,10 +167,15 @@ const StyledCta = styled.div`
     .nav-rubi-cta {
       margin-right: 0em;
       display: flex;
-
       height: 40px;
     }
     .rubi-cta-list {
+      display: none;
+      flex-direction: row;
+      align-items: center;
+      list-style: none;
+    }
+    .rubi-cta-list-two {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -163,7 +187,7 @@ const StyledCta = styled.div`
     a {
       text-decoration: none;
       color: var(--gold);
-      font-size: clamp(1.6rem, 1.6vw, 2.3rem);
+      font-size: clamp(1.8rem, 1.6vw, 2.3rem);
       transition: 0.3s;
 
       &:hover,
@@ -187,7 +211,7 @@ const StyledCta = styled.div`
       background-color: transparent;
       padding: 0;
       width: max-content;
-      font-size: clamp(1.6rem, 1.6vw, 2.3rem);
+      font-size: clamp(1.8rem, 1.6vw, 2.3rem);
       text-align: center;
       display: inline-block;
       height: max-content;
@@ -208,6 +232,22 @@ const Navigation = ({
   isVideoVisible,
 }) => {
   const [showCta, setShowCta] = useState(false)
+  const [showRubyListAnimate, setShowRubyListAnimate] = useState("hidden")
+  const [isClick, setIsClick] = useState(false)
+
+  useEffect(() => {
+    let rubiList = document.getElementById('rubi-cta-list')
+    if(rubiList){
+      // setIsClick(false)
+      if(isMobilePortrait) {
+        setShowRubyListAnimate("visible")
+      } else {
+        rubiList.style.display = "none"
+        setShowRubyListAnimate("hidden")
+      }
+    }
+  },[isMobilePortrait, isClick]);
+  
   return (
     <>
       { (isFirstLoad && isDesktop) || (isFirstLoad && isMedium) ? (
@@ -223,37 +263,98 @@ const Navigation = ({
                 variants={rubiAnimationVariants}
                 initial="visible"
                 animate="visible"
+                onMouseLeave={() => {
+                  if(!isMobilePortrait && !isClick) {
+                    let rubiList = document.getElementById('rubi-cta-list')
+                    if(rubiList)
+                      rubiList.style.display = "none"
+                    setShowRubyListAnimate("hidden")
+                  }
+                }}
               >
-                <motion.ul
-                  className="rubi-cta-list"
-                  id="rubi-cta-list"
-                  variants={ctaAnimationVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  <li>
-                    <button
-                      className="button-about-us"
-                      onClick={() => setShowAboutUsModal(true)}
-                    >
-                      get the story
-                    </button>
-                  </li>
-                  <li style={{ color: "var(--gold)" }}>|</li>
-                  <li>
-                    <button
-                      className="button-say-hey"
-                      style={{ fontWeight: "100 !important" }}
-                      onClick={() => setShowSayHeyModal(true)}
-                    >
-                      say hey
-                    </button>
-                  </li>
-                </motion.ul>
+                {
+                  !isClick && 
+                  <motion.ul
+                    style={{
+                      animation: "0.7s ease-out 0s 1 slideInFromRight",
+                    }}
+                    className="rubi-cta-list"
+                    id="rubi-cta-list"
+                    variants={ctaAnimationVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                      <li>
+                        <button
+                          className="button-about-us"
+                          onClick={() => setShowAboutUsModal(true)}
+                        >
+                          get the story
+                        </button>
+                      </li>
+                      <li style={{ color: "var(--gold)" }}>|</li>
+                      <li>
+                        <button
+                          className="button-say-hey"
+                          style={{ fontWeight: "100 !important" }}
+                          onClick={() => setShowSayHeyModal(true)}
+                        >
+                          say hey
+                        </button>
+                      </li>
+                  </motion.ul>
+                }
+                {
+                  isClick && 
+                  <motion.ul
+                    className="rubi-cta-list-two"
+                    id="rubi-cta-list-two"
+                    variants={ctaAnimationVariants}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                      <li>
+                        <button
+                          className="button-about-us"
+                          onClick={() => setShowAboutUsModal(true)}
+                        >
+                          get the story
+                        </button>
+                      </li>
+                      <li style={{ color: "var(--gold)" }}>|</li>
+                      <li>
+                        <button
+                          className="button-say-hey"
+                          style={{ fontWeight: "100 !important" }}
+                          onClick={() => setShowSayHeyModal(true)}
+                        >
+                          say hey
+                        </button>
+                      </li>
+                  </motion.ul>
+                }
                 <>
                   <motion.button
-                    onMouseEnter={() => setShowCta(true)}
-                    onClick={() => setShowCta((showCta) => !showCta)}
+                    onMouseEnter={async () => {
+                      console.log("showRubyListAnimate", showRubyListAnimate)
+                      await setShowCta(true)
+                      if(!isMobilePortrait && !isClick) {
+                        let rubiList = document.getElementById('rubi-cta-list')
+                        if(rubiList){
+                          rubiList.style.display = "flex"
+                        }
+                        setTimeout(async() => {
+                          await setShowRubyListAnimate("visible")
+                        }, 2000);
+                      }
+                    }}
+                    
+                    onClick={async (e) => {
+                      let animation = showRubyListAnimate === "visible" ? "hidden" : "visible"
+                      await setShowRubyListAnimate(animation)                     
+                      await setIsClick(isClick === true? false : true)  
+                      setShowCta((showCta) => !showCta)
+                    }}
                     className="button-rubi"
                     whileHover={{
                       filter: "brightness(120%)",

@@ -9,7 +9,7 @@ import { useInView } from "react-intersection-observer"
 
 
 // mobile version with a different background image - incommplete
-const OriginalStoriesMobile = ({ isBottom }) => {
+const OriginalStoriesMobile = ({ isBottom, setShowAboutUsModal }) => {
   const { ref, inView } = useInView({
     threshold: 1,
   })
@@ -86,7 +86,7 @@ const OriginalStoriesMobile = ({ isBottom }) => {
                       </span> responsive <br />
                       <span className="text-outline">always</span> competitive
                     </h3>
-                    <button>get the story</button>
+                    <button onClick={() => setShowAboutUsModal(true)}>get the story</button>
                   </div>
                 </div>
               </div>
@@ -118,7 +118,7 @@ const StyledBackgrounds = styled.section`
     height: 100%;
     z-index: 20;
     background: linear-gradient(360deg, #161616 15%, rgba(0, 0, 0, 0) 43.45%),
-      linear-gradient(180deg, #161616 15%, rgba(0, 0, 0, 0) 38.09%),
+    linear-gradient(180deg, #161616 15%, rgba(22, 22, 22, 0) 38.09%),
       linear-gradient(
         89.93deg,
         #161616 25%,
@@ -169,6 +169,11 @@ const StyledBackgrounds = styled.section`
     .masthead {
       background: linear-gradient(90deg, #161616 35%, transparent 85%);
     }
+    .masthead:before, .masthead:after { 
+      background-position: 10% !important;
+    }
+      background: linear-gradient(90deg, #161616 35%, transparent 85%);
+    }
     .masthead .flex-wrapper {
       padding-left: 10rem;
     }
@@ -179,6 +184,9 @@ const StyledBackgrounds = styled.section`
     }
     .masthead .flex-wrapper {
       padding-left: 5rem;
+    }
+    .masthead:before, .masthead:after { 
+      background-position: 18% !important;
     }
   }
   @media screen and (max-width: 799px) and (min-width: 650px) {
@@ -194,6 +202,9 @@ const StyledBackgrounds = styled.section`
     }
     .masthead .flex-wrapper p {
       font-size: 1.7rem;
+    }
+    .masthead:before, .masthead:after { 
+      background-position: 18% !important;
     }
   }
   @media screen and (max-width: 649px) and (min-width: 551px) {
@@ -211,7 +222,7 @@ const StyledBackgrounds = styled.section`
       font-size: 1.5rem;
     }
   }
-  @media screen and (max-width: 620px) {
+  @media screen and (max-width: 550px) {
     margin-top: 25vh;
     padding: 0;
     .masthead {
@@ -224,7 +235,7 @@ const StyledBackgrounds = styled.section`
       height: 100%;
       z-index: 20;
       background: linear-gradient(360deg, #161616 1%, rgba(0, 0, 0, 0) 43.45%),
-        linear-gradient(180deg, #161616 1%, rgba(0, 0, 0, 0) 38.09%),
+        linear-gradient(180deg, #161616 15%, rgba(22, 22, 22, 0) 38.09%),
         linear-gradient(
           89.93deg,
           #161616 17%,
@@ -234,7 +245,7 @@ const StyledBackgrounds = styled.section`
     }
     .masthead::before,
     .masthead::after {
-      background-position: 58% !important;
+      background-position: 60% !important;
     }
     .masthead .flex-wrapper {
       padding-left: 2rem;
@@ -248,6 +259,13 @@ const StyledBackgrounds = styled.section`
     }
     button {
       font-size: 1.5rem;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .masthead::before,
+    .masthead::after {
+      height: 78% !important;
+      top: 85px !important;
     }
   }
 `

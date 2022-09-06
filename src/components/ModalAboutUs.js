@@ -117,7 +117,7 @@ const Background = styled.div`
     margin-top: 2em;
   }
   .modal-content-top-paragraph-wrapper p {
-    padding: 0.5em 4em 0.5em 4em;
+    padding: 0.5em 2.8em 0.5em 4em;
     text-align: center;
   }
   .modal-content-bottom-absolute-wrapper {
@@ -131,6 +131,13 @@ const Background = styled.div`
     top: 50%;
     bottom: 0;
     left: 0;
+  }
+  
+  @media screen and (max-width: 500px) {
+    .modal-content-bottom-absolute-wrapper {
+      width: 90% !important;
+      left: 5% !important;
+    }
   }
   .modal-content-bottom-title {
     position: relative;
@@ -217,6 +224,9 @@ const Background = styled.div`
   .modal-bottom-paragraph p {
     /* color: var(--black);
     font-weight: 400; */
+  }
+  .p-content {
+    font-size: clamp(1.8rem) !important;
   }
   /* .modal-content-skewed-crawl {
     position: relative;
@@ -354,21 +364,21 @@ const ModalAboutUs = ({ showAboutUsModal, setShowAboutUsModal }) => {
                 >
                   <div className="modal-content">
                     <div className="modal-content-title">
-                      <h2>
+                      <h4>
                         The <span>story</span> of work & career
                         <br />
                         has changed forever.
-                      </h2>
+                      </h4>
                     </div>
                     <div className="modal-content-top-paragraph-wrapper">
-                      <p>
+                      <p className="p-content">
                         People are no longer
                         <br />
                         resources to achieve
                         <br />
                         business objectives.
                       </p>
-                      <p>
+                      <p className="p-content">
                         Business objectives
                         <br />
                         are opportunities to live

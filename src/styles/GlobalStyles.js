@@ -15,6 +15,8 @@ const GlobalStyles = createGlobalStyle`
         --beige:#f0e4c3;
         --black: #161616;
         --black-light: #252522;
+        --gray: #636268;
+        --gray-light: #2B2B2B;
 
         --h1:clamp(3rem, 3.3vw, 5rem);
         --h3-banner-clamp: clamp(2rem, 2.31vw, 4rem);

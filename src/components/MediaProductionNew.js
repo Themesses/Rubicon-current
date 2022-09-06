@@ -90,6 +90,21 @@ const StyledBanner = styled.div`
     max-width: 100%;
     margin: 1em 0;
   }
+  @media screen and (max-width: 480px) {
+    h2 {
+      font-size: clamp(1.2rem,2vw,2rem) !important;
+    }
+    p {
+      font-size: clamp(1rem,0vw,0rem) !important;
+    }
+    button {
+      font-size: clamp(1.2rem,2vw,1.8rem) !important;
+      padding: 0.3em 0.6em !important;
+    }
+    .headline-wrapper {
+      right: 69% !important;
+    }
+  }
   .background-fallback-image {
     /* height: 100%; */
     /* width: 100%;
@@ -169,13 +184,26 @@ const StyledBanner = styled.div`
       aspect-ratio: 2.8/1;
     }
   }
+  @media screen and (min-width: 621px) and (max-width: 1199px) {
+    .headline-wrapper {
+      padding-left: 1em !important;
+      right: 62% !important;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .headline-wrapper {
+      padding-left: 2em !important;
+      right: 62% !important;
+    }
+  }
   @media screen and (max-width: 620px) {
     .main-parallax-banner {
       aspect-ratio: 2.7/1;
       /* height: 50vh; */
     }
     .headline-wrapper {
-      padding-left: 1em;
+      padding-left: 0.3em !important;
+      right: 62% !important;
     }
     .flare {
       &:after,
@@ -187,13 +215,13 @@ const StyledBanner = styled.div`
     p {
       margin: .5em 0;
     }
-  button {
-    font-size: clamp(1.4rem, 2vw, 1.8rem);
-    border: 1px solid var(--beige);
-    padding: 0.5em .8em;
-    border-radius: 0.3em;
-    transition: 0.3s;
-  }
+    button {
+      font-size: clamp(1.4rem, 2vw, 1.8rem);
+      border: 1px solid var(--beige);
+      padding: 0.5em .8em;
+      border-radius: 0.3em;
+      transition: 0.3s;
+    }
   }
 `
 
@@ -256,10 +284,10 @@ const MediaProduction = ({ setShowModalMore }) => {
       if (mainVideo && sphereVideo && foregroundImage) {
         mainVideo[0].style.opacity = 1
         mainVideo[0].style.visibility = "visible"
-        sphereVideo[0].style.opacity = 1
-        sphereVideo[0].style.visibility = "visible"
         foregroundImage[0].style.opacity = 1
         foregroundImage[0].style.visibility = "visible"
+        sphereVideo[0].style.opacity = 1
+        sphereVideo[0].style.visibility = "visible"
         flairRef.current.style.opacity = 1
         flairRef.current.style.visibility = "visible"
       }
@@ -362,9 +390,7 @@ const MediaProduction = ({ setShowModalMore }) => {
                   for quality clients
                 </h2>
                 <p ref={ref}>
-                  <span>Rubicon</span>, your limitless source
-                  <br />
-                  for creative audio/visuals.
+                  <span>Rubicon</span> — your limitless source for creative audio/visuals.
                 </p>
                 <button onClick={() => setShowModalMore(true)}>more...</button>
               </div>

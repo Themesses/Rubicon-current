@@ -147,9 +147,10 @@ const Agency = ({ isVideoVisible }) => {
       setIsDesktop(true)
     }
     if (
-      dimensions.height < dimensions.width &&
-      dimensions.width < 920 &&
-      dimensions.width > 500
+      dimensions.width <= 800 &&
+      dimensions.width >= 300 && 
+      dimensions.height <= 450 &&
+      dimensions.height >= 169
     ) {
       console.log("mobile landscape")
       setIsMobileLandscape(true)
@@ -328,12 +329,12 @@ const Agency = ({ isVideoVisible }) => {
                   <VideoLogosMobile />
                   <ClientGallery isJank={isJank} />
                   <ClientCarousel dimensions={dimensions} />
-                  <OriginalStoriesMobile />
+                  <OriginalStoriesMobile  setShowAboutUsModal={setShowAboutUsModal}/>
                 </>
               ) : !isBottom && isMobileLandscape ? (
                 <>
                   <VideoLogosMobileLandscape />
-                  <OriginalStories />
+                  <OriginalStories setShowAboutUsModal={setShowAboutUsModal} />
                 </>
               ) : !isBottom && isMedium ? (
                 <>
@@ -348,9 +349,9 @@ const Agency = ({ isVideoVisible }) => {
                   <ClientCarousel dimensions={dimensions} />
                 </>
               ) : isBottom && !isMobilePortrait && !isMobileLandscape && !isMedium? (
-                <OriginalStories isBottom={isBottom} />
+                <OriginalStories isBottom={isBottom} setShowAboutUsModal={setShowAboutUsModal} />
               ) : isBottom && isMedium ?  (
-                <OriginalStoriesMobile isBottom={isBottom} />
+                <OriginalStoriesMobile isBottom={isBottom} setShowAboutUsModal={setShowAboutUsModal} />
                 // <ClientGallery />
                 // <div>no match</div>
               ) : <div>no match</div>}

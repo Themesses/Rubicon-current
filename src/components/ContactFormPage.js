@@ -92,15 +92,15 @@ const ContactFormPage = ({ setCompletedSuccessAnimation }) => {
   // }
   useEffect(() => {
     if (
-      formData.name.length > 1 &&
-      formData.email.length > 4 &&
+      formData.name.length > 1 ||
+      formData.email.length > 4 ||
       formData.message.length > 2
     ) {
       setProcessing(true)
     }
     if (
-      formData.name.length < 2 &&
-      formData.email.length < 5 &&
+      formData.name.length < 2 ||
+      formData.email.length < 5 ||
       formData.message.length < 3
     ) {
       setProcessing(false)
@@ -303,6 +303,10 @@ const StyledForm = styled.section`
     background-color: transparent;
     text-decoration: none;
     transition: all 0.1s;
+  }
+
+  button:disabled {
+    color: var(--gray)
   }
 
   textarea[type="text"],

@@ -7,7 +7,7 @@ const StyledHeader = styled.header`
   height: 25vh;
   justify-content: top;
   padding-top: 4em;
-  margin-bottom: 2em;
+  margin-bottom: 8em;
   align-items: center;
 
   // scroll title shimmer conntect to scroll listener on index page
@@ -55,18 +55,36 @@ const StyledHeader = styled.header`
     text-align: center;
     color: var(--beige);
   }
+  @media screen and (min-width: 620px) {
+    h1 {
+      font-size: 64px !important;
+    }
+    h2 {
+      font-size: clamp(3.5rem, 1.59vw, 2.4rem) !important;
+    }
+  }
+  @media screen and (min-width: 620px) and (max-width: 725px) {
+    h1 {
+      font-size: 50px !important;
+    }
+    h2 {
+      font-size: clamp(3rem, 1.59vw, 2.4rem) !important;
+    }
+  }
   // scroll title shimmer
   // media query for mobile
   @media screen and (max-width: 619px) {
     height: 150px;
     padding-top: 3em;
-    margin-bottom: 1em;
+    margin-bottom: 3em;
+    padding-bottom: 9em;
   }
   // media query for mobile landcape
   @media screen and (min-width: 520px) and (max-width: 959px) and (orientation: landscape) {
     height: 150px;
     padding-top: 3em;
-    margin-bottom: 1em;
+    margin-bottom: 3em;
+    padding-bottom: 9em;
   }
 `
 

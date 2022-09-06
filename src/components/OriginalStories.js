@@ -8,7 +8,7 @@ import Footer from "./Footer"
 import styled from "styled-components"
 
 
-const OriginalStories = ({ isBottom }) => {
+const OriginalStories = ({ isBottom, setShowAboutUsModal }) => {
 
   const textwrapVariants = {
     initial: {opacity: 0, y: 50, transition: {duration: 0.5}},
@@ -65,7 +65,7 @@ const OriginalStories = ({ isBottom }) => {
                       </span> responsive <br />
                       <span className="text-outline">always</span> competitive
                     </h3>
-                    <button>get the story</button>
+                    <button onClick={() => setShowAboutUsModal(true)}> get the story</button>
                   </motion.div>
                 </div>
               </div>
@@ -104,7 +104,7 @@ const StyledBackgrounds = styled.section`
     height: 100%;
     z-index: 20;
     background: linear-gradient(360deg, #161616 15%, rgba(0, 0, 0, 0) 43.45%),
-      linear-gradient(180deg, #161616 15%, rgba(0, 0, 0, 0) 38.09%),
+      linear-gradient(180deg, #161616 15%, rgba(22, 22, 22, 0) 38.09%),
       linear-gradient(
         89.93deg,
         #161616 25%,
@@ -172,6 +172,11 @@ const StyledBackgrounds = styled.section`
     .masthead .flex-wrapper {
       padding-left: 5rem;
     }
+
+    .masthead:before,
+    .masthead:after {
+      background-position: 18% !important
+    }
   }
   @media screen and (max-width: 799px) and (min-width: 650px) {
     .masthead {
@@ -186,6 +191,10 @@ const StyledBackgrounds = styled.section`
     }
     .masthead .flex-wrapper p {
       font-size: 1.7rem;
+    }
+    .masthead:before,
+    .masthead:after {
+      background-position: 18% !important
     }
   }
   @media screen and (max-width: 649px) and (min-width: 551px) {
@@ -202,14 +211,10 @@ const StyledBackgrounds = styled.section`
     .masthead .flex-wrapper p {
       font-size: 1.5rem;
     }
-  .masthead::before,
-  .masthead::after {
-    margin-left: 25%;
-    margin-top: 25%;
-    /* width: 65vw !important; */
-    height: 55vh !important;
-    background-position: 38% center !important;
-  }
+    .masthead:before,
+    .masthead:after {
+      background-position: 20% !important
+    }
   }
   @media screen and (max-width: 550px) {
     margin-top: 25vh;
@@ -224,7 +229,7 @@ const StyledBackgrounds = styled.section`
       height: 100%;
       z-index: 20;
       background: linear-gradient(360deg, #161616 1%, rgba(0, 0, 0, 0) 43.45%),
-        linear-gradient(180deg, #161616 1%, rgba(0, 0, 0, 0) 38.09%),
+        linear-gradient(180deg, #161616 15%, rgba(22, 22, 22, 0) 38.09%),
         linear-gradient(
           89.93deg,
           #161616 17%,
@@ -234,7 +239,7 @@ const StyledBackgrounds = styled.section`
     }
     .masthead::before,
     .masthead::after {
-      background-position: 78% !important;
+      background-position: 60% !important;
     }
     .masthead .flex-wrapper {
       padding-left: 2rem;

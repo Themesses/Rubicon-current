@@ -22,7 +22,7 @@ const StyledBanner = styled.div`
   span {
     color: var(--gold);
   }
-
+  
   .headline-wrapper {
     position: absolute;
     top: 50%;
@@ -75,6 +75,39 @@ const StyledBanner = styled.div`
     background: var(--beige);
     color: var(--black);
   }
+  @media screen and (min-width: 621px) and (max-width: 1199px) {
+    .headline-wrapper {
+      padding-left: 1em !important;
+      right: 62% !important;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .headline-wrapper {
+      padding-left: 2em !important;
+      right: 62% !important;
+    }
+  }
+  @media screen and (max-width: 620px) {
+    .headline-wrapper {
+      padding-left: 0.3em !important;
+      right: 62% !important;
+    }
+  }
+  @media screen and (max-width: 480px) {
+    h2 {
+      font-size: clamp(1.2rem,2vw,2rem) !important;
+    }
+    p {
+      font-size: clamp(1rem,0vw,0rem) !important;
+    }
+    button {
+      font-size: clamp(1.2rem,2vw,1.8rem) !important;
+      padding: 0.3em 0.6em !important;
+    }
+    .headline-wrapper {
+      right: 69% !important;
+    }
+  }
 `
 
 const MediaProductionStaticFallback = ({setShowModalMore}) => {
@@ -107,9 +140,7 @@ const MediaProductionStaticFallback = ({setShowModalMore}) => {
                 for quality clients
               </h2>
               <p>
-                <span>Rubicon</span> — your limitless source for
-                <br />
-                creative audio/visual storytelling.
+                <span>Rubicon</span> — your limitless source for creative audio/visual.
               </p>
               <button onClick={() => setShowModalMore(true)}>more...</button>
             </div>
