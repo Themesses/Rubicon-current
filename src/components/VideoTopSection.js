@@ -44,7 +44,7 @@ const StyledSection = styled.div`
   @keyframes fadein {
     from { opacity: 0}
     to   { opacity: 1}
-  } 
+  }
   @keyframes slideInFromBottom {
     from { transform: translateY(20px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
@@ -78,7 +78,7 @@ const StyledButton = styled.div`
     z-index: 101;
     margin-left: -155px;
   }
-  
+
   ${StyledSection}:hover & .toggle-button{
     z-index: 99;
     filter: blur(1px);
@@ -137,11 +137,11 @@ const StyledImage = styled.div`
     margin-top: 5px;
     filter: blur(1px);
   }
-  .play-icon .gold-play-button {   
+  .play-icon .gold-play-button {
     display: none;
   }
 
-  .play-icon .gold-play-button svg{   
+  .play-icon .gold-play-button svg{
     // height: 74px;
     // width: 67px;
   }
@@ -152,7 +152,7 @@ const StyledImage = styled.div`
   ${StyledSection}:hover & svg{
     z-index: 102;
   }
-  
+
   ${StyledSection}:hover & svg path{
     // stroke: var(--gold);
     // filter: brightness(110%) drop-shadow(2px 2px 5px #ffb800);
@@ -161,7 +161,7 @@ const StyledImage = styled.div`
   }
 
   ${StyledSection}:hover & .play-icon .gold-play-button{
-    display: block;  
+    display: block;
     z-index: 102;
     margin-left: 23px;
     margin-top: 5px;
@@ -180,7 +180,7 @@ const StyledImage = styled.div`
       height: 59px;
       width: 90px;
     }
-    ${StyledSection}:hover & .play-icon .gold-play-button{    
+    ${StyledSection}:hover & .play-icon .gold-play-button{
       margin-left: 11px;
       margin-top: 3px;
     }
@@ -201,7 +201,7 @@ const StyledBanner = styled.div`
     left: 0;
     right: 0;
   }
-  
+
   .parallax-video {
     width: 100%;
     height: 100%;
@@ -216,7 +216,7 @@ const StyledBanner = styled.div`
     margin-top: -15px;
   }
 
-  .poster22-overlay,.posterOverlayOpening {    
+  .poster22-overlay,.posterOverlayOpening {
     object-fit: cover;
   }
 
@@ -268,8 +268,8 @@ const VideoStyledBanner = styled.div`
   }
   @media screen and (min-width: 620px){
     .initialVideoDiv {
-      height:100vh 
-    }      
+      height:100vh
+    }
   }
 `
 
@@ -297,7 +297,7 @@ const renderVideo = ({
             <ParallaxBanner
               className="video-class main-parallax-banner"
               layers={[
-                {               
+                {
                   children: (
                     <video
                       id="posterOverlayOpening"
@@ -310,12 +310,12 @@ const renderVideo = ({
                         const posterOverlay = isBrowser ? document.getElementsByClassName("poster22-overlay") : "";
                         const playButton = isBrowser ? document.getElementsByClassName("play-button") : "";
                         playButton[0].style.display = "flex"
-                        posterOverlay[0].style.display = "block"                       
+                        posterOverlay[0].style.display = "block"
                       }}
                     />
                   ),
-                },     
-                {               
+                },
+                {
                   children: (
                     <video
                       id="posterOpeningOverlay"
@@ -382,7 +382,7 @@ const renderVideo = ({
                 </motion.button>
               </StyledButton>
               <StyledImage>
-                <motion.button             
+                <motion.button
                   ref={vidButtonRef}
                   className="play-icon"
                   style={{
@@ -399,7 +399,7 @@ const renderVideo = ({
                     src={YellowPlayButton}
                   />
 
-                    
+
                   <img src={GrayPlayButton} alt="play-Video" className="gray-play-button" />
                     {/* <img src={goldPlayButton} alt="play-Video" className="gold-play-button" />
                     <img src={grayPlayButton} alt="play-Video" className="gray-play-button" /> */}
@@ -412,13 +412,13 @@ const renderVideo = ({
           <div className="close" onClick={handleVideoEnd}>
           </div>
         </StyledCloseIcon>
-        <VideoStyledBanner>    
+        <VideoStyledBanner>
           <div className="initialVideoDiv">
             <video
               ref={vidRef}
               className="initialVideo"
               controlsList="nodownload"
-              preload="metadata" 
+              preload="metadata"
               onEnded={handleVideoEnd}
               src={src}
               style={{
@@ -460,7 +460,7 @@ export default function VideoTopSection({ src, poster, noControls, onEnded }) {
   const playButton = isBrowser
     ? document.getElementsByClassName("play-button")
     : ""
-  
+
   const closeIcon = isBrowser
     ? document.getElementsByClassName("close")
     : ""
@@ -478,6 +478,29 @@ export default function VideoTopSection({ src, poster, noControls, onEnded }) {
     }
 
   }, [])
+
+    // React doesn't always insert the "muted" attribute. Without it, the video won't autoplay on certain browsers.This checks inserts that attribute, checks if the video is playing, if it still isnt it shows the play button
+  useEffect(() => {
+    const video = document.getElementById("posterOverlayOpening")
+    if (video) {
+      video.setAttribute("muted", "")
+      let startPlayPromise = video.play()
+      if (startPlayPromise !== undefined) {
+        startPlayPromise
+        .then(() => {
+          console.log("video is playing!!!!!!!!!!!!!!!")
+        })
+        .catch((error) => {
+          if (error.name === "NotAllowedError") {
+          const posterOverlay = isBrowser ? document.getElementsByClassName("poster22-overlay") : "";
+          const playButton = isBrowser ? document.getElementsByClassName("play-button") : "";
+          playButton[0].style.display = "flex"
+          posterOverlay[0].style.display = "block"
+          }
+        })
+      }
+    }
+  })
 
 
   const handleVideoEnd = () => {
@@ -526,7 +549,7 @@ export default function VideoTopSection({ src, poster, noControls, onEnded }) {
     initialVideo[0].style.visibility = "visible"
     playButton[0].style.display = "none"
     closeIcon[0].style.display = "block"
-    
+
     initialVideo[0].style.minWidth = "100%"
     initialVideo[0].style.minHeight = "100%"
     initialVideo[0].style.right = "0"
@@ -559,7 +582,7 @@ const handlePause = () => {
     videoClass[0].style.zIndex = 0
     vidRef.current.paused ? handlePlay() : handlePause()
   }
-    
+
   return (
     <>
       {renderVideo({

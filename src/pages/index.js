@@ -119,9 +119,12 @@ const Agency = ({ isVideoVisible }) => {
   // set breakpoints for responsiveness
   //these breakpoints help with placing the correct video logo on render as well as resize
   //resize of the window is hooked into the useEffect hook above
+
+  //Girish: Changed the approach here to aspect ratio insted of resolutions. Seems to work well enough for now. Basically anything above 1.6 aspect is Desktop or Landscape depending on width, anything between .9 and 1.6 is medium and anything below .9 is mobile.
+
   useEffect(() => {
-    console.log("dim current", dimensions.width)
-    if (dimensions.width < 620 && dimensions.height > dimensions.width) {
+    console.log("dim current", dimensions.width, dimensions.height, dimensions.width/dimensions.height)
+    if (dimensions.width / dimensions.height < .9) {
       console.log("mobile")
       setIsMobileLandscape(false)
       setIsMobilePortrait(true)
@@ -129,17 +132,15 @@ const Agency = ({ isVideoVisible }) => {
       setIsDesktop(false)
     }
     if (
-      dimensions.width >= 620 &&
-      dimensions.width < 920 &&
-      dimensions.height > dimensions.width
+      (dimensions.width/dimensions.height) > .9 && (dimensions.width/dimensions.height) < 1.60
     ) {
-      console.log("medium")
+      console.log("medium !!!!!!!")
       setIsMobileLandscape(false)
       setIsMobilePortrait(false)
       setIsMedium(true)
       setIsDesktop(false)
     }
-    if (dimensions.width >= 920 && dimensions.width > dimensions.height) {
+    if (dimensions.width >= 920 && (dimensions.width / dimensions.height) >= 1.60) {
       console.log("desktop")
       setIsMobileLandscape(false)
       setIsMobilePortrait(false)
@@ -147,10 +148,7 @@ const Agency = ({ isVideoVisible }) => {
       setIsDesktop(true)
     }
     if (
-      dimensions.width <= 800 &&
-      dimensions.width >= 300 && 
-      dimensions.height <= 450 &&
-      dimensions.height >= 169
+      (dimensions.width < 920 && (dimensions.width /dimensions.height) >=1.60)
     ) {
       console.log("mobile landscape")
       setIsMobileLandscape(true)
@@ -159,6 +157,46 @@ const Agency = ({ isVideoVisible }) => {
       setIsDesktop(false)
     }
   }, [dimensions.width, dimensions.height])
+  // useEffect(() => {
+  //   console.log("dim current", dimensions.width)
+  //   if (dimensions.width < 620 && dimensions.height > dimensions.width) {
+  //     console.log("mobile")
+  //     setIsMobileLandscape(false)
+  //     setIsMobilePortrait(true)
+  //     setIsMedium(false)
+  //     setIsDesktop(false)
+  //   }
+  //   if (
+  //     dimensions.width >= 620 &&
+  //     dimensions.width < 920 &&
+  //     dimensions.height > dimensions.width
+  //   ) {
+  //     console.log("medium")
+  //     setIsMobileLandscape(false)
+  //     setIsMobilePortrait(false)
+  //     setIsMedium(true)
+  //     setIsDesktop(false)
+  //   }
+  //   if (dimensions.width >= 920 && dimensions.width > dimensions.height) {
+  //     console.log("desktop")
+  //     setIsMobileLandscape(false)
+  //     setIsMobilePortrait(false)
+  //     setIsMedium(false)
+  //     setIsDesktop(true)
+  //   }
+  //   if (
+  //     dimensions.width <= 800 &&
+  //     dimensions.width >= 300 &&
+  //     dimensions.height <= 450 &&
+  //     dimensions.height >= 169
+  //   ) {
+  //     console.log("mobile landscape")
+  //     setIsMobileLandscape(true)
+  //     setIsMobilePortrait(false)
+  //     setIsMedium(false)
+  //     setIsDesktop(false)
+  //   }
+  // }, [dimensions.width, dimensions.height])
 
   // check scroll position
   // if window is refreshed anywhere but on top of the page the static header with rest of the page is rendered as opposed to the opening animation
