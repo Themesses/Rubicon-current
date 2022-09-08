@@ -198,8 +198,17 @@ const StyledBanner = styled.div`
   }
   @media screen and (max-width: 620px) {
     .main-parallax-banner {
-      aspect-ratio: 2.7/1;
+      aspect-ratio: 1.8/1;
       /* height: 50vh; */
+    }
+    .parallax-video {
+      height: 100%;
+    }
+    .sphere-wrapper {
+      top: 33%;
+    }
+    .gatsby-image-wrapper img{
+      top: 30px;
     }
     .headline-wrapper {
       padding-left: 0.3em !important;
@@ -214,6 +223,7 @@ const StyledBanner = styled.div`
     }
     p {
       margin: .5em 0;
+      font-size: clamp(2rem, 0vw, 0rem) !important;
     }
     button {
       font-size: clamp(1.4rem, 2vw, 1.8rem);
@@ -221,6 +231,53 @@ const StyledBanner = styled.div`
       padding: 0.5em .8em;
       border-radius: 0.3em;
       transition: 0.3s;
+    }
+    .headline-wrapper {
+      padding-left: 0.3em !important;
+      right: 55% !important;
+    }
+    h2 {
+      font-size: clamp(2.2rem,2vw,2rem) !important;
+    }
+    
+  }
+  @media screen and (max-width: 379px) {
+    h2 {
+      font-size: clamp(1.2rem,2vw,2rem) !important;
+    }
+    p {
+      font-size: clamp(1rem,0vw,0rem) !important;
+    }
+    button {
+      font-size: clamp(1.2rem,2vw,1.8rem) !important;
+      padding: 0.3em 0.6em !important;
+    }
+    .headline-wrapper {
+      right: 68% !important;
+    }
+    .sphere-wrapper {
+      top: 36%;
+    }
+  }
+  @media screen and (min-width: 380px) and (max-width: 480px) {
+    h2 {
+      font-size: clamp(1.8rem,2vw,2rem) !important;
+    }
+    p {
+      font-size: clamp(1.5rem,0vw,0rem) !important;
+    }
+    button {
+      font-size: clamp(1.5rem,2vw,1.8rem) !important;
+      padding: 0.3em 0.6em !important;
+    }
+    .headline-wrapper {
+      right: 53% !important;
+    }
+  }
+  @media screen and (max-width: 375px) {
+    .headline-wrapper {
+      right: 55% !important;
+      padding-left: 0.1em !important;
     }
   }
 `
@@ -252,7 +309,7 @@ const MediaProduction = ({ setShowModalMore }) => {
   }, [waterfallVideo, reverseVideo, handImage, v4])
 
   const background = {
-    translateY: [-30, 20],
+    translateY: [-15, 15],
     children: (
       <video
         autoPlay

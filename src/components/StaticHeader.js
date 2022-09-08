@@ -63,6 +63,14 @@ const StyledHeader = styled.header`
       font-size: clamp(3.5rem, 1.59vw, 2.4rem) !important;
     }
   }
+  @media screen and (max-width: 375px) {
+    h1 {
+      font-size: 22px !important;
+    }
+    h2 {
+      font-size: clamp(1.3rem, 1.59vw, 2.4rem) !important;
+    }
+  }
   @media screen and (min-width: 620px) and (max-width: 725px) {
     h1 {
       font-size: 50px !important;
@@ -76,15 +84,21 @@ const StyledHeader = styled.header`
   @media screen and (max-width: 619px) {
     height: 150px;
     padding-top: 3em;
-    margin-bottom: 3em;
-    padding-bottom: 9em;
+    margin-bottom: 0.5em;
+    padding-bottom: 6em;
+  }
+  @media screen and (max-width: 375px) {
+    height: 90px;
+    padding-top: 0em;
+    margin-bottom: 0em;
+    padding-bottom: 0em;
   }
   // media query for mobile landcape
   @media screen and (min-width: 520px) and (max-width: 959px) and (orientation: landscape) {
     height: 150px;
-    padding-top: 3em;
+    padding-top: 1.8em;
     margin-bottom: 3em;
-    padding-bottom: 9em;
+    padding-bottom: 5.5em;
   }
 `
 

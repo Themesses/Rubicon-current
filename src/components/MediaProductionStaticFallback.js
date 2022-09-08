@@ -45,7 +45,6 @@ const StyledBanner = styled.div`
     position: absolute;
     inset: -0.1em 0 -0.1em 0;
     background: transparent;
-    background: transparent;
     background: linear-gradient(90deg, #161616 25%, rgba(22, 22, 22, 0) 60%),
       linear-gradient(180deg, #161616 1%, rgba(22, 22, 22, 0) 30%),
       linear-gradient(0deg, #161616 4%, rgba(22, 22, 22, 0) 25%);
@@ -75,6 +74,14 @@ const StyledBanner = styled.div`
     background: var(--beige);
     color: var(--black);
   }
+  @media screen and (max-width: 619px) {
+    .masthead {
+      aspect-ratio: 1.8/1 !important;
+    }
+    .foreground-image {
+      top: 18% !important;
+    }
+  }
   @media screen and (min-width: 621px) and (max-width: 1199px) {
     .headline-wrapper {
       padding-left: 1em !important;
@@ -90,10 +97,16 @@ const StyledBanner = styled.div`
   @media screen and (max-width: 620px) {
     .headline-wrapper {
       padding-left: 0.3em !important;
-      right: 62% !important;
+      right: 55% !important;
+    }
+    h2 {
+      font-size: clamp(2.2rem,2vw,2rem) !important;
+    }
+    p {
+      font-size: clamp(2rem, 0vw, 0rem) !important;
     }
   }
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 379px) {
     h2 {
       font-size: clamp(1.2rem,2vw,2rem) !important;
     }
@@ -105,7 +118,28 @@ const StyledBanner = styled.div`
       padding: 0.3em 0.6em !important;
     }
     .headline-wrapper {
-      right: 69% !important;
+      right: 68% !important;
+    }
+  }
+  @media screen and (min-width: 380px) and (max-width: 480px) {
+    h2 {
+      font-size: clamp(1.8rem,2vw,2rem) !important;
+    }
+    p {
+      font-size: clamp(1.5rem,0vw,0rem) !important;
+    }
+    button {
+      font-size: clamp(1.5rem,2vw,1.8rem) !important;
+      padding: 0.3em 0.6em !important;
+    }
+    .headline-wrapper {
+      right: 53% !important;
+    }
+  }
+  @media screen and (max-width: 375px) {
+    .headline-wrapper {
+      right: 55% !important;
+      padding-left: 0.1em !important;
     }
   }
 `
