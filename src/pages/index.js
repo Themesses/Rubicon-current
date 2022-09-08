@@ -123,8 +123,13 @@ const Agency = ({ isVideoVisible }) => {
   //Girish: Changed the approach here to aspect ratio insted of resolutions. Seems to work well enough for now. Basically anything above 1.6 aspect is Desktop or Landscape depending on width, anything between .9 and 1.6 is medium and anything below .9 is mobile.
 
   useEffect(() => {
-    console.log("dim current", dimensions.width, dimensions.height, dimensions.width/dimensions.height)
-    if (dimensions.width / dimensions.height < .9) {
+    console.log(
+      "dim current",
+      dimensions.width,
+      dimensions.height,
+      dimensions.width / dimensions.height
+    )
+    if (dimensions.width / dimensions.height < 0.9) {
       console.log("mobile")
       setIsMobileLandscape(false)
       setIsMobilePortrait(true)
@@ -132,7 +137,8 @@ const Agency = ({ isVideoVisible }) => {
       setIsDesktop(false)
     }
     if (
-      (dimensions.width/dimensions.height) > .9 && (dimensions.width/dimensions.height) < 1.60
+      dimensions.width / dimensions.height > 0.9 &&
+      dimensions.width / dimensions.height < 1.6
     ) {
       console.log("medium !!!!!!!")
       setIsMobileLandscape(false)
@@ -140,16 +146,17 @@ const Agency = ({ isVideoVisible }) => {
       setIsMedium(true)
       setIsDesktop(false)
     }
-    if (dimensions.width >= 920 && (dimensions.width / dimensions.height) >= 1.60) {
+    if (
+      dimensions.width >= 920 &&
+      dimensions.width / dimensions.height >= 1.6
+    ) {
       console.log("desktop")
       setIsMobileLandscape(false)
       setIsMobilePortrait(false)
       setIsMedium(false)
       setIsDesktop(true)
     }
-    if (
-      (dimensions.width < 920 && (dimensions.width /dimensions.height) >=1.60)
-    ) {
+    if (dimensions.width < 920 && dimensions.width / dimensions.height >= 1.6) {
       console.log("mobile landscape")
       setIsMobileLandscape(true)
       setIsMobilePortrait(false)
@@ -367,7 +374,9 @@ const Agency = ({ isVideoVisible }) => {
                   <VideoLogosMobile />
                   <ClientGallery isJank={isJank} />
                   <ClientCarousel dimensions={dimensions} />
-                  <OriginalStoriesMobile  setShowAboutUsModal={setShowAboutUsModal}/>
+                  <OriginalStoriesMobile
+                    setShowAboutUsModal={setShowAboutUsModal}
+                  />
                 </>
               ) : !isBottom && isMobileLandscape ? (
                 <>
@@ -386,13 +395,24 @@ const Agency = ({ isVideoVisible }) => {
                   <ClientGallery />
                   <ClientCarousel dimensions={dimensions} />
                 </>
-              ) : isBottom && !isMobilePortrait && !isMobileLandscape && !isMedium? (
-                <OriginalStories isBottom={isBottom} setShowAboutUsModal={setShowAboutUsModal} />
-              ) : isBottom && isMedium ?  (
-                <OriginalStoriesMobile isBottom={isBottom} setShowAboutUsModal={setShowAboutUsModal} />
+              ) : isBottom &&
+                !isMobilePortrait &&
+                !isMobileLandscape &&
+                !isMedium ? (
+                <OriginalStories
+                  isBottom={isBottom}
+                  setShowAboutUsModal={setShowAboutUsModal}
+                />
+              ) : isBottom && isMedium ? (
+                <OriginalStoriesMobile
+                  isBottom={isBottom}
+                  setShowAboutUsModal={setShowAboutUsModal}
+                />
+              ) : (
                 // <ClientGallery />
                 // <div>no match</div>
-              ) : <div>no match</div>}
+                <div>no match</div>
+              )}
 
               <StyledBottom ref={ref} className="bottom" />
             </>
