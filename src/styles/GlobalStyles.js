@@ -18,7 +18,7 @@ const GlobalStyles = createGlobalStyle`
         --gray: #636268;
         --gray-light: #636060;
 
-        --h1:clamp(3rem, 3.3vw, 5rem);
+        --h1:clamp(3rem, 3.7vw, 5.5rem);
         --h3-banner-clamp: clamp(2rem, 2.31vw, 4rem);
         --h3-banner-clamp-fallback-lg: 5rem;
         --h3-banner-clamp-fallback-md: 4rem;

@@ -16,7 +16,7 @@ const HeaderStylesFull = styled.div`
     justify-content: top;
     align-items: center;
     transform: translateY(-50%);
-    padding-top: 4em;
+    padding-top: 2em;
     height: 25vh;
     width: 99vw;
   }
@@ -56,7 +56,7 @@ const HeaderStylesFull = styled.div`
 const H1Styles = styled(motion.h1)`
   position: relative;
   font-size: var(--h1);
-  font-size: 64px;
+  /* font-size: 64px; */
   text-align: center;
   background-color: #3d3a3a;
   background-clip: text;
@@ -70,8 +70,8 @@ const H1Styles = styled(motion.h1)`
   } */
 `
 const H2Styles = styled(motion.h2)`
-  /* font-size: clamp(1.9rem, 1.59vw, 2.4rem); */
-  font-size: clamp(3.5rem, 1.59vw, 2.4rem) !important;
+  font-size: clamp(1.9rem, 1.59vw, 2.9rem);
+  /* font-size: clamp(3.5rem, 1.59vw, 2.4rem) !important; */
   text-align: center;
   color: var(--beige);
 `
@@ -128,7 +128,7 @@ const Header = ({
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.02,
+        staggerChildren: 0.018,
       },
     },
   }
@@ -183,7 +183,7 @@ const Header = ({
     if (isScrollFired) {
       setTimeout(() => {
         setIsFirstLoad(false)
-      }, 2900)
+      }, 3000)
     }
   }, [isScrollFired, setIsFirstLoad])
 

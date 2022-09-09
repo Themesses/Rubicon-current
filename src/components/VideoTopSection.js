@@ -50,7 +50,7 @@ const StyledSection = styled.div`
     to {
       opacity: 1;
     }
-  } 
+  }
   @keyframes slideInFromBottom {
     from {
       transform: translateY(20px);
@@ -90,7 +90,7 @@ const StyledButton = styled.div`
     z-index: 101;
     margin-left: -155px;
   }
-  
+
   ${StyledSection}:hover & .toggle-button {
     z-index: 99;
     filter: blur(1px);
@@ -121,27 +121,27 @@ const StyledButton = styled.div`
   }
 
   @media screen and (max-width: 619px) {
-    ${StyledSection}:hover & svg{
+    ${StyledSection}:hover & svg {
       height: 29px;
       width: 276px;
       top: -64% !important;
     }
 
-    svg{
+    svg {
       height: 29px;
       width: 276px;
       top: -64% !important;
     }
   }
-  
+
   @media screen and (max-width: 550px) {
-    ${StyledSection}:hover & svg{
+    ${StyledSection}:hover & svg {
       height: 19px;
       width: 276px;
       top: -64% !important;
     }
 
-    svg{
+    svg {
       height: 19px;
       width: 276px;
       top: -64% !important;
@@ -149,13 +149,13 @@ const StyledButton = styled.div`
   }
 
   @media screen and (max-width: 375px) {
-    ${StyledSection}:hover & svg{
+    ${StyledSection}:hover & svg {
       height: 14px;
       width: 286px;
       top: -50% !important;
     }
 
-    svg{
+    svg {
       height: 14px;
       width: 286px;
       top: -50% !important;
@@ -194,11 +194,11 @@ const StyledImage = styled.div`
     filter: blur(2px);
     opacity: 0.4;
   }
-  .play-icon .gold-play-button {   
+  .play-icon .gold-play-button {
     display: none;
   }
 
-  .play-icon .gold-play-button svg {   
+  .play-icon .gold-play-button svg {
     // height: 74px;
     // width: 67px;
   }
@@ -209,7 +209,7 @@ const StyledImage = styled.div`
   ${StyledSection}:hover & svg {
     z-index: 102;
   }
-  
+
   ${StyledSection}:hover & svg path {
     // stroke: var(--gold);
     // filter: brightness(110%) drop-shadow(2px 2px 5px #ffb800);
@@ -218,7 +218,7 @@ const StyledImage = styled.div`
   }
 
   ${StyledSection}:hover & .play-icon .gold-play-button {
-    display: block;  
+    display: block;
     z-index: 102;
     margin-left: 23px;
     margin-top: 5px;
@@ -237,18 +237,18 @@ const StyledImage = styled.div`
       height: 59px;
       width: 90px;
     }
-    ${StyledSection}:hover & .play-icon .gold-play-button {    
+    ${StyledSection}:hover & .play-icon .gold-play-button {
       margin-left: 11px;
       margin-top: 3px;
     }
   }
 
   @media screen and (max-width: 619px) {
-    .gray-play-button{
+    .gray-play-button {
       height: 31px;
       width: 44px;
     }
-    .gold-play-button{
+    .gold-play-button {
       height: 30px;
       width: 67px;
     }
@@ -256,18 +256,18 @@ const StyledImage = styled.div`
       margin-top: -18px;
       filter: blur(0.8px);
     }
-    ${StyledSection}:hover & .play-icon .gold-play-button{    
+    ${StyledSection}:hover & .play-icon .gold-play-button {
       margin-left: 11px;
       margin-top: -17px;
     }
   }
 
   @media screen and (max-width: 550px) {
-    .gray-play-button{
+    .gray-play-button {
       height: 21px;
       width: 40px;
     }
-    .gold-play-button{
+    .gold-play-button {
       height: 21px;
       width: 63px;
     }
@@ -275,18 +275,18 @@ const StyledImage = styled.div`
       margin-top: -18px;
       filter: blur(0.8px);
     }
-    ${StyledSection}:hover & .play-icon .gold-play-button{    
+    ${StyledSection}:hover & .play-icon .gold-play-button {
       margin-left: 11px;
       margin-top: -17px;
     }
   }
 
   @media screen and (max-width: 375px) {
-    .gray-play-button{
+    .gray-play-button {
       height: 16px;
       width: 47px;
     }
-    .gold-play-button{
+    .gold-play-button {
       height: 15px;
       width: 70px;
     }
@@ -294,7 +294,7 @@ const StyledImage = styled.div`
       margin-top: -15.5px;
       filter: blur(0.4px);
     }
-    ${StyledSection}:hover & .play-icon .gold-play-button{    
+    ${StyledSection}:hover & .play-icon .gold-play-button {
       margin-left: 11px;
       margin-top: -15px;
     }
@@ -315,7 +315,7 @@ const StyledBanner = styled.div`
     left: 0;
     right: 0;
   }
-  
+
   .parallax-video {
     width: 100%;
     height: 100%;
@@ -331,7 +331,7 @@ const StyledBanner = styled.div`
   }
 
   .poster22-overlay,
-  .posterOverlayOpening {    
+  .posterOverlayOpening {
     object-fit: cover;
   }
 
@@ -351,11 +351,12 @@ const StyledBanner = styled.div`
       aspect-ratio: 1/1;
     }
     .video-class {
-      width: 89%
+      width: 89%;
     }
   }
   @media screen and (max-width: 620px) {
-    .posterOverlayOpening, .parallax-video {
+    .posterOverlayOpening,
+    .parallax-video {
       height: 110% !important;
     }
   }
@@ -388,7 +389,7 @@ const VideoStyledBanner = styled.div`
   @media screen and (min-width: 620px) {
     .initialVideoDiv {
       height: 100vh;
-    }      
+    }
   }
 `
 

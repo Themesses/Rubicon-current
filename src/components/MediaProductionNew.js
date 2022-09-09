@@ -61,9 +61,9 @@ const StyledBanner = styled.div`
   .headline-wrapper {
     position: absolute;
     top: 50%;
+    left: 0%;
     transform: translateY(-50%);
-    padding-left: 4em;
-    /* border: 1px solid red; */
+    padding-left: 5em;
   }
   button {
     background: transparent;
@@ -80,25 +80,24 @@ const StyledBanner = styled.div`
     color: var(--black);
   }
   h2 {
-    font-size: clamp(1.5rem, 2.8vw, 4rem);
+    font-size: clamp(1.5rem, 2.8vw, 3.8rem);
     display: block;
-    /* margin-bottom: 1em; */
     line-height: 1.3;
   }
   p {
-    font-size: clamp(1.5rem, 2vw, 2.6rem);
+    font-size: clamp(1.5rem, 2vw, 2.4rem);
     max-width: 100%;
     margin: 1em 0;
   }
   @media screen and (max-width: 480px) {
     h2 {
-      font-size: clamp(1.2rem,2vw,2rem) !important;
+      font-size: clamp(1.2rem, 2vw, 2rem) !important;
     }
     p {
-      font-size: clamp(1rem,0vw,0rem) !important;
+      font-size: clamp(1rem, 0vw, 0rem) !important;
     }
     button {
-      font-size: clamp(1.2rem,2vw,1.8rem) !important;
+      font-size: clamp(1.2rem, 2vw, 1.8rem) !important;
       padding: 0.3em 0.6em !important;
     }
     .headline-wrapper {
@@ -192,27 +191,37 @@ const StyledBanner = styled.div`
   }
   @media screen and (min-width: 1200px) {
     .headline-wrapper {
-      padding-left: 2em !important;
-      right: 62% !important;
+      /* padding-left: 2em !important;
+      right: 62% !important; */
     }
   }
   @media screen and (max-width: 620px) {
     .main-parallax-banner {
-      aspect-ratio: 1.8/1;
+      aspect-ratio: 1.3/1;
+      /* transform: scale(1.3); */
       /* height: 50vh; */
     }
     .parallax-video {
       height: 100%;
+      transform: scale(1.6);
+    }
+    .foreground-image {
+      transform: scale(1.65) translateX(5%) translateY(2%);
     }
     .sphere-wrapper {
-      top: 33%;
+      top: 34%;
+      left: 32%;
+      transform: scale(1.55) translateX(5%) translateY(2%);
     }
-    .gatsby-image-wrapper img{
+    .gatsby-image-wrapper img {
       top: 30px;
     }
     .headline-wrapper {
       padding-left: 0.3em !important;
       right: 62% !important;
+    }
+    .line-break {
+      display: none;
     }
     .flare {
       &:after,
@@ -222,13 +231,13 @@ const StyledBanner = styled.div`
       }
     }
     p {
-      margin: .5em 0;
+      margin: 0.5em 0;
       font-size: clamp(2rem, 0vw, 0rem) !important;
     }
     button {
       font-size: clamp(1.4rem, 2vw, 1.8rem);
       border: 1px solid var(--beige);
-      padding: 0.5em .8em;
+      padding: 0.5em 0.8em;
       border-radius: 0.3em;
       transition: 0.3s;
     }
@@ -237,19 +246,18 @@ const StyledBanner = styled.div`
       right: 55% !important;
     }
     h2 {
-      font-size: clamp(2.2rem,2vw,2rem) !important;
+      font-size: clamp(2.2rem, 2vw, 2rem) !important;
     }
-    
   }
   @media screen and (max-width: 379px) {
     h2 {
-      font-size: clamp(1.2rem,2vw,2rem) !important;
+      font-size: clamp(1.2rem, 2vw, 2rem) !important;
     }
     p {
-      font-size: clamp(1rem,0vw,0rem) !important;
+      font-size: clamp(1rem, 0vw, 0rem) !important;
     }
     button {
-      font-size: clamp(1.2rem,2vw,1.8rem) !important;
+      font-size: clamp(1.2rem, 2vw, 1.8rem) !important;
       padding: 0.3em 0.6em !important;
     }
     .headline-wrapper {
@@ -261,13 +269,13 @@ const StyledBanner = styled.div`
   }
   @media screen and (min-width: 380px) and (max-width: 480px) {
     h2 {
-      font-size: clamp(1.8rem,2vw,2rem) !important;
+      font-size: clamp(1.8rem, 2vw, 2rem) !important;
     }
     p {
-      font-size: clamp(1.5rem,0vw,0rem) !important;
+      font-size: clamp(1.5rem, 0vw, 0rem) !important;
     }
     button {
-      font-size: clamp(1.5rem,2vw,1.8rem) !important;
+      font-size: clamp(1.5rem, 2vw, 1.8rem) !important;
       padding: 0.3em 0.6em !important;
     }
     .headline-wrapper {
@@ -447,7 +455,8 @@ const MediaProduction = ({ setShowModalMore }) => {
                   for quality clients
                 </h2>
                 <p ref={ref}>
-                  <span>Rubicon</span> — your limitless source for creative audio/visuals.
+                  <span>Rubicon</span> — your limitless source for
+                  <br className="line-break" /> creative audio/visuals.
                 </p>
                 <button onClick={() => setShowModalMore(true)}>more...</button>
               </div>

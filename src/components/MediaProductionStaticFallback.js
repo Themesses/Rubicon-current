@@ -22,7 +22,7 @@ const StyledBanner = styled.div`
   span {
     color: var(--gold);
   }
-  
+
   .headline-wrapper {
     position: absolute;
     top: 50%;
@@ -57,7 +57,7 @@ const StyledBanner = styled.div`
 
     top: 0%;
     right: 0%;
-    transform: translate( 15%, -11%);
+    transform: translate(15%, -11%);
     z-index: -1;
   }
   button {
@@ -76,10 +76,11 @@ const StyledBanner = styled.div`
   }
   @media screen and (max-width: 619px) {
     .masthead {
-      aspect-ratio: 1.8/1 !important;
+      aspect-ratio: 1.3/1 !important;
     }
     .foreground-image {
       top: 18% !important;
+      transform: scale(1.6) translate(15%, 0%);
     }
   }
   @media screen and (min-width: 621px) and (max-width: 1199px) {
@@ -100,7 +101,7 @@ const StyledBanner = styled.div`
       right: 55% !important;
     }
     h2 {
-      font-size: clamp(2.2rem,2vw,2rem) !important;
+      font-size: clamp(2.2rem, 2vw, 2rem) !important;
     }
     p {
       font-size: clamp(2rem, 0vw, 0rem) !important;
@@ -108,13 +109,13 @@ const StyledBanner = styled.div`
   }
   @media screen and (max-width: 379px) {
     h2 {
-      font-size: clamp(1.2rem,2vw,2rem) !important;
+      font-size: clamp(1.2rem, 2vw, 2rem) !important;
     }
     p {
-      font-size: clamp(1rem,0vw,0rem) !important;
+      font-size: clamp(1rem, 0vw, 0rem) !important;
     }
     button {
-      font-size: clamp(1.2rem,2vw,1.8rem) !important;
+      font-size: clamp(1.2rem, 2vw, 1.8rem) !important;
       padding: 0.3em 0.6em !important;
     }
     .headline-wrapper {
@@ -123,13 +124,13 @@ const StyledBanner = styled.div`
   }
   @media screen and (min-width: 380px) and (max-width: 480px) {
     h2 {
-      font-size: clamp(1.8rem,2vw,2rem) !important;
+      font-size: clamp(1.8rem, 2vw, 2rem) !important;
     }
     p {
-      font-size: clamp(1.5rem,0vw,0rem) !important;
+      font-size: clamp(1.5rem, 0vw, 0rem) !important;
     }
     button {
-      font-size: clamp(1.5rem,2vw,1.8rem) !important;
+      font-size: clamp(1.5rem, 2vw, 1.8rem) !important;
       padding: 0.3em 0.6em !important;
     }
     .headline-wrapper {
@@ -144,7 +145,7 @@ const StyledBanner = styled.div`
   }
 `
 
-const MediaProductionStaticFallback = ({setShowModalMore}) => {
+const MediaProductionStaticFallback = ({ setShowModalMore }) => {
   const { backgroundImage } = useStaticQuery(
     graphql`
       query {
@@ -167,24 +168,25 @@ const MediaProductionStaticFallback = ({setShowModalMore}) => {
     <StyledBanner>
       <BgImage image={pluginImage} className="masthead">
         <div className="gradient-overlay">
-            <div className="headline-wrapper">
-              <h2>
-                media production
-                <br />
-                for quality clients
-              </h2>
-              <p>
-                <span>Rubicon</span> — your limitless source for creative audio/visual.
-              </p>
-              <button onClick={() => setShowModalMore(true)}>more...</button>
-            </div>
-            <StaticImage
-              className="foreground-image"
-              src="../assets/images/globeandhand4.webp"
-              placeholder="none"
-              alt="hand holding a glass globe"
-            />
+          <div className="headline-wrapper">
+            <h2>
+              media production
+              <br />
+              for quality clients
+            </h2>
+            <p>
+              <span>Rubicon</span> — your limitless source for creative
+              audio/visual.
+            </p>
+            <button onClick={() => setShowModalMore(true)}>more...</button>
           </div>
+          <StaticImage
+            className="foreground-image"
+            src="../assets/images/globeandhand4.webp"
+            placeholder="none"
+            alt="hand holding a glass globe"
+          />
+        </div>
       </BgImage>
     </StyledBanner>
   )

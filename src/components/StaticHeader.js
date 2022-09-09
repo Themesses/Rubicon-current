@@ -6,8 +6,8 @@ const StyledHeader = styled.header`
   flex-direction: column;
   height: 25vh;
   justify-content: top;
-  padding-top: 4em;
-  margin-bottom: 8em;
+  padding-top: 2em;
+  margin-bottom: 0em;
   align-items: center;
 
   // scroll title shimmer conntect to scroll listener on index page
@@ -57,10 +57,11 @@ const StyledHeader = styled.header`
   }
   @media screen and (min-width: 620px) {
     h1 {
-      font-size: 64px !important;
+      font-size: var(--h1);
     }
     h2 {
-      font-size: clamp(3.5rem, 1.59vw, 2.4rem) !important;
+      font-size: clamp(1.9rem, 1.59vw, 2.9rem);
+      /* font-size: clamp(3.5rem, 1.59vw, 2.4rem) !important; */
     }
   }
   @media screen and (max-width: 375px) {
@@ -83,9 +84,21 @@ const StyledHeader = styled.header`
   // media query for mobile
   @media screen and (max-width: 619px) {
     height: 150px;
-    padding-top: 3em;
+    padding-top: 2em;
+    margin-bottom: 1em;
+    padding-bottom: 3em;
+    h1 {
+      font-size: 7vw;
+    }
+    h2 {
+      font-size: 4vw;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    height: 110px;
+    padding-top: 1em;
+    padding-bottom: 0;
     margin-bottom: 0.5em;
-    padding-bottom: 6em;
   }
   @media screen and (max-width: 375px) {
     height: 90px;

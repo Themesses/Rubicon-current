@@ -9,7 +9,7 @@ const isBrowser = typeof window !== "undefined"
 
 if (isBrowser) {
 window.jankcb = function(callback) {
-    console.log('Starting JankCB...');
+    // console.log('Starting JankCB...');
 
     // Check for callback
     if (typeof callback !== 'function') {
@@ -41,13 +41,13 @@ window.jankcb = function(callback) {
       } else {
         delta = timestamp - lastTimestamp;
         fps = ticks / (delta / 1000);
-        console.log('FPS:', fps);
+        // console.log('FPS:', fps);
 
         if (fps < minFps) {
           misses += 1;
-          console.log('Miss: ', misses);
+          // console.log('Miss: ', misses);
           if (misses >= maxMisses) {
-            console.log('Triggering Callback');
+            // console.log('Triggering Callback');
             callback();
             return;
           }

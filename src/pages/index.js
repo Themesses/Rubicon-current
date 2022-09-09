@@ -369,7 +369,7 @@ const Agency = ({ isVideoVisible }) => {
               />
             )}
             <>
-              {!isBottom && isMobilePortrait ? (
+              { isMobilePortrait ? (
                 <>
                   <VideoLogosMobile />
                   <ClientGallery isJank={isJank} />
@@ -378,36 +378,49 @@ const Agency = ({ isVideoVisible }) => {
                     setShowAboutUsModal={setShowAboutUsModal}
                   />
                 </>
-              ) : !isBottom && isMobileLandscape ? (
+              ) :  isMobileLandscape ? (
                 <>
                   <VideoLogosMobileLandscape />
                   <OriginalStories setShowAboutUsModal={setShowAboutUsModal} />
                 </>
-              ) : !isBottom && isMedium ? (
+              ) : isMedium ? (
                 <>
                   <VideoLogosMiddle isBottom={isBottom} />
                   <ClientGallery />
                   <ClientCarousel dimensions={dimensions} />
-                </>
-              ) : !isBottom && isDesktop ? (
-                <>
-                  <VideoLogos isBottom={isBottom} />
-                  <ClientGallery />
-                  <ClientCarousel dimensions={dimensions} />
-                </>
-              ) : isBottom &&
-                !isMobilePortrait &&
-                !isMobileLandscape &&
-                !isMedium ? (
-                <OriginalStories
-                  isBottom={isBottom}
-                  setShowAboutUsModal={setShowAboutUsModal}
-                />
-              ) : isBottom && isMedium ? (
                 <OriginalStoriesMobile
                   isBottom={isBottom}
                   setShowAboutUsModal={setShowAboutUsModal}
                 />
+                </>
+              ) : isDesktop ? (
+                <>
+                  <VideoLogos isBottom={isBottom} />
+                  <ClientGallery />
+                  <ClientCarousel dimensions={dimensions} />
+                  <OriginalStories setShowAboutUsModal={setShowAboutUsModal} />
+                </>
+              // ) : !isBottom && isDesktop ? (
+              //   <>
+              //     <VideoLogos isBottom={isBottom} />
+              //     <ClientGallery />
+              //     <ClientCarousel dimensions={dimensions} />
+              //     <OriginalStories setShowAboutUsModal={setShowAboutUsModal} />
+              //   </>
+              // ) : isBottom &&
+              //   !isMobilePortrait &&
+              //   !isMobileLandscape &&
+              //   !isMedium ? (
+              //     <div>""</div>
+                // <OriginalStories
+                //   isBottom={isBottom}
+                //   setShowAboutUsModal={setShowAboutUsModal}
+                // />
+              // ) : isBottom && isMedium ? (
+              //   <OriginalStoriesMobile
+              //     isBottom={isBottom}
+              //     setShowAboutUsModal={setShowAboutUsModal}
+              //   />
               ) : (
                 // <ClientGallery />
                 // <div>no match</div>
