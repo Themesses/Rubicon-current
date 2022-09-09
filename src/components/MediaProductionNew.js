@@ -59,11 +59,14 @@ const StyledBanner = styled.div`
     right: 0;
   }
   .headline-wrapper {
+    opacity: 0;
+    visibility: hidden;
     position: absolute;
     top: 50%;
     left: 0%;
     transform: translateY(-50%);
     padding-left: 5em;
+    /* border: 1px solid red; */
   }
   button {
     background: transparent;
@@ -346,7 +349,8 @@ const MediaProduction = ({ setShowModalMore }) => {
       const sphereVideo = document.getElementsByClassName("sphere-video")
       const foregroundImage =
         document.getElementsByClassName("foreground-image")
-      if (mainVideo && sphereVideo && foregroundImage) {
+      const headling = document.getElementsByClassName("headline-wrapper")
+      if (mainVideo && sphereVideo && foregroundImage && headling) {
         mainVideo[0].style.opacity = 1
         mainVideo[0].style.visibility = "visible"
         foregroundImage[0].style.opacity = 1
@@ -355,6 +359,8 @@ const MediaProduction = ({ setShowModalMore }) => {
         sphereVideo[0].style.visibility = "visible"
         flairRef.current.style.opacity = 1
         flairRef.current.style.visibility = "visible"
+          headling[0].style.opacity = 1
+          headling[0].style.visibility = "visible"
       }
     }
   }

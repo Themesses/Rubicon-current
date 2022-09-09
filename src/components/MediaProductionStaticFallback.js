@@ -1,4 +1,4 @@
-import React from "react"
+import React,{ useEffect, useState} from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import { getImage, StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
@@ -22,12 +22,18 @@ const StyledBanner = styled.div`
   span {
     color: var(--gold);
   }
-
+  
   .headline-wrapper {
+    opacity: 0;
+    visibility: hidden;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     padding-left: 4em;
+  }
+  .c-bgImage {
+    opacity: 0;
+    visibility: hidden;
   }
   h2 {
     font-size: clamp(1.5rem, 2.8vw, 4rem);
@@ -42,6 +48,8 @@ const StyledBanner = styled.div`
     margin: 1em 0;
   }
   .gradient-overlay {
+    opacity: 0;
+    visibility: hidden;
     position: absolute;
     inset: -0.1em 0 -0.1em 0;
     background: transparent;
@@ -50,6 +58,8 @@ const StyledBanner = styled.div`
       linear-gradient(0deg, #161616 4%, rgba(22, 22, 22, 0) 25%);
   }
   .foreground-image {
+    opacity: 0;
+    visibility: hidden;
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -57,7 +67,7 @@ const StyledBanner = styled.div`
 
     top: 0%;
     right: 0%;
-    transform: translate(15%, -11%);
+    transform: translate( 15%, -11%);
     z-index: -1;
   }
   button {
@@ -145,7 +155,10 @@ const StyledBanner = styled.div`
   }
 `
 
-const MediaProductionStaticFallback = ({ setShowModalMore }) => {
+const MediaProductionStaticFallback = ({setShowModalMore}) => {
+  const [waterfallImage, setWaterfallImage] = useState(false)
+  const [handImage, setHandImage] = useState(false)
+
   const { backgroundImage } = useStaticQuery(
     graphql`
       query {
@@ -155,38 +168,60 @@ const MediaProductionStaticFallback = ({ setShowModalMore }) => {
               width: 2000
               quality: 70
               webpOptions: { quality: 90 }
-            )
+              )
+            }
           }
         }
-      }
-    `
-  )
+        `
+      )
+      useEffect(() => {
+        loadAllITems()
+      }, [waterfallImage,handImage])
 
   const pluginImage = getImage(backgroundImage)
 
+  const loadAllITems = () => {
+    if (waterfallImage && handImage ) {
+      const foreground = document.getElementsByClassName("foreground-image")
+      const mainImage = document.getElementsByClassName("c-bgImage")
+      const gradientImg = document.getElementsByClassName("gradient-overlay")      
+      const headling = document.getElementsByClassName("headline-wrapper")
+      if (foreground && mainImage && gradientImg && headling) {
+        foreground[0].style.opacity = 1
+        foreground[0].style.visibility = "visible"      
+        mainImage[0].style.opacity = 1
+        mainImage[0].style.visibility = "visible"      
+        headling[0].style.opacity = 1
+        headling[0].style.visibility = "visible"
+        gradientImg[0].style.opacity = 1
+        gradientImg[0].style.visibility = "visible"       
+      }
+    }
+  }
+
   return (
     <StyledBanner>
-      <BgImage image={pluginImage} className="masthead">
+      <BgImage image={pluginImage} className="masthead c-bgImage" onLoad={() => setWaterfallImage(true)}>
         <div className="gradient-overlay">
-          <div className="headline-wrapper">
-            <h2>
-              media production
-              <br />
-              for quality clients
-            </h2>
-            <p>
-              <span>Rubicon</span> — your limitless source for creative
-              audio/visual.
-            </p>
-            <button onClick={() => setShowModalMore(true)}>more...</button>
+            <div className="headline-wrapper">
+              <h2>
+                media production
+                <br />
+                for quality clients
+              </h2>
+              <p>
+                <span>Rubicon</span> — your limitless source for creative audio/visual.
+              </p>
+              <button onClick={() => setShowModalMore(true)}>more...</button>
+            </div>
+            <StaticImage
+              className="foreground-image"
+              src="../assets/images/globeandhand4.webp"
+              placeholder="none"
+              alt="hand holding a glass globe"
+              onLoad={() => setHandImage(true)}
+            />
           </div>
-          <StaticImage
-            className="foreground-image"
-            src="../assets/images/globeandhand4.webp"
-            placeholder="none"
-            alt="hand holding a glass globe"
-          />
-        </div>
       </BgImage>
     </StyledBanner>
   )
