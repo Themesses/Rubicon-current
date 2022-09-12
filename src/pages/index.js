@@ -54,6 +54,8 @@ const Agency = ({ isVideoVisible }) => {
   const [isScrollFired, setIsScrollFired] = useState(false)
   // local state for timing the delay of opacity on the rest of the page so it can load in the background and be ready to be seen once the opening sequence is finished
   const [isAnimationTriggered, setIsAnimationTriggered] = useState(false)
+  // state for checking if elements of the parallax are ready to be displayed
+  const [parallaxLoaded, setParallaxLoaded] = useState(false)
   // state for checking if window was resized
   const [dimensions, setDimensions] = useState({
     height: isBrowser && window.innerHeight,
@@ -304,8 +306,8 @@ const Agency = ({ isVideoVisible }) => {
   }, [showSayHeyModal, showAboutUsModal, showModalMore])
 
   const componentAnimation = {
-    hidden: { y: 30, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { delay: 1, duration: 0.2 } },
+    hidden: { y: -50, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.7 } },
   }
 
   return (
@@ -343,7 +345,7 @@ const Agency = ({ isVideoVisible }) => {
           <AnimatedSection
             variants={componentAnimation}
             initial="hidden"
-            animate="visible"
+            animate={parallaxLoaded && 'visible'}
           >
             <ModalMore
               showModalMore={showModalMore}
@@ -358,10 +360,15 @@ const Agency = ({ isVideoVisible }) => {
               setShowAboutUsModal={setShowAboutUsModal}
             />
             {!isJank ? (
+
+              // <motion.div variants={componentAnimation} initial="hidden" animate={parallaxLoaded && "visible"}>
               <MediaProductionNew
                 isMobilePortrait={isMobilePortrait}
                 setShowModalMore={setShowModalMore}
+                parallaxLoaded={parallaxLoaded}
+                setParallaxLoaded={setParallaxLoaded}
               />
+              // </motion.div>
             ) : (
               <MediaProductionStaticFallback
                 isMobilePortrait={isMobilePortrait}
@@ -369,7 +376,7 @@ const Agency = ({ isVideoVisible }) => {
               />
             )}
             <>
-              { isMobilePortrait ? (
+              {isMobilePortrait ? (
                 <>
                   <VideoLogosMobile />
                   <ClientGallery isJank={isJank} />
@@ -378,7 +385,7 @@ const Agency = ({ isVideoVisible }) => {
                     setShowAboutUsModal={setShowAboutUsModal}
                   />
                 </>
-              ) :  isMobileLandscape ? (
+              ) : isMobileLandscape ? (
                 <>
                   <VideoLogosMobileLandscape />
                   <OriginalStories setShowAboutUsModal={setShowAboutUsModal} />
@@ -388,10 +395,10 @@ const Agency = ({ isVideoVisible }) => {
                   <VideoLogosMiddle isBottom={isBottom} />
                   <ClientGallery />
                   <ClientCarousel dimensions={dimensions} />
-                <OriginalStoriesMobile
-                  isBottom={isBottom}
-                  setShowAboutUsModal={setShowAboutUsModal}
-                />
+                  <OriginalStoriesMobile
+                    isBottom={isBottom}
+                    setShowAboutUsModal={setShowAboutUsModal}
+                  />
                 </>
               ) : isDesktop ? (
                 <>
@@ -400,28 +407,28 @@ const Agency = ({ isVideoVisible }) => {
                   <ClientCarousel dimensions={dimensions} />
                   <OriginalStories setShowAboutUsModal={setShowAboutUsModal} />
                 </>
-              // ) : !isBottom && isDesktop ? (
-              //   <>
-              //     <VideoLogos isBottom={isBottom} />
-              //     <ClientGallery />
-              //     <ClientCarousel dimensions={dimensions} />
-              //     <OriginalStories setShowAboutUsModal={setShowAboutUsModal} />
-              //   </>
-              // ) : isBottom &&
-              //   !isMobilePortrait &&
-              //   !isMobileLandscape &&
-              //   !isMedium ? (
-              //     <div>""</div>
+              ) : (
+                // ) : !isBottom && isDesktop ? (
+                //   <>
+                //     <VideoLogos isBottom={isBottom} />
+                //     <ClientGallery />
+                //     <ClientCarousel dimensions={dimensions} />
+                //     <OriginalStories setShowAboutUsModal={setShowAboutUsModal} />
+                //   </>
+                // ) : isBottom &&
+                //   !isMobilePortrait &&
+                //   !isMobileLandscape &&
+                //   !isMedium ? (
+                //     <div>""</div>
                 // <OriginalStories
                 //   isBottom={isBottom}
                 //   setShowAboutUsModal={setShowAboutUsModal}
                 // />
-              // ) : isBottom && isMedium ? (
-              //   <OriginalStoriesMobile
-              //     isBottom={isBottom}
-              //     setShowAboutUsModal={setShowAboutUsModal}
-              //   />
-              ) : (
+                // ) : isBottom && isMedium ? (
+                //   <OriginalStoriesMobile
+                //     isBottom={isBottom}
+                //     setShowAboutUsModal={setShowAboutUsModal}
+                //   />
                 // <ClientGallery />
                 // <div>no match</div>
                 <div>no match</div>

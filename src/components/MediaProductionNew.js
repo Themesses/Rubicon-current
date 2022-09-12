@@ -59,8 +59,8 @@ const StyledBanner = styled.div`
     right: 0;
   }
   .headline-wrapper {
-    opacity: 0;
-    visibility: hidden;
+    /* opacity: 0;
+    visibility: hidden; */
     position: absolute;
     top: 50%;
     left: 0%;
@@ -293,11 +293,12 @@ const StyledBanner = styled.div`
   }
 `
 
-const MediaProduction = ({ setShowModalMore }) => {
+const MediaProduction = ({ setShowModalMore, parallaxLoaded, setParallaxLoaded }) => {
   const [waterfallVideo, setWaterfallVideo] = useState(false)
   const [reverseVideo, setReverseVideo] = useState(false)
   const [handImage, setHandImage] = useState(false)
   const [v4, setV4] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
   const { ref, inView } = useInView({
     threshold: 1,
@@ -336,8 +337,8 @@ const MediaProduction = ({ setShowModalMore }) => {
           flairRef.current.style.display = "inline-block"
         }}
         style={{
-          opacity: 0,
-          visibility: "hidden",
+          // opacity: 0,
+          // visibility: "hidden",
         }}
       />
     ),
@@ -351,16 +352,19 @@ const MediaProduction = ({ setShowModalMore }) => {
         document.getElementsByClassName("foreground-image")
       const headling = document.getElementsByClassName("headline-wrapper")
       if (mainVideo && sphereVideo && foregroundImage && headling) {
-        mainVideo[0].style.opacity = 1
-        mainVideo[0].style.visibility = "visible"
-        foregroundImage[0].style.opacity = 1
-        foregroundImage[0].style.visibility = "visible"
-        sphereVideo[0].style.opacity = 1
-        sphereVideo[0].style.visibility = "visible"
-        flairRef.current.style.opacity = 1
-        flairRef.current.style.visibility = "visible"
-          headling[0].style.opacity = 1
-          headling[0].style.visibility = "visible"
+        //toggle everything is loaded and animate from index.js
+        setParallaxLoaded(true)
+
+        // mainVideo[0].style.opacity = 1
+        // mainVideo[0].style.visibility = "visible"
+        // foregroundImage[0].style.opacity = 1
+        // foregroundImage[0].style.visibility = "visible"
+        // sphereVideo[0].style.opacity = 1
+        // sphereVideo[0].style.visibility = "visible"
+        // flairRef.current.style.opacity = 1
+        // flairRef.current.style.visibility = "visible"
+        //   headling[0].style.opacity = 1
+        //   headling[0].style.visibility = "visible"
       }
     }
   }
@@ -407,8 +411,8 @@ const MediaProduction = ({ setShowModalMore }) => {
                     className="sphere-video"
                     style={{
                       transform: "rotate(180deg) translateX(50%)",
-                      opacity: 0,
-                      visibility: "hidden",
+                      // opacity: 0,
+                      // visibility: "hidden",
                     }}
                     width="500%"
                     muted
@@ -423,8 +427,8 @@ const MediaProduction = ({ setShowModalMore }) => {
                   <div
                     className="flare"
                     style={{
-                      opacity: 0,
-                      visibility: "hidden",
+                      // opacity: 0,
+                      // visibility: "hidden",
                     }}
                     ref={flairRef}
                   />
@@ -437,8 +441,8 @@ const MediaProduction = ({ setShowModalMore }) => {
             children: (
               <StaticImage
                 style={{
-                  opacity: 0,
-                  visibility: "hidden",
+                  // opacity: 0,
+                  // visibility: "hidden",
                 }}
                 className="foreground-image"
                 src="../assets/images/globeandhand4.webp"

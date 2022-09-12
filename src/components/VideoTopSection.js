@@ -50,7 +50,7 @@ const StyledSection = styled.div`
     to {
       opacity: 1;
     }
-  } 
+  }
   @keyframes slideInFromBottom {
     from {
       transform: translateY(20px);
@@ -90,7 +90,7 @@ const StyledButton = styled.div`
     z-index: 101;
     margin-left: -155px;
   }
-  
+
   ${StyledSection}:hover & .toggle-button {
     z-index: 99;
     filter: blur(1px);
@@ -133,15 +133,15 @@ const StyledButton = styled.div`
       top: 48% !important;
     }
   }
-  
+
   @media screen and (max-width: 550px) {
-    ${StyledSection}:hover & svg{
+    ${StyledSection}:hover & svg {
       height: 19px;
       width: 276px;
       top: 35% !important;
     }
 
-    svg{
+    svg {
       height: 19px;
       width: 276px;
       top: 35% !important;
@@ -149,16 +149,16 @@ const StyledButton = styled.div`
   }
 
   @media screen and (max-width: 375px) {
-    ${StyledSection}:hover & svg{
+    ${StyledSection}:hover & svg {
       height: 14px;
-      width: 280px;
-      top: 10% !important;
+      width: 286px;
+      top: -50% !important;
     }
 
-    svg{
+    svg {
       height: 14px;
-      width: 280px;
-      top: 10% !important;
+      width: 286px;
+      top: -50% !important;
     }
   }
 `
@@ -194,11 +194,11 @@ const StyledImage = styled.div`
     filter: blur(2px);
     opacity: 0.4;
   }
-  .play-icon .gold-play-button {   
+  .play-icon .gold-play-button {
     display: none;
   }
 
-  .play-icon .gold-play-button svg {   
+  .play-icon .gold-play-button svg {
     // height: 74px;
     // width: 67px;
   }
@@ -209,7 +209,7 @@ const StyledImage = styled.div`
   ${StyledSection}:hover & svg {
     z-index: 102;
   }
-  
+
   ${StyledSection}:hover & svg path {
     // stroke: var(--gold);
     // filter: brightness(110%) drop-shadow(2px 2px 5px #ffb800);
@@ -218,7 +218,7 @@ const StyledImage = styled.div`
   }
 
   ${StyledSection}:hover & .play-icon .gold-play-button {
-    display: block;  
+    display: block;
     z-index: 102;
     margin-left: 23px;
     margin-top: 5px;
@@ -237,7 +237,7 @@ const StyledImage = styled.div`
       height: 59px;
       width: 90px;
     }
-    ${StyledSection}:hover & .play-icon .gold-play-button {    
+    ${StyledSection}:hover & .play-icon .gold-play-button {
       margin-left: 11px;
       margin-top: 3px;
     }
@@ -253,12 +253,12 @@ const StyledImage = styled.div`
       width: 67px;
     }
     .play-icon .gray-play-button {
-      margin-top: 3px;
+      margin-top: -18px;
       filter: blur(0.8px);
     }
-    ${StyledSection}:hover & .play-icon .gold-play-button {    
+    ${StyledSection}:hover & .play-icon .gold-play-button {
       margin-left: 11px;
-      margin-top: 4px;
+      margin-top: -17px;
     }
   }
 
@@ -272,12 +272,12 @@ const StyledImage = styled.div`
       width: 63px;
     }
     .play-icon .gray-play-button {
-      margin-top: 1px;
+      margin-top: -18px;
       filter: blur(0.8px);
     }
-    ${StyledSection}:hover & .play-icon .gold-play-button {    
+    ${StyledSection}:hover & .play-icon .gold-play-button {
       margin-left: 11px;
-      margin-top: 2px;
+      margin-top: -17px;
     }
   }
 
@@ -291,12 +291,12 @@ const StyledImage = styled.div`
       width: 70px;
     }
     .play-icon .gray-play-button {
-      margin-top: -4.5px;
+      margin-top: -15.5px;
       filter: blur(0.4px);
     }
-    ${StyledSection}:hover & .play-icon .gold-play-button {    
+    ${StyledSection}:hover & .play-icon .gold-play-button {
       margin-left: 11px;
-      margin-top: -4px;
+      margin-top: -15px;
     }
   }
 `
@@ -315,7 +315,7 @@ const StyledBanner = styled.div`
     left: 0;
     right: 0;
   }
-  
+
   .parallax-video {
     width: 100%;
     height: 100%;
@@ -331,7 +331,7 @@ const StyledBanner = styled.div`
   }
 
   .poster22-overlay,
-  .posterOverlayOpening {    
+  .posterOverlayOpening {
     object-fit: cover;
   }
 
@@ -389,7 +389,7 @@ const VideoStyledBanner = styled.div`
   @media screen and (min-width: 620px) {
     .initialVideoDiv {
       height: 100vh;
-    }      
+    }
   }
 `
 
@@ -437,10 +437,8 @@ const renderVideo = ({
                             const playButton = isBrowser
                               ? document.getElementsByClassName("play-button")
                               : ""
+                            playButton[0].style.display = "flex"
                             posterOverlay[0].style.display = "block"
-                            setTimeout(() => {
-                              playButton[0].style.display = "flex"
-                            }, 1000);
                           }}
                         />
                       ) : (
@@ -693,10 +691,8 @@ export default function VideoTopSection({ src, poster, noControls, onEnded }) {
                 ? document.getElementsByClassName("play-button")
                 : ""
               video.setAttribute("data-state", "hidden")
+              playButton[0].style.display = "flex"
               posterOverlay[0].style.display = "block"
-              setTimeout(() => {
-                playButton[0].style.display = "flex"                
-              }, 1000);
             }
           })
       }
@@ -725,9 +721,9 @@ export default function VideoTopSection({ src, poster, noControls, onEnded }) {
     vidButtonRef.current.style.display = "flex"
     vidRef.current.load()
     vidRef.current.controls = false
+    playButton[0].style.display = "flex"
     posterOverlay[0].style.display = "block"
     posterOpening[0].style.display = "block"
-    playButton[0].style.display = "flex"
     videoClass[0].style.height = "100%"
     videoClass[0].style.zIndex = 1
     initialVideo[0].style.width = "90%"
@@ -772,12 +768,12 @@ export default function VideoTopSection({ src, poster, noControls, onEnded }) {
     initialVideo[0].style.opacity = 1
     initialVideo[0].style.visibility = "visible"
     closeIcon[0].style.display = "block"
-    
+    playButton[0].style.display = "flex"
+
     initialVideo[0].style.minWidth = "100%"
     initialVideo[0].style.minHeight = "100%"
     initialVideo[0].style.right = "0"
     initialVideo[0].style.bottom = "0"
-    playButton[0].style.display = "flex"
   }
 
   const handleToggleVideo = () => {

@@ -247,7 +247,7 @@ const Navigation = ({
       }
     }
   },[isMobilePortrait, isClick]);
-  
+
   return (
     <>
       { (isFirstLoad && isDesktop) || (isFirstLoad && isMedium) ? (
@@ -263,17 +263,17 @@ const Navigation = ({
                 variants={rubiAnimationVariants}
                 initial="visible"
                 animate="visible"
-                onMouseLeave={() => {
-                  if(!isMobilePortrait && !isClick) {
-                    let rubiList = document.getElementById('rubi-cta-list')
-                    if(rubiList)
-                      rubiList.style.display = "none"
-                    setShowRubyListAnimate("hidden")
-                  }
-                }}
+                // onMouseLeave={() => {
+                //   if(!isMobilePortrait && !isClick) {
+                //     let rubiList = document.getElementById('rubi-cta-list')
+                //     if(rubiList)
+                //       rubiList.style.display = "none"
+                //     setShowRubyListAnimate("hidden")
+                //   }
+                // }}
               >
                 {
-                  !isClick && 
+                  !isClick &&
                   <motion.ul
                     style={{
                       animation: "0.7s ease-out 0s 1 slideInFromRight",
@@ -305,7 +305,7 @@ const Navigation = ({
                   </motion.ul>
                 }
                 {
-                  isClick && 
+                  isClick &&
                   <motion.ul
                     className="rubi-cta-list-two"
                     id="rubi-cta-list-two"
@@ -335,24 +335,24 @@ const Navigation = ({
                 }
                 <>
                   <motion.button
-                    onMouseEnter={async () => {
-                      console.log("showRubyListAnimate", showRubyListAnimate)
-                      await setShowCta(true)
-                      if(!isMobilePortrait && !isClick) {
-                        let rubiList = document.getElementById('rubi-cta-list')
-                        if(rubiList){
-                          rubiList.style.display = "flex"
-                        }
-                        setTimeout(async() => {
-                          await setShowRubyListAnimate("visible")
-                        }, 2000);
-                      }
-                    }}
-                    
+                    // onClick={async () => {
+                    //   console.log("showRubyListAnimate", showRubyListAnimate)
+                    //   await setShowCta(true)
+                    //   if(!isMobilePortrait && !isClick) {
+                    //     let rubiList = document.getElementById('rubi-cta-list')
+                    //     if(rubiList){
+                    //       rubiList.style.display = "flex"
+                    //     }
+                    //     setTimeout(async() => {
+                    //       await setShowRubyListAnimate("visible")
+                    //     }, 2000);
+                    //   }
+                    // }}
+
                     onClick={async (e) => {
                       let animation = showRubyListAnimate === "visible" ? "hidden" : "visible"
-                      await setShowRubyListAnimate(animation)                     
-                      await setIsClick(isClick === true? false : true)  
+                      await setShowRubyListAnimate(animation)
+                      await setIsClick(isClick === true? false : true)
                       setShowCta((showCta) => !showCta)
                     }}
                     className="button-rubi"
