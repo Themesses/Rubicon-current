@@ -209,7 +209,7 @@ const VideoLogosMobile = ({ isBottom }) => {
             <StyledSectionLogoScroll>
               <div className="sticky-title" id="videoscroll-title">
                 <h3>
-                  delivered 700++++ <span className="custom">custom projects</span>{" "}
+                  produced 700+ <span className="custom">custom projects</span>{" "}
                   for
                 </h3>
               </div>

@@ -9,6 +9,7 @@ const HeaderStylesFull = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  /* border: 1px solid red; */
 
   .static-wrapper {
     display: flex;
@@ -52,6 +53,9 @@ const HeaderStylesFull = styled.div`
       background-position: top left;
     }
   }
+  @media screen and (max-width: 619px) {
+    /* border: 1px solid red; */
+  }
 `
 const H1Styles = styled(motion.h1)`
   position: relative;
@@ -63,6 +67,9 @@ const H1Styles = styled(motion.h1)`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 500;
+  @media screen and (max-width: 619px) {
+    font-size: 7vw !important;
+  }
   /* @media screen and (min-width: 620px) {
     h1 {
       font-size: 64px !important;
@@ -74,6 +81,9 @@ const H2Styles = styled(motion.h2)`
   /* font-size: clamp(3.5rem, 1.59vw, 2.4rem) !important; */
   text-align: center;
   color: var(--beige);
+  @media screen and (max-width: 620px) {
+    font-size: 4vw;
+  }
 `
 const HeaderWrapper = styled(motion.div)`
   display: flex;
@@ -81,6 +91,9 @@ const HeaderWrapper = styled(motion.div)`
   align-items: center;
   height: 25vh;
   width: 50%;
+  @media screen and (max-width: 620px) {
+   width: 100%;
+  }
 `
 
 const Header = ({
@@ -90,6 +103,7 @@ const Header = ({
   setIsFirstLoad,
   dimensions,
   isWindowTop,
+  isMobilePortrait,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false)
 
@@ -107,8 +121,10 @@ const Header = ({
 
   // up translation on opening animation sequence
   const mainAnimation = {
-    initial: { y: 0 },
-    animate: { y: "-25vh", transition: { delay: 1.5, duration: 0.7 } },
+
+    // initial:  isMobilePortrait ? {y: "10vh"} :{ y: 0 },
+    initial:  { y: 0 },
+    animate:  isMobilePortrait ? {y: "-25vh", transition: {delay: 1.7, duration: 0.7}} : { y: "-25vh", transition: { delay: 1.5, duration: 0.7 } },
   }
   //h1 animations
   const h1Animation = {
@@ -176,12 +192,14 @@ const Header = ({
       controlsH1.start("animate")
       setTimeout(() => {
         headerMainText.current.classList.add("shimmer-static")
+        // debugger;
       }, 1200)
     }
   }, [isScrollFired, controls, controlsH1, controlsH2])
   useEffect(() => {
     if (isScrollFired) {
       setTimeout(() => {
+        // debugger;
         setIsFirstLoad(false)
       }, 3000)
     }

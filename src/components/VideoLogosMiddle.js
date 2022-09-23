@@ -206,7 +206,7 @@ const VideoLogosMiddle = ({ isBottom }) => {
   }
   return (
     <>
-      {!isBottom && (
+      {/* {!isBottom && ( */}
         <motion.div
           key="video-logos"
           // transition={{ duration: 3}}
@@ -226,7 +226,7 @@ const VideoLogosMiddle = ({ isBottom }) => {
                       transition={{ ease: "easeOut", duration: 0.3 }}
                       exit={{ opacity: 0}}
                     >
-                      delivered 700+{" "}
+                      produced 700+{" "}
                       <span className="custom shimmer-logos">
                         custom projects
                       </span>{" "}
@@ -249,7 +249,7 @@ const VideoLogosMiddle = ({ isBottom }) => {
             </StyledSectionLogoScroll>
           </div>
         </motion.div>
-      )}
+      {/* )} */}
       {/* </> */}
     </>
   )

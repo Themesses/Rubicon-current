@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import { motion } from "framer-motion"
 import Icon from "../assets/images/rubi-icon.png"
+import useDeviceDetect from "./hooks/useDeviceDetect"
+const isBrowser = typeof window !== "undefined"
 
 const rubiAnimationVariants = {
   hidden: {
@@ -60,17 +62,30 @@ const ctaAnimationVariants = {
 
 const StyledNavigation = styled.div`
   display: flex;
-  position: -webkit-sticky;
   position: sticky;
-  background: var(--black);
+  position: -webkit-sticky;
+  /* background: var(--black); */
+  background-color: var(--nav-color);
+  /* border: 1px solid red; */
+  /* background: transparent; */
   justify-content: flex-end;
   padding-right: 0.2em;
   align-items: center;
-  top: 0;
+  top: 80px;
+  transform: translateY(-80px);
   height: 70px;
-  z-index: 999;
+  z-index: 99;
   @media screen and (max-width: 620px) {
-    height: 40px
+    height: 6vh;
+    transform: translateY(-8vh);
+    transform: translateY(var(--transformVh));
+    /* transform: translateY(calc(-23 * var(--navVh, 1vh))); */
+    /* transform: (calc(40 * var(--navVh, 1vh))); */
+    top: 8vh;
+    top: var(--topVh);
+    transition: all .1s;
+    /* top: calc(var(--navVh, 1vh) * 23); */
+
   }
 `
 const StyledCta = styled.div`
@@ -165,7 +180,7 @@ const StyledCta = styled.div`
     padding: 0;
     /* transform: translateX(-5px); */
     .nav-rubi-cta {
-      margin-right: 0em;
+      margin-right: .5em;
       display: flex;
       height: 40px;
     }
@@ -200,7 +215,7 @@ const StyledCta = styled.div`
       padding: 0;
       height: 2.3em;
       width: 2.3em;
-      transform: translateY(6px);
+      transform: translateY(9px);
     }
     img {
       width: 100%;
@@ -234,6 +249,10 @@ const Navigation = ({
   const [showCta, setShowCta] = useState(false)
   const [showRubyListAnimate, setShowRubyListAnimate] = useState("hidden")
   const [isClick, setIsClick] = useState(false)
+  const [isTop, setIsTop] = useState(true)
+
+  //user agent detection for bottom rubi correction (see isTop)
+  const { isMobile, isSafari } = useDeviceDetect()
 
   useEffect(() => {
     let rubiList = document.getElementById('rubi-cta-list')
@@ -247,6 +266,66 @@ const Navigation = ({
       }
     }
   },[isMobilePortrait, isClick]);
+  // useEffect(() => {
+  //   console.log('page:', window.pageYOffset)
+  // })
+
+  //sets the background color of the nav based on state passed from layout
+  useEffect(() => {
+    if (isVideoVisible) {
+      document.documentElement.style.setProperty('--nav-color', 'transparent')
+    }
+    if (!isVideoVisible) {
+      document.documentElement.style.setProperty('--nav-color', 'var(--black)')
+    }
+
+  }, [isVideoVisible])
+
+  useEffect(() => {
+    const navVh = isBrowser ? window.innerHeight * 0.01: "";
+    document.documentElement.style.setProperty('--navVh', `${navVh}px`)
+  })
+
+  useEffect(() => {
+    // console.log()
+    if (isMobilePortrait) {
+      window.addEventListener('scroll', function() {
+
+          console.log(window.scrollY)
+          if (window.scrollY <= 5) {
+            setIsTop(true)
+    // document.documentElement.style.setProperty('--transformVh', `-170px`)
+    // document.documentElement.style.setProperty('--topVh', `170px`)
+          } else {
+            setIsTop(false)
+
+    // document.documentElement.style.setProperty('--transformVh', `-80px`)
+    // document.documentElement.style.setProperty('--topVh', `80px`)
+
+          }
+      })
+
+    }
+  }, [isMobilePortrait])
+  useEffect(() => {
+    //uses user agent (isMobile) to detect if its served on mobile, in future might optimize between firefox and rest
+    if (isTop & isMobilePortrait & isSafari) {
+    document.documentElement.style.setProperty('--transformVh', `-160px`)
+    document.documentElement.style.setProperty('--topVh', `160px`)
+    }
+    if (!isTop & isMobilePortrait & isSafari) {
+
+      document.documentElement.style.setProperty('--transformVh', `-80px`)
+      document.documentElement.style.setProperty('--topVh', `80px`)
+    }
+    if (isMobilePortrait & !isSafari) {
+
+      document.documentElement.style.setProperty('--transformVh', `-80px`)
+      document.documentElement.style.setProperty('--topVh', `80px`)
+    }
+
+  }, [isTop, isMobilePortrait, isSafari])
+
 
   return (
     <>
@@ -256,7 +335,7 @@ const Navigation = ({
         </StyledNavigationHidden>
       ) : (
         <StyledNavigation>
-          {!isVideoVisible && (
+          {/* {!isVideoVisible && ( */}
             <StyledCta>
               <motion.div
                 className="nav-rubi-cta"
@@ -378,7 +457,7 @@ const Navigation = ({
                 </>
               </motion.div>
             </StyledCta>
-          )}
+          {/* )} */}
         </StyledNavigation>
       )}
     </>

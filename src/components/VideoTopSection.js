@@ -71,11 +71,12 @@ const StyledButton = styled.div`
     position: absolute;
     z-index: 102;
     display: inline-block;
-    margin: 0 5px;
+    /* margin: 0 5px; */
     vertical-align: middle;
     top: 50%;
     height: 55px;
     width: 320px;
+    transition: .5s;
   }
 
   .toggle-button {
@@ -90,22 +91,26 @@ const StyledButton = styled.div`
     z-index: 101;
     margin-left: -155px;
   }
+  /* ${StyledSection}:hover & ${StyledImage} > #play-initial path { */
+    /* border: 2px solid blue; */
+  /* } */
 
   ${StyledSection}:hover & .toggle-button {
     z-index: 99;
-    filter: blur(1px);
   }
 
   ${StyledSection}:hover & svg {
     z-index: 100;
     height: 54px;
     width: 319px;
+    /* transition: .5s; */
   }
 
   ${StyledSection}:hover & svg path {
     fill: var(--beige);
     filter: blur(2px);
     opacity: 0.5;
+    transition: .5s;
   }
 
   @media screen and (max-width: 1200px) {
@@ -165,13 +170,32 @@ const StyledButton = styled.div`
 
 const StyledImage = styled.div`
   svg {
+    box-sizing: content-box;
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10%);
     z-index: 100;
     display: inline-block;
-    margin: 0 5px;
     vertical-align: middle;
     top: 50%;
+    opacity: .2;
+    padding: 0em 4em;
+    transition: .5s;
+    filter: blur(2px) drop-shadow(0 0 0 var(--black));
+    height: 5em;
+    width: 6em;
   }
+  svg:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 1em var(--gold));
+  }
+  svg:hover path {
+    stroke: var(--gold);
+    filter: blur(1px);
+    stroke-width: 4;
+  }
+  /* svg path {
+  } */
 
   .play-icon {
     position: absolute;
@@ -179,21 +203,26 @@ const StyledImage = styled.div`
     color: var(--gold);
     font-family: Lexend Deca;
     font-size: clamp(1.4rem, 2vmax, 2rem);
-    // padding: clamp(1rem, 1vmax, 1rem);
     border-radius: 0.5rem;
     background-color: transparent;
     z-index: 99;
-    margin-left: -52px;
+    margin-left: 7px;
     margin-top: 0px;
   }
+  /* #play-initial path {
+    stroke: red;
+  } */
 
   .play-icon .gray-play-button {
     display: block;
     margin-left: 23px;
     margin-top: 5px;
-    filter: blur(2px);
-    opacity: 0.4;
+    /* filter: blur(2px); */
+    opacity: 1;
   }
+  /* .play-icon .gray-play-button img {
+    stroke: red !important;
+  } */
   .play-icon .gold-play-button {
     display: none;
   }
@@ -355,9 +384,24 @@ const StyledBanner = styled.div`
     }
   }
   @media screen and (max-width: 620px) {
+    height: 100vh;
+    height: calc(var(--100vh, 1vh) * 100) !important;
+
+    .main-parallax-banner {
+      /* height: 100vh !important; */
+      height: calc(var(--100vh, 1vh) * 100) !important;
+      /* border: 1px solid red; */
+    }
+    .video-class {
+      height: 100vh !important;
+      height: calc(var(--100vh, 1vh) * 100) !important;
+      /* border: 5px solid green; */
+    }
     .posterOverlayOpening,
     .parallax-video {
-      height: 110% !important;
+      /* height: 110% !important; */
+      height: 100vh !important;
+      height: calc(var(--100vh, 1vh) * 100) !important;
     }
   }
   @media screen and (max-width: 520px) {
@@ -389,6 +433,13 @@ const VideoStyledBanner = styled.div`
   @media screen and (min-width: 620px) {
     .initialVideoDiv {
       height: 100vh;
+    }
+  }
+  @media screen and (max-width: 619px) {
+    .initialVideoDiv {
+      height: 100vh;
+      position: absolute;
+      top: 0;
     }
   }
 `
@@ -573,19 +624,24 @@ const renderVideo = ({
                   }}
                   onClick={handleToggleVideo}
                 >
-                  <motion.img
+<svg id="play-initial" width="70" height="63" viewBox="0 0 70 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M67.7418 31.0352L2.82715 60.1001V1.97019L67.7418 31.0352Z" stroke="#F0E4C3" strokeWidth="3.89844"/>
+</svg>
+                  {/* <motion.img
                     variants={rubiGlowAnimationVariants}
                     initial="hidden"
                     animate="visible"
                     className="gold-play-button"
                     src={YellowPlayButton}
-                  />
+                  /> */}
 
-                  <img
+                  {/* <motion.img
+                    variants={rubiGlowAnimationVariants}
                     src={WhitePlayButton}
                     alt="play-Video"
                     className="gray-play-button"
-                  />
+                  /> */}
+
                   {/* <img src={goldPlayButton} alt="play-Video" className="gold-play-button" />
                     <img src={grayPlayButton} alt="play-Video" className="gray-play-button" /> */}
                 </motion.button>
@@ -632,8 +688,8 @@ const renderVideo = ({
   </>
 )
 
-export default function VideoTopSection({ src, poster, noControls, onEnded }) {
-  const [videoFailed, setVideoFailed] = useState()
+export default function VideoTopSection({ src, poster, noControls, onEnded, setVideoFailed, videoFailed }) {
+  // const [videoFailed, setVideoFailed] = useState()
   const vidRef = useRef(null)
   const vidButtonRef = useRef(null)
   const navigation = isBrowser ? document.getElementById("header") : ""
@@ -655,6 +711,13 @@ export default function VideoTopSection({ src, poster, noControls, onEnded }) {
     ? document.getElementsByClassName("initialVideo")
     : ""
 
+  useEffect(() => {
+
+    const vh100 = isBrowser ? window.innerHeight * 0.01: "";
+    document.documentElement.style.setProperty('--100vh', `${vh100}px`)
+  })
+
+  // const vh100 = isBrowser ? document.documentElement.style.setProperty('--100vh', `${vh}px`) : ""
   useEffect(() => {
     function handleEsc(event) {
       if (event.keyCode === 27) {

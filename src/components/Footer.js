@@ -24,7 +24,7 @@ const StyledFooter = styled(motion.footer)`
   justify-content: center;
   /* margin: 0; */
   box-sizing: border-box;
-  z-index: 999;
+  z-index: 991;
   ul {
     list-style: none;
   }

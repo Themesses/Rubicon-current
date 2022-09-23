@@ -200,21 +200,21 @@ const StyledBanner = styled.div`
   }
   @media screen and (max-width: 620px) {
     .main-parallax-banner {
-      aspect-ratio: 1.3/1;
+      aspect-ratio: .8/1;
       /* transform: scale(1.3); */
       /* height: 50vh; */
     }
     .parallax-video {
       height: 100%;
-      transform: scale(1.6);
+      transform: scale(2.2);
     }
     .foreground-image {
-      transform: scale(1.65) translateX(5%) translateY(2%);
+      transform: scale(1.85) translateX(5%) translateY(30%);
     }
     .sphere-wrapper {
-      top: 34%;
+      top: 40%;
       left: 32%;
-      transform: scale(1.55) translateX(5%) translateY(2%);
+      transform: scale(1.85) translateX(5%) translateY(30%);
     }
     .gatsby-image-wrapper img {
       top: 30px;
@@ -234,7 +234,7 @@ const StyledBanner = styled.div`
       }
     }
     p {
-      margin: 0.5em 0;
+      margin: 2em 0;
       font-size: clamp(2rem, 0vw, 0rem) !important;
     }
     button {
@@ -249,7 +249,8 @@ const StyledBanner = styled.div`
       right: 55% !important;
     }
     h2 {
-      font-size: clamp(2.2rem, 2vw, 2rem) !important;
+      /* font-size: clamp(2.2rem, 2vw, 2rem) !important; */
+      font-size: 2.7rem !important;
     }
   }
   @media screen and (max-width: 379px) {

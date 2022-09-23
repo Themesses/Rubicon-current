@@ -22,18 +22,18 @@ const StyledBanner = styled.div`
   span {
     color: var(--gold);
   }
-  
+
   .headline-wrapper {
-    opacity: 0;
-    visibility: hidden;
+    /* opacity: 0;
+    visibility: hidden; */
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     padding-left: 4em;
   }
   .c-bgImage {
-    opacity: 0;
-    visibility: hidden;
+    /* opacity: 0;
+    visibility: hidden; */
   }
   h2 {
     font-size: clamp(1.5rem, 2.8vw, 4rem);
@@ -48,8 +48,8 @@ const StyledBanner = styled.div`
     margin: 1em 0;
   }
   .gradient-overlay {
-    opacity: 0;
-    visibility: hidden;
+    /* opacity: 0;
+    visibility: hidden; */
     position: absolute;
     inset: -0.1em 0 -0.1em 0;
     background: transparent;
@@ -58,8 +58,8 @@ const StyledBanner = styled.div`
       linear-gradient(0deg, #161616 4%, rgba(22, 22, 22, 0) 25%);
   }
   .foreground-image {
-    opacity: 0;
-    visibility: hidden;
+    /* opacity: 0;
+    visibility: hidden; */
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -86,11 +86,11 @@ const StyledBanner = styled.div`
   }
   @media screen and (max-width: 619px) {
     .masthead {
-      aspect-ratio: 1.3/1 !important;
+      aspect-ratio: .8/1 !important;
     }
     .foreground-image {
-      top: 18% !important;
-      transform: scale(1.6) translate(15%, 0%);
+      top: 28% !important;
+      transform: scale(1.7) translate(15%, 0%);
     }
   }
   @media screen and (min-width: 621px) and (max-width: 1199px) {
@@ -155,7 +155,7 @@ const StyledBanner = styled.div`
   }
 `
 
-const MediaProductionStaticFallback = ({setShowModalMore}) => {
+const MediaProductionStaticFallback = ({setShowModalMore, setParallaxLoaded}) => {
   const [waterfallImage, setWaterfallImage] = useState(false)
   const [handImage, setHandImage] = useState(false)
 
@@ -184,17 +184,19 @@ const MediaProductionStaticFallback = ({setShowModalMore}) => {
     if (waterfallImage && handImage ) {
       const foreground = document.getElementsByClassName("foreground-image")
       const mainImage = document.getElementsByClassName("c-bgImage")
-      const gradientImg = document.getElementsByClassName("gradient-overlay")      
+      const gradientImg = document.getElementsByClassName("gradient-overlay")
       const headling = document.getElementsByClassName("headline-wrapper")
       if (foreground && mainImage && gradientImg && headling) {
-        foreground[0].style.opacity = 1
-        foreground[0].style.visibility = "visible"      
-        mainImage[0].style.opacity = 1
-        mainImage[0].style.visibility = "visible"      
-        headling[0].style.opacity = 1
-        headling[0].style.visibility = "visible"
-        gradientImg[0].style.opacity = 1
-        gradientImg[0].style.visibility = "visible"       
+        //toggle everying is loaded and animate from index
+        setParallaxLoaded(true)
+        // foreground[0].style.opacity = 1
+        // foreground[0].style.visibility = "visible"
+        // mainImage[0].style.opacity = 1
+        // mainImage[0].style.visibility = "visible"
+        // headling[0].style.opacity = 1
+        // headling[0].style.visibility = "visible"
+        // gradientImg[0].style.opacity = 1
+        // gradientImg[0].style.visibility = "visible"
       }
     }
   }

@@ -21,6 +21,7 @@ import VideoLogosMobileLandscape from "../components/VideoLogosMobileLandscape"
 import Navigation from "../components/Navigation"
 import jankcb from "../components/functions/jankcb.js"
 import ClientCarousel from "../components/ClientCarousel"
+// import { smoothScrollTo } from "../components/functions/smoothScrollTo"
 // import useDeviceDetect from "../components/hooks/useDeviceDetect"
 
 const isBrowser = typeof window !== "undefined"
@@ -45,7 +46,7 @@ const AnimatedSection = styled(motion.div)`
   display: flex;
   flex-direction: column;
 `
-const Agency = ({ isVideoVisible }) => {
+const Agency = ({videoFailed}) => {
   // state for checking if user scrolled to the bottom of the page
   const [isBottom, setIsBottom] = useState(false)
   // state for checking if it's a first render
@@ -78,11 +79,11 @@ const Agency = ({ isVideoVisible }) => {
   const [showModalMore, setShowModalMore] = useState(false)
   const [showSayHeyModal, setShowSayHeyModal] = useState(false)
   const [showAboutUsModal, setShowAboutUsModal] = useState(false)
-  console.log("is video visible", isVideoVisible)
+  // console.log("is video visible", isVideoVisible)
 
   // intersection observer hook for checking if user scrolled to the bottom of the page via handleResize()
-  const { ref, inView } = useInView({
-    threshold: 1,
+  const { ree, inView } = useInView({
+    threshold: .9,
   })
   useEffect(() => {
     if (inView) {
@@ -96,6 +97,9 @@ const Agency = ({ isVideoVisible }) => {
   const handleJank = () => {
     setIsJank(true)
   }
+  // useEffect(() => {
+  //   console.log('did video fail?', videoFailed.videoFailed)
+  // })
 
   // test fps of the page
   useEffect(() => {
@@ -221,6 +225,36 @@ const Agency = ({ isVideoVisible }) => {
   }, [])
 
   //scroll function for isFirstLoad, when fired it also sets isScrollFired to true which is passed to the Header component to start the opening animation after 1s delay
+  const handleScrollMobile = () => {
+
+    // const pageHeight = window.innerHeight
+    // document.body.style.transform = 'translate3d(0px, -'+ pageHeight + 'px, 0px)';
+    // alert('mobile')
+    // setIsScrollFired(true)
+    // console.log(window.scrollY)
+    // window.requestAnimationFrame(() => {
+      // window.scrollTo(0, window.innerHeight)
+      // scrollTo('dynamic-header')
+      // alert('scrolling')
+      // document.body.style.height = "100%"
+      // window.scrollTo(0, dimensions.height)
+      // document.body.style.overflow = "hidden"
+
+    // })
+    // setTimeout(() => {
+
+    //   setIsScrollFired(true)
+    // }, 1000)
+
+    // document.getElementById('dynamic-header').scrollIntoView({block: 'end'})
+
+    // window.requestAnimationFrame(() => {
+      // setTimeout(() => {
+        // window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+      // }, 1)
+        // })
+
+  }
   const handleScroll = () => {
     if (
       isBrowser &&
@@ -230,10 +264,44 @@ const Agency = ({ isVideoVisible }) => {
       !isMobileLandscape
     ) {
       setIsScrollFired(true)
+      // smoothScrollTo(window.innerHeight)
       // smooth scroll on safari not working atm
-      window.requestAnimationFrame(() => {
-        window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
-      })
+      // if (isMobilePortrait) {
+      // } else {
+
+        window.requestAnimationFrame(() => {
+          window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+          // window.scrollTo(0, 485)
+
+        })
+      // }
+      // export const smoothScrollTo = (
+      //   y: number,
+      //   {duration = 400, offset = 0} = {}
+      // ) => {
+      //   const easeOutCubic = (t: number) => --t * t * t + 1;
+      //   const startY = window.scrollY;
+      //   const difference = y - startY;
+      //   const startTime = performance.now();
+
+      //   if (y === startY + offset) {
+      //     return Promise.resolve(undefined);
+      //   }
+
+      //   return new Promise((resolve) => {
+      //     const step = () => {
+      //       const progress = (performance.now() - startTime) / duration;
+      //       const amount = easeOutCubic(progress);
+      //       window.scrollTo({top: startY + amount * difference - offset});
+      //       if (progress < 0.99) {
+      //         window.requestAnimationFrame(step);
+      //       } else {
+      //         resolve(undefined);
+      //       }
+      //     };
+      //     step();
+      //   });
+      // };
     } else {
       return
     }
@@ -252,8 +320,32 @@ const Agency = ({ isVideoVisible }) => {
       setIsAnimationTriggered(true)
       return () => window.removeEventListener("scroll", handleScroll)
     }
+    if (
+      isFirstLoad &&
+      isWindowTop &&
+      isMobilePortrait
+    ) {
+      // window.addEventListener("scroll", handleScrollMobile)
+      // setIsAnimationTriggered(true)
+      // return () => window.removeEventListener("scroll", handleScrollMobile, { passive: true})
+      let fired = false
+      window.addEventListener("scroll", function(){
+        if (document.body.scrollTop === 0 && fired === false) {
+          // alert('This will happen only once');
+      // window.scrollTo(0, window.innerHeight)
+        // window.requestAnimationFrame(() => {
+          window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+        // })
+
+          fired = true;
+
+        }
+      }, true)
+      setIsAnimationTriggered(true)
+      return () => window.removeEventListener("scroll", handleScrollMobile, { passive: true})
+    }
     if (!isFirstLoad) {
-      console.log("out")
+      // console.log("out")
       return
     }
   }, [
@@ -313,14 +405,15 @@ const Agency = ({ isVideoVisible }) => {
   return (
     // <AnimatePresence exitBeforeEnter>
     <ParallaxProvider>
-      {isFirstLoad && isWindowTop && !isMobilePortrait && !isMobileLandscape ? (
+      {/* {isFirstLoad && isWindowTop && !isMobilePortrait && !isMobileLandscape ? ( */}
+      {isFirstLoad && isWindowTop && !isMobileLandscape ? (
         <>
-          <Navigation
+          {/* <Navigation
             isFirstLoad={isFirstLoad}
             isMobilePortrait={isMobilePortrait}
             isDesktop={isDesktop}
             isMedium={isMedium}
-          />
+          /> */}
           <Header
             isFirstLoad={isFirstLoad}
             setIsFirstLoad={setIsFirstLoad}
@@ -328,21 +421,23 @@ const Agency = ({ isVideoVisible }) => {
             setIsScrollFired={setIsScrollFired}
             isWindowTop={isWindowTop}
             dimensions={dimensions}
+            isMobilePortrait={isMobilePortrait}
           />
         </>
       ) : (
         // {/* //if it's not the first load, the rest of the page is animated with framer-motion and the header is swapped for a static header */}
         <>
-          <Navigation
-            isFirstLoad={isFirstLoad}
-            setShowSayHeyModal={setShowSayHeyModal}
-            setShowAboutUsModal={setShowAboutUsModal}
-            isVideoVisible={isVideoVisible.isVideoVisible}
-          />
+          {/* <Navigation */}
+            {/* isFirstLoad={isFirstLoad} */}
+            {/* setShowSayHeyModal={setShowSayHeyModal} */}
+            {/* setShowAboutUsModal={setShowAboutUsModal} */}
+            {/* // isVideoVisible={isVideoVisible.isVideoVisible} */}
+          {/* /> */}
 
           <StaticHeader />
 
           <AnimatedSection
+          //if all the
             variants={componentAnimation}
             initial="hidden"
             animate={parallaxLoaded && 'visible'}
@@ -359,7 +454,7 @@ const Agency = ({ isVideoVisible }) => {
               showAboutUsModal={showAboutUsModal}
               setShowAboutUsModal={setShowAboutUsModal}
             />
-            {!isJank ? (
+            {!isJank && !videoFailed.videoFailed? (
 
               // <motion.div variants={componentAnimation} initial="hidden" animate={parallaxLoaded && "visible"}>
               <MediaProductionNew
@@ -373,6 +468,7 @@ const Agency = ({ isVideoVisible }) => {
               <MediaProductionStaticFallback
                 isMobilePortrait={isMobilePortrait}
                 setShowModalMore={setShowModalMore}
+                setParallaxLoaded={setParallaxLoaded}
               />
             )}
             <>
@@ -395,7 +491,7 @@ const Agency = ({ isVideoVisible }) => {
                   <VideoLogosMiddle isBottom={isBottom} />
                   <ClientGallery />
                   <ClientCarousel dimensions={dimensions} />
-                  <OriginalStoriesMobile
+                  <OriginalStories
                     isBottom={isBottom}
                     setShowAboutUsModal={setShowAboutUsModal}
                   />
@@ -405,7 +501,7 @@ const Agency = ({ isVideoVisible }) => {
                   <VideoLogos isBottom={isBottom} />
                   <ClientGallery />
                   <ClientCarousel dimensions={dimensions} />
-                  <OriginalStories setShowAboutUsModal={setShowAboutUsModal} />
+                  <OriginalStories setShowAboutUsModal={setShowAboutUsModal} isBottom={isBottom}/>
                 </>
               ) : (
                 // ) : !isBottom && isDesktop ? (
@@ -434,7 +530,7 @@ const Agency = ({ isVideoVisible }) => {
                 <div>no match</div>
               )}
 
-              <StyledBottom ref={ref} className="bottom" />
+              {/* <StyledBottom ref={ref} className="bottom" /> */}
             </>
           </AnimatedSection>
         </>

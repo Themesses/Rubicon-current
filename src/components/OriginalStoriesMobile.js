@@ -1,4 +1,5 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react"
+
 import { graphql, useStaticQuery } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
 import { BgImage } from "gbimage-bridge"
@@ -10,14 +11,43 @@ import { useInView } from "react-intersection-observer"
 
 // mobile version with a different background image - incommplete
 const OriginalStoriesMobile = ({ isBottom, setShowAboutUsModal }) => {
+  const [bottom, setBottom] = useState(false)
+
   const { ref, inView } = useInView({
-    threshold: 1,
+    threshold: .80,
+    triggerOnce: true,
   })
+
+  useEffect(() => {
+    if (inView) {
+      setBottom(true)
+    }
+  }, [inView, ref])
+
 
   // const { ref2, inView2 } = useInView({
   //   threshold: .5,
   // })
   const animation = useAnimation()
+
+  // const wrapperVariants = {
+  //   initial: {
+  //     opacity: 0,
+  //     transition: { duration: 0.5 },
+  //   },
+  //   animate: {
+  //     opacity: 1,
+  //     transition: { duration: 0.5, staggerChildren: 0.1 },
+  //   },
+  //   exit: {
+  //     opacity: 0,
+  //     transition: { duration: 0.5 },
+  //   },
+  // }
+  const textwrapVariants = {
+    initial: {opacity: 0, y: 50, transition: {duration: 0.5}},
+    animate: {opacity: 1, y: 0, transition: {duration: 0.5, staggerChildren: 0.1}},
+  }
 
   const wrapperVariants = {
     initial: {
@@ -52,6 +82,12 @@ const OriginalStoriesMobile = ({ isBottom, setShowAboutUsModal }) => {
     }
   }, [inView])
 
+ const children = [
+  {id: 1, title: "always", subtitle: "creative"},
+  {id: 2, title: "always", subtitle: "responsive"},
+  {id: 3, title: "always", subtitle: "competitive"},
+ ]
+
   const { backgroundImage } = useStaticQuery(
     graphql`
       query {
@@ -71,13 +107,46 @@ const OriginalStoriesMobile = ({ isBottom, setShowAboutUsModal }) => {
   const pluginImage = getImage(backgroundImage)
 
   return (
-    <>
+    <div ref={ref}>
         <motion.div key="original-stories" {...wrapperVariants}>
           <StyledBackgrounds >
             <BgImage image={pluginImage} className="masthead">
               <div className="gradient">
                 <div className="flex-wrapper">
-                  <div id="stories-text-wrapper">
+                  <motion.div id="stories-text-wrapper" initial="initial" animate='animate' variants={textwrapVariants}>
+                    {bottom &&
+                    <div>
+                      {
+                    children.map((child, i) => (
+                      <motion.div
+                      key={child.id}
+                      initial={{ opacity: 0, translateY: -40}}
+                      animate={{ opacity: 1, translateY: 0}}
+                      transition={{duration: 0.3, delay: i * 0.1}}
+                      // id="stories-text-wrapper"
+                      >
+                        <h3 className="text-outline">{child.title} <motion.span className="text-outline-span" initial={{opacity: 0, x: -15}} animate={{ opacity: 1, x: 10}} transition={{ ease: "easeIn", duration: .2, delay: .7 + i * 0.1  }}>{child.subtitle}</motion.span></h3>
+
+                        {/* <span>{child.subtitle}</span> */}
+                      </motion.div>
+                    ))}
+                    <motion.button initial={{ opacity: 0}} animate={{ opacity: 1}} transition={{ duration: 0.3, delay: 1.2}} onClick={() => setShowAboutUsModal(true)}> get the story</motion.button>
+                    </div>
+                    // <motion.h3 initial='initial' animate="animate" variants={h3Variants}>
+                    //   <motion.span className="text-outline">always</motion.span>
+                    //   creative{" "}
+                    //   <br />
+                    //   <motion.span className="text-outline">
+                    //     always
+                    //   </motion.span>
+                    //   responsive
+                    //   <br />
+                    //   <motion.span className="text-outline">always</motion.span>
+                    //   competitive
+                    // </motion.h3>
+                  }
+                  </motion.div>
+                  {/* <div id="stories-text-wrapper">
                     <h3 ref={ref}>
                       <span className="text-outline">always</span> creative{" "}
                       <br />
@@ -87,16 +156,16 @@ const OriginalStoriesMobile = ({ isBottom, setShowAboutUsModal }) => {
                       <span className="text-outline">always</span> competitive
                     </h3>
                     <button onClick={() => setShowAboutUsModal(true)}>get the story</button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </BgImage>
-            <motion.div animate={animation} initial={{ opacity: 0 }}>
+            {/* <motion.div animate={animation} initial={{ opacity: 0 }}> */}
               <Footer />
-            </motion.div>
+            {/* </motion.div> */}
           </StyledBackgrounds>
         </motion.div>
-    </>
+    </div>
   )
 }
 const StyledBackgrounds = styled.section`
@@ -138,8 +207,8 @@ const StyledBackgrounds = styled.section`
   .masthead h3 {
     font-size: clamp(1.5rem, 2.8vw, 4rem);
     display: block;
-    margin-bottom: 1em;
-    line-height: 1.3;
+    /* margin-bottom: 1em; */
+    line-height: 1.6;
     z-index: 999 !important;
   }
   .masthead p {
@@ -151,6 +220,10 @@ const StyledBackgrounds = styled.section`
     text-shadow: 0 0 1px var(--black), 0px 0px 1px white, 0px 0px 1px white,
       0px 0px 1px white;
   }
+  .text-outline-span {
+    display: inline-block;
+    color: var(--beige);
+  }
   button {
     background: transparent;
     color: var(--beige);
@@ -158,6 +231,7 @@ const StyledBackgrounds = styled.section`
     padding: 0.5em 1em;
     border-radius: 0.3em;
     transition: 0.3s;
+    margin-top: 1.5em;
   }
 
   button:hover {
@@ -165,11 +239,11 @@ const StyledBackgrounds = styled.section`
     color: var(--black);
   }
 
-  @media screen and (max-width: 1600px) and (min-width: 1200px) {
+  /* @media screen and (max-width: 1600px) and (min-width: 1200px) {
     .masthead {
       background: linear-gradient(90deg, #161616 35%, transparent 85%);
     }
-    .masthead:before, .masthead:after { 
+    .masthead:before, .masthead:after {
       background-position: 10% !important;
     }
       background: linear-gradient(90deg, #161616 35%, transparent 85%);
@@ -177,15 +251,15 @@ const StyledBackgrounds = styled.section`
     .masthead .flex-wrapper {
       padding-left: 10rem;
     }
-  }
-  @media screen and (max-width: 1199px) and (min-width: 800px) {
+  } */
+  /* @media screen and (max-width: 1199px) and (min-width: 800px) {
     .masthead {
       background: linear-gradient(90deg, #161616 40%, transparent 83%);
     }
     .masthead .flex-wrapper {
       padding-left: 5rem;
     }
-    .masthead:before, .masthead:after { 
+    .masthead:before, .masthead:after {
       background-position: 18% !important;
     }
   }
@@ -203,11 +277,11 @@ const StyledBackgrounds = styled.section`
     .masthead .flex-wrapper p {
       font-size: 1.7rem;
     }
-    .masthead:before, .masthead:after { 
+    .masthead:before, .masthead:after {
       background-position: 18% !important;
     }
-  }
-  @media screen and (max-width: 649px) and (min-width: 551px) {
+  } */
+  /* @media screen and (max-width: 649px) and (min-width: 551px) {
     .masthead {
       background: linear-gradient(90deg, #161616 42%, transparent 85%);
     }
@@ -221,8 +295,8 @@ const StyledBackgrounds = styled.section`
     .masthead .flex-wrapper p {
       font-size: 1.5rem;
     }
-  }
-  @media screen and (max-width: 550px) {
+  } */
+  @media screen and (max-width: 620px) {
     margin-top: 25vh;
     padding: 0;
     .masthead {
@@ -261,7 +335,7 @@ const StyledBackgrounds = styled.section`
       font-size: 1.5rem;
     }
   }
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 450px) {
     .masthead::before,
     .masthead::after {
       height: 78% !important;

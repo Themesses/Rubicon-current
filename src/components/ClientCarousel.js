@@ -99,6 +99,9 @@ const StyledSection = styled.section`
       font-size: 4.6vw;
     }
   }
+  @media screen and (max-width: 620px) {
+   margin-bottom: -13rem;
+  }
   @media screen and (max-width: 439px) {
     h3 {
       font-size: 4.6vw;
@@ -206,7 +209,7 @@ export default function ClientCarousel({ isJank, dimensions }) {
         {data.allMarkdownRemark.nodes.map((item) => (
           <SwiperSlide>
             <ClientComponent
-              key={item.frontmatter.slug}
+              key={item.frontmatter.id}
               src={item.frontmatter.logo}
               link={item.frontmatter.link}
               alt={item.frontmatter.alt}
