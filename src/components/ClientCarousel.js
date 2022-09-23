@@ -8,7 +8,6 @@ import { motion, useAnimation } from "framer-motion"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Grid, Pagination, Navigation } from "swiper"
 
-
 import "swiper/css"
 import "swiper/css/navigation"
 import "swiper/css/pagination"
@@ -17,17 +16,7 @@ import "swiper/css/grid"
 const StyledSection = styled.section`
   max-width: 80vw;
   margin: 0 auto;
-  /* height: 90vh; */
-  /* height: 1500px; */
-  /* height: 120vh; */
-  /* padding-bottom: */
-  /* margin-top: 20vh; */
-  margin-bottom: 60vh;
-  /* border: 1px solid red; */
-
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: center; */
+  margin-bottom: 15rem;
 
   span {
     color: var(--gold);
@@ -65,12 +54,12 @@ const StyledSection = styled.section`
   }
   @media screen and (max-width: 620px) {
     .swiper {
-      padding: 0 2em;
+      padding: 0 0.7em;
     }
   }
   .swiper-button-prev,
   .swiper-button-next {
-    color: rgb(240, 228, 195, .15);
+    color: rgb(240, 228, 195, 0.15);
   }
   .swiper-button-disabled {
     visibility: hidden;
@@ -104,11 +93,14 @@ const StyledSection = styled.section`
     }
   }
   @media screen and (max-width: 700px) {
-    margin-bottom: 15rem;
+    margin-bottom: 0rem;
     h3 {
       margin: 5rem 0;
       font-size: 4.6vw;
     }
+  }
+  @media screen and (max-width: 620px) {
+   margin-bottom: -13rem;
   }
   @media screen and (max-width: 439px) {
     h3 {
@@ -118,22 +110,11 @@ const StyledSection = styled.section`
     }
   }
 `
-// const StyledWrapper = styled.div`
-//   display: grid;
-//   grid-template-rows: 1fr 1fr;
-//   @media screen and (max-width: 700px) {
-//     grid-template-columns: 1fr;
-//   }
-//   @media screen and (max-width: 900px) {
-//     grid-gap: 1rem;
-//     margin: 0;
-//   }
-// `
 
 export default function ClientCarousel({ isJank, dimensions }) {
   const pagination = {
     clickable: true,
-  };
+  }
   const [ref2, inView2] = useInView({
     threshold: 0.3,
 
@@ -141,12 +122,6 @@ export default function ClientCarousel({ isJank, dimensions }) {
     triggerOnce: true,
   })
 
-  // const [ref3, inView3] = useInView({
-  //   threshold: 1,
-  //   rootMargin: "-10% 0px 300px 0px",
-  // })
-
-  // const shimmerRef = useRef(null)
   const componentRef = useRef(null)
 
   useEffect(() => {
@@ -182,7 +157,14 @@ export default function ClientCarousel({ isJank, dimensions }) {
         filter: {
           frontmatter: {
             title: {
-              in: ["Schools", "ARHT Media", "Publicis Groupe", "Wealthy", "Hazelview", "Venici"]
+              in: [
+                "Schools"
+                "ARHT Media"
+                "Publicis Groupe"
+                "Wealthy"
+                "Hazelview"
+                "Venici"
+              ]
             }
           }
         }
@@ -211,17 +193,23 @@ export default function ClientCarousel({ isJank, dimensions }) {
   `)
   return (
     <StyledSection ref={componentRef}>
-
       <h3 ref={ref2}>
-        supporting{" "}
-        <span className="shimmer-marketing">marketing teams </span>at{" "}
+        supporting <span className="shimmer-marketing">marketing teams </span>at{" "}
       </h3>
       <Swiper
-         navigation={dimensions.width > 620 ? true : false} grabCursor={true} pagination={pagination} modules={[Pagination, Navigation]} spaceBetween={46} slidesPerView={dimensions.width > 1300 ? 3 : dimensions.width > 620 ? 2 : 1}>
+        navigation={dimensions.width > 900 ? true : false}
+        grabCursor={true}
+        pagination={pagination}
+        modules={[Pagination, Navigation]}
+        spaceBetween={46}
+        slidesPerView={
+          dimensions.width > 1300 ? 3 : dimensions.width > 620 ? 2 : 1
+        }
+      >
         {data.allMarkdownRemark.nodes.map((item) => (
           <SwiperSlide>
             <ClientComponent
-              key={item.frontmatter.slug}
+              key={item.frontmatter.id}
               src={item.frontmatter.logo}
               link={item.frontmatter.link}
               alt={item.frontmatter.alt}

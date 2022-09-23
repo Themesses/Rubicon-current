@@ -15,8 +15,10 @@ const GlobalStyles = createGlobalStyle`
         --beige:#f0e4c3;
         --black: #161616;
         --black-light: #252522;
+        --gray: #636268;
+        --gray-light: #636060;
 
-        --h1:clamp(3rem, 3.3vw, 5rem);
+        --h1:clamp(3rem, 3.7vw, 5.5rem);
         --h3-banner-clamp: clamp(2rem, 2.31vw, 4rem);
         --h3-banner-clamp-fallback-lg: 5rem;
         --h3-banner-clamp-fallback-md: 4rem;
@@ -41,6 +43,8 @@ const GlobalStyles = createGlobalStyle`
     body {
         font-size: 2rem;
         background-color: var(--black);
+        transform: translate3d(0px, 0px, 0px,);
+        transition: all 700ms ease;
         /* scroll-behavior: smooth; */
         /* overflow-x: visible !important; */
         /* min-height: -webkit-fill-available; */

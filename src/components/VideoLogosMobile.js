@@ -22,9 +22,9 @@ const StyledSectionLogoScroll = styled.section`
     justify-content: center;
     align-items: center;
     text-align: center;
-    top: 10%;
-    height: 5rem;
+    top: 80px;
     margin-top: 10rem;
+    /* border: 1px solid red; */
     h3 {
       font-size: var(--h3-banner-clamp);
     }
@@ -35,8 +35,10 @@ const StyledSectionLogoScroll = styled.section`
     /* padding-top: 1em; */
     position: sticky;
     z-index: -1;
-    top: 25%;
+    top: 200px;
     display: block;
+    /* border: 1px solid yellow; */
+    margin-top: 10rem;
   }
 
   /* @media screen and (max-width: 600px) {
@@ -98,8 +100,8 @@ const ImageCanvas = ({
 
   const handleScroll = () => {
     const scrollFraction =
-      (window.scrollY - window.innerHeight  * .4) /
-      (scrollHeight - window.innerHeight + 600)
+      (window.scrollY - window.innerHeight  * 1.2) /
+      (scrollHeight - window.innerHeight + 1000)
     // window.innerWidth < 600
     //   ? (window.scrollY - window.innerHeight - 150) /
     //     (scrollHeight - window.innerHeight)
@@ -197,7 +199,7 @@ const VideoLogosMobile = ({ isBottom }) => {
                   transition={{ ease: "easeOut", duration: 0.3 }}
                   exit={{ opacity: 0 }}
                 >
-                  delivered 700+{" "}
+                  produced 700+{" "}
                   <span className="custom shimmer-logos">custom projects</span>{" "}
                   for
                 </motion.h3>
@@ -206,7 +208,7 @@ const VideoLogosMobile = ({ isBottom }) => {
           </div>
           <div id="video-scroll">
             <ImageCanvas
-              scrollHeight={5000}
+              scrollHeight={4000}
               width="360"
               height="470"
               numFrames={500}

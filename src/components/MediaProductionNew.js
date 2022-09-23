@@ -59,10 +59,13 @@ const StyledBanner = styled.div`
     right: 0;
   }
   .headline-wrapper {
+    /* opacity: 0;
+    visibility: hidden; */
     position: absolute;
     top: 50%;
+    left: 0%;
     transform: translateY(-50%);
-    padding-left: 4em;
+    padding-left: 5em;
     /* border: 1px solid red; */
   }
   button {
@@ -80,15 +83,29 @@ const StyledBanner = styled.div`
     color: var(--black);
   }
   h2 {
-    font-size: clamp(1.5rem, 2.8vw, 4rem);
+    font-size: clamp(1.5rem, 2.8vw, 3.8rem);
     display: block;
-    /* margin-bottom: 1em; */
     line-height: 1.3;
   }
   p {
-    font-size: clamp(1.5rem, 2vw, 2.6rem);
+    font-size: clamp(1.5rem, 2vw, 2.4rem);
     max-width: 100%;
     margin: 1em 0;
+  }
+  @media screen and (max-width: 480px) {
+    h2 {
+      font-size: clamp(1.2rem, 2vw, 2rem) !important;
+    }
+    p {
+      font-size: clamp(1rem, 0vw, 0rem) !important;
+    }
+    button {
+      font-size: clamp(1.2rem, 2vw, 1.8rem) !important;
+      padding: 0.3em 0.6em !important;
+    }
+    .headline-wrapper {
+      right: 69% !important;
+    }
   }
   .background-fallback-image {
     /* height: 100%; */
@@ -169,13 +186,45 @@ const StyledBanner = styled.div`
       aspect-ratio: 2.8/1;
     }
   }
+  @media screen and (min-width: 621px) and (max-width: 1199px) {
+    .headline-wrapper {
+      padding-left: 1em !important;
+      right: 62% !important;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .headline-wrapper {
+      /* padding-left: 2em !important;
+      right: 62% !important; */
+    }
+  }
   @media screen and (max-width: 620px) {
     .main-parallax-banner {
-      aspect-ratio: 2.7/1;
+      aspect-ratio: .8/1;
+      /* transform: scale(1.3); */
       /* height: 50vh; */
     }
+    .parallax-video {
+      height: 100%;
+      transform: scale(2.2);
+    }
+    .foreground-image {
+      transform: scale(1.85) translateX(5%) translateY(30%);
+    }
+    .sphere-wrapper {
+      top: 40%;
+      left: 32%;
+      transform: scale(1.85) translateX(5%) translateY(30%);
+    }
+    .gatsby-image-wrapper img {
+      top: 30px;
+    }
     .headline-wrapper {
-      padding-left: 1em;
+      padding-left: 0.3em !important;
+      right: 62% !important;
+    }
+    .line-break {
+      display: none;
     }
     .flare {
       &:after,
@@ -185,23 +234,72 @@ const StyledBanner = styled.div`
       }
     }
     p {
-      margin: .5em 0;
+      margin: 2em 0;
+      font-size: clamp(2rem, 0vw, 0rem) !important;
     }
-  button {
-    font-size: clamp(1.4rem, 2vw, 1.8rem);
-    border: 1px solid var(--beige);
-    padding: 0.5em .8em;
-    border-radius: 0.3em;
-    transition: 0.3s;
+    button {
+      font-size: clamp(1.4rem, 2vw, 1.8rem);
+      border: 1px solid var(--beige);
+      padding: 0.5em 0.8em;
+      border-radius: 0.3em;
+      transition: 0.3s;
+    }
+    .headline-wrapper {
+      padding-left: 0.3em !important;
+      right: 55% !important;
+    }
+    h2 {
+      /* font-size: clamp(2.2rem, 2vw, 2rem) !important; */
+      font-size: 2.7rem !important;
+    }
   }
+  @media screen and (max-width: 379px) {
+    h2 {
+      font-size: clamp(1.2rem, 2vw, 2rem) !important;
+    }
+    p {
+      font-size: clamp(1rem, 0vw, 0rem) !important;
+    }
+    button {
+      font-size: clamp(1.2rem, 2vw, 1.8rem) !important;
+      padding: 0.3em 0.6em !important;
+    }
+    .headline-wrapper {
+      right: 68% !important;
+    }
+    .sphere-wrapper {
+      top: 36%;
+    }
+  }
+  @media screen and (min-width: 380px) and (max-width: 480px) {
+    h2 {
+      font-size: clamp(1.8rem, 2vw, 2rem) !important;
+    }
+    p {
+      font-size: clamp(1.5rem, 0vw, 0rem) !important;
+    }
+    button {
+      font-size: clamp(1.5rem, 2vw, 1.8rem) !important;
+      padding: 0.3em 0.6em !important;
+    }
+    .headline-wrapper {
+      right: 53% !important;
+    }
+  }
+  @media screen and (max-width: 375px) {
+    .headline-wrapper {
+      right: 55% !important;
+      padding-left: 0.1em !important;
+    }
   }
 `
 
-const MediaProduction = ({ setShowModalMore }) => {
+const MediaProduction = ({ setShowModalMore, parallaxLoaded, setParallaxLoaded }) => {
   const [waterfallVideo, setWaterfallVideo] = useState(false)
   const [reverseVideo, setReverseVideo] = useState(false)
   const [handImage, setHandImage] = useState(false)
   const [v4, setV4] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
   const { ref, inView } = useInView({
     threshold: 1,
@@ -224,7 +322,7 @@ const MediaProduction = ({ setShowModalMore }) => {
   }, [waterfallVideo, reverseVideo, handImage, v4])
 
   const background = {
-    translateY: [-30, 20],
+    translateY: [-15, 15],
     children: (
       <video
         autoPlay
@@ -240,8 +338,8 @@ const MediaProduction = ({ setShowModalMore }) => {
           flairRef.current.style.display = "inline-block"
         }}
         style={{
-          opacity: 0,
-          visibility: "hidden",
+          // opacity: 0,
+          // visibility: "hidden",
         }}
       />
     ),
@@ -253,15 +351,21 @@ const MediaProduction = ({ setShowModalMore }) => {
       const sphereVideo = document.getElementsByClassName("sphere-video")
       const foregroundImage =
         document.getElementsByClassName("foreground-image")
-      if (mainVideo && sphereVideo && foregroundImage) {
-        mainVideo[0].style.opacity = 1
-        mainVideo[0].style.visibility = "visible"
-        sphereVideo[0].style.opacity = 1
-        sphereVideo[0].style.visibility = "visible"
-        foregroundImage[0].style.opacity = 1
-        foregroundImage[0].style.visibility = "visible"
-        flairRef.current.style.opacity = 1
-        flairRef.current.style.visibility = "visible"
+      const headling = document.getElementsByClassName("headline-wrapper")
+      if (mainVideo && sphereVideo && foregroundImage && headling) {
+        //toggle everything is loaded and animate from index.js
+        setParallaxLoaded(true)
+
+        // mainVideo[0].style.opacity = 1
+        // mainVideo[0].style.visibility = "visible"
+        // foregroundImage[0].style.opacity = 1
+        // foregroundImage[0].style.visibility = "visible"
+        // sphereVideo[0].style.opacity = 1
+        // sphereVideo[0].style.visibility = "visible"
+        // flairRef.current.style.opacity = 1
+        // flairRef.current.style.visibility = "visible"
+        //   headling[0].style.opacity = 1
+        //   headling[0].style.visibility = "visible"
       }
     }
   }
@@ -308,8 +412,8 @@ const MediaProduction = ({ setShowModalMore }) => {
                     className="sphere-video"
                     style={{
                       transform: "rotate(180deg) translateX(50%)",
-                      opacity: 0,
-                      visibility: "hidden",
+                      // opacity: 0,
+                      // visibility: "hidden",
                     }}
                     width="500%"
                     muted
@@ -324,8 +428,8 @@ const MediaProduction = ({ setShowModalMore }) => {
                   <div
                     className="flare"
                     style={{
-                      opacity: 0,
-                      visibility: "hidden",
+                      // opacity: 0,
+                      // visibility: "hidden",
                     }}
                     ref={flairRef}
                   />
@@ -338,8 +442,8 @@ const MediaProduction = ({ setShowModalMore }) => {
             children: (
               <StaticImage
                 style={{
-                  opacity: 0,
-                  visibility: "hidden",
+                  // opacity: 0,
+                  // visibility: "hidden",
                 }}
                 className="foreground-image"
                 src="../assets/images/globeandhand4.webp"
@@ -362,9 +466,8 @@ const MediaProduction = ({ setShowModalMore }) => {
                   for quality clients
                 </h2>
                 <p ref={ref}>
-                  <span>Rubicon</span>, your limitless source
-                  <br />
-                  for creative audio/visuals.
+                  <span>Rubicon</span> — your limitless source for
+                  <br className="line-break" /> creative audio/visuals.
                 </p>
                 <button onClick={() => setShowModalMore(true)}>more...</button>
               </div>

@@ -3,20 +3,21 @@ import styled from "styled-components"
 import { motion, useAnimation } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 
-
 const HeaderStylesFull = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh ;
+  height: 100vh;
+  /* border: 1px solid red; */
 
   .static-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: top;
     align-items: center;
-    padding-top: 4em;
+    transform: translateY(-50%);
+    padding-top: 2em;
     height: 25vh;
     width: 99vw;
   }
@@ -52,21 +53,37 @@ const HeaderStylesFull = styled.div`
       background-position: top left;
     }
   }
+  @media screen and (max-width: 619px) {
+    /* border: 1px solid red; */
+  }
 `
 const H1Styles = styled(motion.h1)`
   position: relative;
   font-size: var(--h1);
+  /* font-size: 64px; */
   text-align: center;
   background-color: #3d3a3a;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 500;
+  @media screen and (max-width: 619px) {
+    font-size: 7vw !important;
+  }
+  /* @media screen and (min-width: 620px) {
+    h1 {
+      font-size: 64px !important;
+    }
+  } */
 `
 const H2Styles = styled(motion.h2)`
-  font-size: clamp(1.9rem, 1.59vw, 2.4rem);
+  font-size: clamp(1.9rem, 1.59vw, 2.9rem);
+  /* font-size: clamp(3.5rem, 1.59vw, 2.4rem) !important; */
   text-align: center;
   color: var(--beige);
+  @media screen and (max-width: 620px) {
+    font-size: 4vw;
+  }
 `
 const HeaderWrapper = styled(motion.div)`
   display: flex;
@@ -74,12 +91,23 @@ const HeaderWrapper = styled(motion.div)`
   align-items: center;
   height: 25vh;
   width: 50%;
+  @media screen and (max-width: 620px) {
+   width: 100%;
+  }
 `
 
-const Header = ({ isFirstLoad, isScrollFired, setIsScrollFired, setIsFirstLoad, dimensions, isWindowTop }) => {
+const Header = ({
+  isFirstLoad,
+  isScrollFired,
+  setIsScrollFired,
+  setIsFirstLoad,
+  dimensions,
+  isWindowTop,
+  isMobilePortrait,
+}) => {
   const [isLoaded, setIsLoaded] = useState(false)
 
-  const {ref, inView} = useInView({
+  const { ref, inView } = useInView({
     threshold: 0.5,
     triggerOnce: true,
   })
@@ -93,8 +121,10 @@ const Header = ({ isFirstLoad, isScrollFired, setIsScrollFired, setIsFirstLoad, 
 
   // up translation on opening animation sequence
   const mainAnimation = {
-    initial: { y: 0 },
-    animate: { y: "-37.5vh", transition: { delay: 1.7, duration: 0.8 } },
+
+    // initial:  isMobilePortrait ? {y: "10vh"} :{ y: 0 },
+    initial:  { y: 0 },
+    animate:  isMobilePortrait ? {y: "-25vh", transition: {delay: 1.7, duration: 0.7}} : { y: "-25vh", transition: { delay: 1.5, duration: 0.7 } },
   }
   //h1 animations
   const h1Animation = {
@@ -114,7 +144,7 @@ const Header = ({ isFirstLoad, isScrollFired, setIsScrollFired, setIsFirstLoad, 
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.025,
+        staggerChildren: 0.018,
       },
     },
   }
@@ -155,19 +185,23 @@ const Header = ({ isFirstLoad, isScrollFired, setIsScrollFired, setIsFirstLoad, 
 
   useEffect(() => {
     if (isScrollFired) {
-      setIsLoaded(true)
+      setTimeout(() => {
+        setIsLoaded(true)
+      }, 2000)
       controls.start("animate")
       controlsH1.start("animate")
       setTimeout(() => {
         headerMainText.current.classList.add("shimmer-static")
-      }, 1600)
+        // debugger;
+      }, 1200)
     }
   }, [isScrollFired, controls, controlsH1, controlsH2])
   useEffect(() => {
     if (isScrollFired) {
       setTimeout(() => {
+        // debugger;
         setIsFirstLoad(false)
-      }, 2900)
+      }, 3000)
     }
   }, [isScrollFired, setIsFirstLoad])
 
@@ -182,42 +216,35 @@ const Header = ({ isFirstLoad, isScrollFired, setIsScrollFired, setIsFirstLoad, 
   return (
     <div id="dynamic-header" ref={ref}>
       {/* {isFirstLoad  && ( */}
-        <HeaderStylesFull>
-          <div className="static-wrapper">
-            <HeaderWrapper
-              animate={controls}
-              variants={mainAnimation}
+      <HeaderStylesFull>
+        <div className="static-wrapper">
+          <HeaderWrapper
+            animate={controls}
+            variants={mainAnimation}
+            initial="initial"
+          >
+            <H1Styles
+              ref={headerMainText}
+              variants={h1Animation}
               initial="initial"
+              animate={controlsH1}
             >
-              <H1Styles
-                ref={headerMainText}
-                variants={h1Animation}
-                initial="initial"
-                animate={controlsH1}
-              >
-                creativity & execution
-              </H1Styles>
-              {isLoaded && (
-                <H2Styles
-                  variants={sentence}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  {h2FirstHalf.split("").map((char, index) => {
-                    return (
-                      <motion.span
-                        key={char + "-" + index}
-                        variants={firstHalf}
-                      >
-                        {char}
-                      </motion.span>
-                    )
-                  })}
-                </H2Styles>
-              )}
-            </HeaderWrapper>
-          </div>
-        </HeaderStylesFull>
+              creativity & execution
+            </H1Styles>
+            {isLoaded && (
+              <H2Styles variants={sentence} initial="hidden" animate="visible">
+                {h2FirstHalf.split("").map((char, index) => {
+                  return (
+                    <motion.span key={char + "-" + index} variants={firstHalf}>
+                      {char}
+                    </motion.span>
+                  )
+                })}
+              </H2Styles>
+            )}
+          </HeaderWrapper>
+        </div>
+      </HeaderStylesFull>
       {/* )} */}
       {/* {!isFirstLoad && (
         <PostAnimationStyles key="header-postAnimation">

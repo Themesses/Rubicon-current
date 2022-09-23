@@ -1,4 +1,4 @@
-import React from "react"
+import React,{ useEffect, useState} from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import { getImage, StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
@@ -24,10 +24,16 @@ const StyledBanner = styled.div`
   }
 
   .headline-wrapper {
+    /* opacity: 0;
+    visibility: hidden; */
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     padding-left: 4em;
+  }
+  .c-bgImage {
+    /* opacity: 0;
+    visibility: hidden; */
   }
   h2 {
     font-size: clamp(1.5rem, 2.8vw, 4rem);
@@ -42,15 +48,18 @@ const StyledBanner = styled.div`
     margin: 1em 0;
   }
   .gradient-overlay {
+    /* opacity: 0;
+    visibility: hidden; */
     position: absolute;
     inset: -0.1em 0 -0.1em 0;
-    background: transparent;
     background: transparent;
     background: linear-gradient(90deg, #161616 25%, rgba(22, 22, 22, 0) 60%),
       linear-gradient(180deg, #161616 1%, rgba(22, 22, 22, 0) 30%),
       linear-gradient(0deg, #161616 4%, rgba(22, 22, 22, 0) 25%);
   }
   .foreground-image {
+    /* opacity: 0;
+    visibility: hidden; */
     justify-content: center;
     align-items: center;
     position: absolute;
@@ -75,9 +84,81 @@ const StyledBanner = styled.div`
     background: var(--beige);
     color: var(--black);
   }
+  @media screen and (max-width: 619px) {
+    .masthead {
+      aspect-ratio: .8/1 !important;
+    }
+    .foreground-image {
+      top: 28% !important;
+      transform: scale(1.7) translate(15%, 0%);
+    }
+  }
+  @media screen and (min-width: 621px) and (max-width: 1199px) {
+    .headline-wrapper {
+      padding-left: 1em !important;
+      right: 62% !important;
+    }
+  }
+  @media screen and (min-width: 1200px) {
+    .headline-wrapper {
+      padding-left: 2em !important;
+      right: 62% !important;
+    }
+  }
+  @media screen and (max-width: 620px) {
+    .headline-wrapper {
+      padding-left: 0.3em !important;
+      right: 55% !important;
+    }
+    h2 {
+      font-size: clamp(2.2rem, 2vw, 2rem) !important;
+    }
+    p {
+      font-size: clamp(2rem, 0vw, 0rem) !important;
+    }
+  }
+  @media screen and (max-width: 379px) {
+    h2 {
+      font-size: clamp(1.2rem, 2vw, 2rem) !important;
+    }
+    p {
+      font-size: clamp(1rem, 0vw, 0rem) !important;
+    }
+    button {
+      font-size: clamp(1.2rem, 2vw, 1.8rem) !important;
+      padding: 0.3em 0.6em !important;
+    }
+    .headline-wrapper {
+      right: 68% !important;
+    }
+  }
+  @media screen and (min-width: 380px) and (max-width: 480px) {
+    h2 {
+      font-size: clamp(1.8rem, 2vw, 2rem) !important;
+    }
+    p {
+      font-size: clamp(1.5rem, 0vw, 0rem) !important;
+    }
+    button {
+      font-size: clamp(1.5rem, 2vw, 1.8rem) !important;
+      padding: 0.3em 0.6em !important;
+    }
+    .headline-wrapper {
+      right: 53% !important;
+    }
+  }
+  @media screen and (max-width: 375px) {
+    .headline-wrapper {
+      right: 55% !important;
+      padding-left: 0.1em !important;
+    }
+  }
 `
 
-const MediaProductionStaticFallback = ({setShowModalMore}) => {
+const MediaProductionStaticFallback = ({setShowModalMore, setParallaxLoaded}) => {
+  const [waterfallImage, setWaterfallImage] = useState(false)
+  const [handImage, setHandImage] = useState(false)
+
   const { backgroundImage } = useStaticQuery(
     graphql`
       query {
@@ -87,18 +168,42 @@ const MediaProductionStaticFallback = ({setShowModalMore}) => {
               width: 2000
               quality: 70
               webpOptions: { quality: 90 }
-            )
+              )
+            }
           }
         }
-      }
-    `
-  )
+        `
+      )
+      useEffect(() => {
+        loadAllITems()
+      }, [waterfallImage,handImage])
 
   const pluginImage = getImage(backgroundImage)
 
+  const loadAllITems = () => {
+    if (waterfallImage && handImage ) {
+      const foreground = document.getElementsByClassName("foreground-image")
+      const mainImage = document.getElementsByClassName("c-bgImage")
+      const gradientImg = document.getElementsByClassName("gradient-overlay")
+      const headling = document.getElementsByClassName("headline-wrapper")
+      if (foreground && mainImage && gradientImg && headling) {
+        //toggle everying is loaded and animate from index
+        setParallaxLoaded(true)
+        // foreground[0].style.opacity = 1
+        // foreground[0].style.visibility = "visible"
+        // mainImage[0].style.opacity = 1
+        // mainImage[0].style.visibility = "visible"
+        // headling[0].style.opacity = 1
+        // headling[0].style.visibility = "visible"
+        // gradientImg[0].style.opacity = 1
+        // gradientImg[0].style.visibility = "visible"
+      }
+    }
+  }
+
   return (
     <StyledBanner>
-      <BgImage image={pluginImage} className="masthead">
+      <BgImage image={pluginImage} className="masthead c-bgImage" onLoad={() => setWaterfallImage(true)}>
         <div className="gradient-overlay">
             <div className="headline-wrapper">
               <h2>
@@ -107,9 +212,7 @@ const MediaProductionStaticFallback = ({setShowModalMore}) => {
                 for quality clients
               </h2>
               <p>
-                <span>Rubicon</span> — your limitless source for
-                <br />
-                creative audio/visual storytelling.
+                <span>Rubicon</span> — your limitless source for creative audio/visual.
               </p>
               <button onClick={() => setShowModalMore(true)}>more...</button>
             </div>
@@ -118,6 +221,7 @@ const MediaProductionStaticFallback = ({setShowModalMore}) => {
               src="../assets/images/globeandhand4.webp"
               placeholder="none"
               alt="hand holding a glass globe"
+              onLoad={() => setHandImage(true)}
             />
           </div>
       </BgImage>

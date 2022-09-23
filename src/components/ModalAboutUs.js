@@ -1,12 +1,11 @@
-import React, {  useEffect, useState } from "react"
-import {  graphql, useStaticQuery } from "gatsby"
+import React, { useEffect, useState } from "react"
+import { graphql, useStaticQuery } from "gatsby"
 import { getImage, StaticImage } from "gatsby-plugin-image"
 import { BgImage } from "gbimage-bridge"
 import { motion, AnimatePresence } from "framer-motion"
 import { IconButton } from "@mui/material"
 import CancelIcon from "@mui/icons-material/Cancel"
 import styled from "styled-components"
-
 
 const sayHeyAnimationVariants = {
   hidden: {
@@ -74,160 +73,156 @@ const Background = styled.div`
   .modal-wrapper {
     overflow: hidden;
     border-radius: 15px;
-    width: 45vw;
-    height: 80vh;
+    width: 65vw;
+    height: 85vh;
     position: relative;
     background: #373434;
     z-index: 992;
-
-    h2 {
-      color: var(--beige);
-    }
-    h3 {
-      font-size: clamp(2rem, 1.6vw, 2.2rem);
-      font-weight: 500;
-      text-align: center;
-      margin-top: 0.5em;
-      margin-bottom: 1.5em;
-    }
-    p {
-      margin-bottom: 0.4em;
-      font-size: clamp(1.6rem, 1.5vw, 1.6rem);
-      line-height: 1.4;
-    }
   }
   .modal-content {
     position: relative;
     overflow-y: auto;
-    height: 80vh;
+    height: 85vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  .modal-content h2 {
-    /* margin-bottom: 50rem; */
-  }
-  .modal-content-title {
-    text-align: center;
-    margin-top: 2em;
   }
   .modal-content-top-paragraph-wrapper {
     display: flex;
     justify-content: space-between;
-    margin-top: 2em;
+    margin-top: 1em;
+    width: 100%;
+    height: 50%;
   }
   .modal-content-top-paragraph-wrapper p {
-    padding: 0.5em 4em 0.5em 4em;
-    text-align: center;
+    /* padding: 0.5em 2.8em 0.5em 4em; */
+    margin-right: 1em;
+    margin-left: 1em;
+    font-size: 2.5rem;
+    font-size: clamp(1.6rem, 1.6vw, 2.5rem);
+    line-height: 2.4em;
+    font-weight: 400;
+  }
+  .left.p-content {
+    text-align: right;
+    background-color: red;
+    background: linear-gradient(
+      115deg,
+      rgba(175, 66, 97, 1) 45%,
+      rgba(243, 236, 120, 1) 100%
+    );
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    .shape-left {
+      width: 10px;
+      height: 100%;
+      float: right;
+      shape-outside: polygon(100% 0, 0 100%, 100% 100%);
+      clip-path: polygon(100% 0, 0 100%, 100% 100%);
+      margin-left: 2rem;
+    }
+    width: 50%;
+  }
+  .right.p-content {
+    background-color: red;
+    background: linear-gradient(
+      72deg,
+      rgba(243, 236, 120, 1) 0%,
+      rgba(175, 66, 97, 1) 51%
+    );
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    .shape-right {
+      width: 10px;
+      height: 100%;
+      float: left;
+      shape-outside: polygon(100% 100%, 0 100%, 0 0);
+      clip-path: polygon(100% 100%, 0 100%, 0 0);
+      margin-right: 2rem;
+    }
+    width: 50%;
   }
   .modal-content-bottom-absolute-wrapper {
     position: absolute;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    color: white;
+    height: 40%;
+    bottom: 0;
     width: 100%;
-    height: 35%;
-    top: 50%;
-    bottom: 0;
-    left: 0;
   }
-  .modal-content-bottom-title {
-    position: relative;
-    margin-top: 1em;
-    padding-bottom: 2em;
-    text-align: center;
-  }
-  .modal-button-rubi {
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    margin: 0;
-    width: 2.6em;
-    height: 2.6em;
-    border-radius: 50%;
-    position: relative;
-  }
-  .modal-content-skewed-wrapper p {
-    padding: 0 2em;
-    position: absolute;
-    transform-style: preserve-3d;
-    transform: rotateX(50deg);
-    text-align: center;
-    line-height: 1.5;
-  }
-  .modal-logo {
-    position: relative;
-    height: auto;
-    margin: 0;
-    padding: 0;
-    width: 2.8em;
-    border-radius: 50%;
-    /* box-shadow: inset 0px 0px 10px 10px var(--gold); */
-    /* filter: drop-shadow(0 0 0.6em var(--gold)); */
-    /* border-radius: 50%; */
-    /* margin:1.em 1em 1em 1em; */
-    /* height:1em; */
-  }
-  .modal-button-h2 {
-    position: absolute;
-    display: flex;
-    color: var(--black) !important;
-    font-weight: 600;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    transform: translateY(-5%);
-  }
-  .modal-bottom-paragraph {
-    background: transparent;
-    /* background: radial-gradient(circle at center, ) */
-    background: radial-gradient(closest-side, rgba(255, 184, 0, 0.7), rgba(247,220, 150 , 0.6), transparent);
-    /* background: radial-gradient(
-      circle,
-      rgba(2, 0, 36, 1) 0%,
-      rgba(249, 246, 189, 0.2332268370607029) 25%,
-      rgba(255, 255, 255, 0.01) 70%
-    ); */
-    position: absolute;
-    display: flex;
-    border-radius: 60%;
-    align-items: center;
-    justify-content: center;
-    /* width: 80%; */
-    width: 80%;
-    height: 35vh;
-    margin: 0 auto;
-    top: 55%;
-    /* bottom: 50%; */
-    /* border: 1px solid red; */
-    left: 0;
-    right: 0;
-    bottom: 0;
-    transform: translateY(-50%);
-  }
-  .modal-bottom-paragraph {
-    text-align: center;
-  }
-  .modal-bottom-paragraph p {
-    /* color: var(--black);
-    font-weight: 400; */
-  }
-  /* .modal-content-skewed-crawl {
-    position: relative;
-    transform-origin: 50% 100%;
-  } */
 
-  /* img {
-    width: 3em;
-    height: auto;
-    margin-top: 4em;
-  } */
+  .modal-content-bottom-absolute-wrapper p {
+    /* padding: 0.5em 5.5em 0.5em 5.5em; */
+    padding-top: 2em;
+    font-size: 15px;
+    width: 50%;
+    height: 100%;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .modal-content-bottom-absolute-wrapper p:first-of-type {
+    margin-right: 7em;
+  }
+  .left.p-content-bottom {
+    text-align: right;
+    background-color: red;
+    background: linear-gradient(
+      100deg,
+      rgba(175, 66, 97, 1) 25%,
+      rgba(243, 236, 120, 1) 100%
+    );
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    .bottom-shape-left {
+      width: 5px;
+      height: 100%;
+      float: right;
+      shape-outside: polygon(100% 0, 0 100%, 100% 100%);
+      clip-path: polygon(100% 0, 0 100%, 100% 100%);
+      margin-left: 2rem;
+    }
+    width: 50%;
+  }
+  .right.p-content-bottom {
+    background-color: red;
+    background: linear-gradient(
+      72deg,
+      rgba(243, 236, 120, 1) 0%,
+      rgba(175, 66, 97, 1) 70%
+    );
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    .bottom-shape-right {
+      width: 5px;
+      height: 100%;
+      float: left;
+      shape-outside: polygon(100% 100%, 0 100%, 0 0);
+      clip-path: polygon(100% 100%, 0 100%, 0 0);
+      margin-right: 2rem;
+    }
+    width: 50%;
+  }
   @media screen and (max-width: 1270px) {
     .modal-wrapper {
       min-width: 50vw;
@@ -243,25 +238,221 @@ const Background = styled.div`
       width: 95vw;
     }
   }
-  @media screen and (max-width: 620px) {
+  @media screen and (max-width: 790px) {
     .modal-wrapper {
-      width: 95vw;
+      width: 99vw;
     }
-    h2 {
-      font-size: 2.5rem;
-    }
-    p {
-      font-size: 1.4rem !important;
-    }
+
     .modal-content-top-paragraph-wrapper p {
-      padding: .4em 1em .4em 1em;
+      /* padding: 0.5em 2.8em 0.5em 4em; */
+      margin-right: 0.5em;
+      margin-left: 0.5em;
+      font-size: 2rem;
+      /* font-size: clamp(1.6rem, 1.6vw, 2.5rem); */
+      line-height: 2.4em;
+      font-weight: 400;
+    }
+    .left.p-content {
+      text-align: right;
+      background-color: red;
+      background: linear-gradient(
+        115deg,
+        rgba(175, 66, 97, 1) 40%,
+        rgba(243, 236, 120, 1) 100%
+      );
+      background-size: 100%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-background-clip: text;
+      -moz-text-fill-color: transparent;
+    }
+    .right.p-content {
+      background-color: red;
+      background: linear-gradient(
+        72deg,
+        rgba(243, 236, 120, 1) 0%,
+        rgba(175, 66, 97, 1) 61%
+      );
+      background-size: 100%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-background-clip: text;
+      -moz-text-fill-color: transparent;
+    }
+    .modal-content-bottom-absolute-wrapper p {
+      /* padding: 0.5em 5.5em 0.5em 5.5em; */
+      padding-top: 2.5em;
+      font-size: 14px;
+      width: 50%;
+      height: 100%;
+      line-height: 1.6;
+      font-weight: 200;
+    }
+    .modal-content-bottom-absolute-wrapper p:first-of-type {
+      margin-right: 6vw;
+    }
+    .left.p-content-bottom {
+      background-color: red;
+      background: linear-gradient(
+        100deg,
+        rgba(175, 66, 97, 1) 10%,
+        rgba(243, 236, 120, 1) 100%
+      );
+      background-size: 100%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-background-clip: text;
+      -moz-text-fill-color: transparent;
+    }
+    .right.p-content-bottom {
+    background-color: red;
+    background: linear-gradient(
+      72deg,
+      rgba(243, 236, 120, 1) 0%,
+      rgba(175, 66, 97, 1) 90%
+    );
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+
     }
   }
-  @media screen and (max-width: 500px) {
-     p br {
+  @media screen and (max-width: 620px) {
+    .modal-wrapper {
+      width: 99vw;
+    }
+    .modal-content-top-paragraph-wrapper p {
+      /* padding: 0.5em 2.8em 0.5em 4em; */
+      /* margin-right: 0.5em;
+      margin-left: 0.5em; */
+      font-size: 1.8rem;
+      /* font-size: clamp(1.6rem, 1.6vw, 2.5rem); */
+      line-height: 2.4em;
+      font-weight: 400;
+    }
+    .modal-content-bottom-absolute-wrapper p {
+      /* padding: 0 .5em 0 .5em; */
+      padding-top: 1.5em;
+      font-size: 14px;
+      width: 50%;
+      height: 100%;
+      line-height: 1.6;
+      font-weight: 200;
+    }
+    .modal-content-bottom-absolute-wrapper p:first-of-type {
+      padding-left: 2.5em;
+    }
+    .modal-content-bottom-absolute-wrapper p:last-of-type {
+      padding-right: 2em;
+    }
+    .br-bottom {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 550px) {
+    .modal-wrapper {
+      height: 76vh;
+      margin-top: -10rem;
+    }
+  .modal-content-top-paragraph-wrapper {
+    margin-top: 3.5em;
+  }
+    .left.p-content {
+      text-align: right;
+      background-color: red;
+      background: linear-gradient(
+        115deg,
+        rgba(175, 66, 97, 1) 20%,
+        rgba(243, 236, 120, 1) 100%
+      );
+      background-size: 100%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-background-clip: text;
+      -moz-text-fill-color: transparent;
+    }
+    .right.p-content {
+      background-color: red;
+      background: linear-gradient(
+        72deg,
+        rgba(243, 236, 120, 1) 0%,
+        rgba(175, 66, 97, 1) 85%
+      );
+      background-size: 100%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-background-clip: text;
+      -moz-text-fill-color: transparent;
+    }
+
+    .modal-content-bottom-absolute-wrapper p {
+      padding-top: 0em;
+      font-size: 14px;
+      width: 50%;
+      height: 100%;
+      line-height: 1.4;
+      font-weight: 300;
+    }
+    .modal-content-bottom-absolute-wrapper p:first-of-type {
+      padding-left: .5em;
+      padding-right: .7em;
+    }
+    .modal-content-bottom-absolute-wrapper p:last-of-type {
+      padding-right: .5em;
+      padding-left: .7em;
+    }
+    .left.p-content-bottom {
+      background-color: red;
+      background: linear-gradient(
+        100deg,
+        rgba(175, 66, 97, 1) 0.1%,
+        rgba(243, 236, 120, 1) 100%
+      );
+      background-size: 100%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-background-clip: text;
+      -moz-text-fill-color: transparent;
+    }
+    .right.p-content-bottom {
+    background-color: red;
+    background: linear-gradient(
+      72deg,
+      rgba(243, 236, 120, 1) 0%,
+      rgba(175, 66, 97, 1) 99%
+    );
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+
+    }
+    .br-bottom {
       display: none;
     }
 
+    /* p br {
+      display: none;
+    } */
   }
 `
 const ModalAboutUs = ({ showAboutUsModal, setShowAboutUsModal }) => {
@@ -269,7 +460,7 @@ const ModalAboutUs = ({ showAboutUsModal, setShowAboutUsModal }) => {
   const { backgroundImage } = useStaticQuery(
     graphql`
       query {
-        backgroundImage: file(relativePath: { eq: "GetStoryBG.png" }) {
+        backgroundImage: file(relativePath: { eq: "GetStoryBGNew.png" }) {
           childImageSharp {
             gatsbyImageData(quality: 100, webpOptions: { quality: 90 })
           }
@@ -299,22 +490,18 @@ const ModalAboutUs = ({ showAboutUsModal, setShowAboutUsModal }) => {
       <AnimatePresence exitBeforeEnter>
         {showAboutUsModal ? (
           <Background onClick={() => setShowAboutUsModal((prev) => !prev)}>
-            {/* <Background > */}
-              <div className="cancel-wrapper">
-                <IconButton onClick={() => setShowAboutUsModal((prev) => !prev)}>
-                  <CancelIcon
-                    aria-label="cancel"
-                    sx={{
-                      // position: "absolute",
-                      transform: "scale(2)",
-                      // top: "0",
-                      // left: "0",
-                      color: "rgb(84,77,77)",
-                    }}
-                    onClick={() => setShowAboutUsModal(false)}
-                  />
-                </IconButton>
-              </div>
+            <div className="cancel-wrapper">
+              <IconButton onClick={() => setShowAboutUsModal((prev) => !prev)}>
+                <CancelIcon
+                  aria-label="cancel"
+                  sx={{
+                    transform: "scale(2)",
+                    color: "rgb(84,77,77)",
+                  }}
+                  onClick={() => setShowAboutUsModal(false)}
+                />
+              </IconButton>
+            </div>
             <motion.div
               className="modal-wrapper"
               showAboutUsModal={showAboutUsModal}
@@ -322,109 +509,71 @@ const ModalAboutUs = ({ showAboutUsModal, setShowAboutUsModal }) => {
               initial="hidden"
               animate="visible"
               onClick={(e) => e.stopPropagation()}
-              // style={
-              //   showSayHeyModal
-              //     ? { transform: "translateX(0px)", opacity: 1 }
-              //     : { opacity: "0", transform: "translateX(100px)" }
-              // }
             >
               <BgImage image={pluginImage} className="masthead">
-                {/* <div className="cancel-wrapper">
-                <IconButton>
-                  <CancelIcon
-                    aria-label="cancel"
-                    sx={{
-                      position: "absolute",
-                      transform: "scale(1.3)",
-                      top: "0",
-                      left: "0",
-                      color: "rgb(84,77,77)",
-                    }}
-                    onClick={() => setShowAboutUsModal(false)}
-                  />
-                </IconButton>
-              </div> */}
-                {/* <h3 id="modal-hey">hey</h3> */}
-                {/* <p>who are you?</p> */}
-
                 <motion.div
                   variants={contactFormAnimationVariants}
                   initial="hidden"
                   animate="visible"
                 >
                   <div className="modal-content">
-                    <div className="modal-content-title">
-                      <h2>
-                        The <span>story</span> of work & career
-                        <br />
-                        has changed forever.
-                      </h2>
-                    </div>
                     <div className="modal-content-top-paragraph-wrapper">
-                      <p>
-                        People are no longer
+                      <p className="p-content left">
+                        <div className="shape-left" />
+                        PEOPLE
                         <br />
-                        resources to achieve
+                        ARE NOT
                         <br />
-                        business objectives.
+                        RESOURCES
+                        <br />
+                        TO BE USED
+                        <br />
+                        FOR BUSINESS
                       </p>
-                      <p>
-                        Business objectives
+                      <p className="p-content right">
+                        <div className="shape-right" />
+                        BUSINESS
                         <br />
-                        are opportunities to live
+                        IS A WAY
                         <br />
-                        your passion.
+                        FOR PEOPLE
+                        <br />
+                        TO LIVE FROM
+                        <br />
+                        THEIR PASSION
                       </p>
                     </div>
                     <div className="modal-content-bottom-absolute-wrapper">
-                      <p className="modal-content-bottom-title">
-                        <span>Rubicon Story Inc.</span> is restoring passion to the forefront of the <br/>
-                        creative industry, rethinking how creative individuals are discovered, <br className="mb-remove"/>
-                        developed, managed and empowered with a first of its kind <br/>
-                        professional creativity platform — {" "}
-                        <span onClick={() => setShowAboutUsModal(false)} style={{fontWeight: '400', cursor: 'pointer'}}>Rubi</span>
+                      <p className="p-content-bottom left">
+                        <div className="bottom-shape-left" />
+                        Rubicon Story Inc. is restoring
+                        <br className="br-bottom"/>
+                        {" "}passion to the forefront of the creative
+                        <br className="br-bottom"/>
+                        {" "}industry rethinking how creative individuals
+                        <br className="br-bottom"/>
+                        {" "}are discovered developed managed and
+                        <br className="br-bottom"/>
+                        {" "}empowered with first of its kind
+                        <br className="br-bottom"/>
+                        {" "}creativity platform — Rubi.
                       </p>
-                      {/* {(isParagraphVisible) ? (
-                        <div className="modal-bottom-paragraph">
-                          <p>
-                            Powered by a proprietary "networkflow",
-                            <br />
-                            Rubi digitize and integrates a smart network with{" "}
-                            <br />a smart workflow, rethinking how creative
-                            individuals
-                            <br />
-                            are discovered, developed, managed and empowered.
-                          </p>
-                        </div>
-                      ): null
-                      } */}
-                      {/* <button className="modal-button-rubi" onClick={toggleParagraphVisible}> */}
-                      {/* <button className="modal-button-rubi" onClick={() => {(<Link to="/platform" />)}}> */}
-                      {/* <Link to="/platform#main" className="modal-button-rubi"> */}
-                        <StaticImage
-                          src="../assets/images/rubi-icon.png"
-                          className="modal-logo"
-                          onClick={() => setShowAboutUsModal(false)}
-                        />
-                      {/* </Link> */}
-                      {/* </button> */}
-                      {/* <div className="modal-content-skewed-wrapper"> */}
-                      {/* <div className="modal-content-skewed-crawl"> */}
-                      {/* <p>
-                          <span style={{fontSize: "1.7rem", color: "var(--beige)" }}>Powered by a proprietary "networkflow",<br /></span>Rubi digitize
-                          and integrates a smart network with <br />a smart workflow,
-                          rethinking how creative individuals<br />are discovered,
-                          developed, managed and empowered.
-                        </p> */}
-                      {/* </div> */}
-                      {/* </div> */}
-                      {/* <img src={Icon} alt="rubi logo"/> */}
+                      <p className="p-content-bottom right">
+                        <div className="bottom-shape-right" />
+                        {" "}Rubi is the virtual character
+                        <br className="br-bottom"/>
+                        {" "}who supports creatives in producing
+                        <br className="br-bottom"/>
+                        {" "}passion projects through Studio,
+                        <br className="br-bottom"/>
+                        {" "}paying projects through Service and
+                        <br className="br-bottom"/>
+                        {" "}supporting creatives through Software
+                        <br className="br-bottom"/>— the 3 divisions of Rubicon.
+                      </p>
+
                     </div>
                   </div>
-                  {/* <ContactFormPage
-                  completedSuccessAnimation={completedSuccessAnimation}
-                  setCompletedSuccessAnimation={setCompletedSuccessAnimation}
-                /> */}
                 </motion.div>
               </BgImage>
             </motion.div>
