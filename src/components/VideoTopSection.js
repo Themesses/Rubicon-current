@@ -76,7 +76,7 @@ const StyledButton = styled.div`
     top: 50%;
     height: 55px;
     width: 320px;
-    transition: .5s;
+    transition: 0.5s;
   }
 
   .toggle-button {
@@ -92,7 +92,7 @@ const StyledButton = styled.div`
     margin-left: -155px;
   }
   /* ${StyledSection}:hover & ${StyledImage} > #play-initial path { */
-    /* border: 2px solid blue; */
+  /* border: 2px solid blue; */
   /* } */
 
   ${StyledSection}:hover & .toggle-button {
@@ -110,7 +110,7 @@ const StyledButton = styled.div`
     fill: var(--beige);
     filter: blur(2px);
     opacity: 0.5;
-    transition: .5s;
+    transition: 0.5s;
   }
 
   @media screen and (max-width: 1200px) {
@@ -178,13 +178,32 @@ const StyledImage = styled.div`
     display: inline-block;
     vertical-align: middle;
     top: 50%;
-    opacity: .2;
+    /* opacity: .2; */
     padding: 0em 4em;
-    transition: .5s;
-    filter: blur(2px) drop-shadow(0 0 0 var(--black));
+    transition: 0.5s;
+    /* filter: blur(2px) drop-shadow(0 0 0 var(--black)); */
+    filter: blur(2px) drop-shadow(0 0 0.6em var(--gold));
     height: 5em;
     width: 6em;
   }
+  /* svg {
+    box-sizing: content-box;
+    position: absolute;
+    transform: translateX(-29%);
+    z-index: 100;
+    display: inline-block;
+    vertical-align: middle;
+    top: 50%; */
+  /* opacity: 1; */
+  /* opacity:.8; */
+  /* padding: 0em 4em;
+    transition: .8s;
+    filter: blur(2px) drop-shadow(0 0 .6em var(--gold));
+    height: 4.2em;
+    width: 5em; */
+  /* border: 1px solid red; */
+  /* stroke-width: 1 !important; */
+  /* } */
   svg:hover {
     opacity: 1;
     filter: drop-shadow(0 0 1em var(--gold));
@@ -624,9 +643,33 @@ const renderVideo = ({
                   }}
                   onClick={handleToggleVideo}
                 >
-<svg id="play-initial" width="70" height="63" viewBox="0 0 70 63" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M67.7418 31.0352L2.82715 60.1001V1.97019L67.7418 31.0352Z" stroke="#F0E4C3" strokeWidth="3.89844"/>
-</svg>
+                  {/* <motion.svg id="play-initial" initial={{ opacity: .2}} animate={{ opacity: .7}} transition={{duration: 2.5, repeat: Infinity}} width="70" height="63" viewBox="0 0 70 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+<motion.path initial={{ opacity: 0, pathLength: 0}} animate={{ opacity: 1, pathLength: 1}} transition={{delay: 4, duration: 1.5, ease: "easeInOut"}} d="M67.7418 31.0352L2.82715 60.1001V1.97019L67.7418 31.0352Z" stroke="#F0E4C3" strokeWidth="3.89844"/>
+</motion.svg> */}
+                  <motion.svg
+                    id="play-initial"
+                    initial={{ opacity: 0.2 }}
+                    animate={{ opacity: 0.7 }}
+                    transition={{ duration: 2.5, repeat: Infinity }}
+                    width="87"
+                    height="104"
+                    viewBox="0 0 87 104"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <motion.path
+                      initial={{ opacity: 0, pathLength: 0 }}
+                      animate={{ opacity: 1, pathLength: 1 }}
+                      transition={{
+                        delay: 4,
+                        duration: 1.5,
+                        ease: "easeInOut",
+                      }}
+                      d="M2 24.6036V78.1873C2 78.4427 2.09775 78.6884 2.27319 78.8741L23.4852 101.321C23.8465 101.703 24.4422 101.74 24.8481 101.406L84.8859 51.9205C85.3765 51.5162 85.3701 50.7626 84.8727 50.3666L24.8266 2.55701C24.4282 2.23984 23.8551 2.27265 23.4956 2.63322L2.29189 23.8975C2.10497 24.0849 2 24.3389 2 24.6036Z"
+                      stroke="white"
+                      stroke-width="3"
+                    />
+                  </motion.svg>
                   {/* <motion.img
                     variants={rubiGlowAnimationVariants}
                     initial="hidden"
@@ -688,11 +731,18 @@ const renderVideo = ({
   </>
 )
 
-export default function VideoTopSection({ src, poster, noControls, onEnded, setVideoFailed, videoFailed }) {
+export default function VideoTopSection({
+  src,
+  poster,
+  noControls,
+  onEnded,
+  setVideoFailed,
+  videoFailed,
+}) {
   // const [videoFailed, setVideoFailed] = useState()
   const vidRef = useRef(null)
   const vidButtonRef = useRef(null)
-  const navigation = isBrowser ? document.getElementById("header") : ""
+  const navigation = isBrowser ? document.getElementById("navigation") : ""
   const posterOverlay = isBrowser
     ? document.getElementsByClassName("poster22-overlay")
     : ""
@@ -712,9 +762,8 @@ export default function VideoTopSection({ src, poster, noControls, onEnded, setV
     : ""
 
   useEffect(() => {
-
-    const vh100 = isBrowser ? window.innerHeight * 0.01: "";
-    document.documentElement.style.setProperty('--100vh', `${vh100}px`)
+    const vh100 = isBrowser ? window.innerHeight * 0.01 : ""
+    document.documentElement.style.setProperty("--100vh", `${vh100}px`)
   })
 
   // const vh100 = isBrowser ? document.documentElement.style.setProperty('--100vh', `${vh}px`) : ""

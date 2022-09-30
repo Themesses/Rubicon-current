@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: `rubiconstory`,
+    title: `Creativity & Execution`,
+    description: `for those looking to tell the story`,
     siteUrl: `https://www.rubiconstory.com`,
   },
   // flags: {

@@ -208,7 +208,7 @@ const VideoLogosMobile = ({ isBottom }) => {
           </div>
           <div id="video-scroll">
             <ImageCanvas
-              scrollHeight={4000}
+              scrollHeight={3200}
               width="360"
               height="470"
               numFrames={500}
