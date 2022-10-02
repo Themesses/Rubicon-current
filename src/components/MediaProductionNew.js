@@ -206,7 +206,7 @@ const StyledBanner = styled.div`
     }
     .parallax-video {
       height: 100%;
-      transform: scale(2.2);
+      transform: scale(2.5);
     }
     .foreground-image {
       transform: scale(1.85) translateX(5%) translateY(30%);

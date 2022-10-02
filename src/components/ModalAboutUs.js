@@ -361,8 +361,8 @@ const Background = styled.div`
   }
   @media screen and (max-width: 550px) {
     .modal-wrapper {
-      height: 76vh;
-      margin-top: -10rem;
+      height: 85vh;
+      margin-top: -1rem;
     }
   .modal-content-top-paragraph-wrapper {
     margin-top: 3.5em;
@@ -372,8 +372,8 @@ const Background = styled.div`
       background-color: red;
       background: linear-gradient(
         115deg,
-        rgba(175, 66, 97, 1) 20%,
-        rgba(243, 236, 120, 1) 100%
+        rgba(175, 66, 97, 1) 1%,
+        rgba(243, 236, 120, 1) 90%
       );
       background-size: 100%;
       background-repeat: repeat;
@@ -387,8 +387,8 @@ const Background = styled.div`
       background-color: red;
       background: linear-gradient(
         72deg,
-        rgba(243, 236, 120, 1) 0%,
-        rgba(175, 66, 97, 1) 85%
+        rgba(243, 236, 120, 1) 1%,
+        rgba(175, 66, 97, 1) 99%
       );
       background-size: 100%;
       background-repeat: repeat;
@@ -408,19 +408,19 @@ const Background = styled.div`
       font-weight: 300;
     }
     .modal-content-bottom-absolute-wrapper p:first-of-type {
-      padding-left: .5em;
+      padding-left: 1em;
       padding-right: .7em;
     }
     .modal-content-bottom-absolute-wrapper p:last-of-type {
-      padding-right: .5em;
+      padding-right: 1em;
       padding-left: .7em;
     }
     .left.p-content-bottom {
       background-color: red;
       background: linear-gradient(
-        100deg,
-        rgba(175, 66, 97, 1) 0.1%,
-        rgba(243, 236, 120, 1) 100%
+        102deg,
+        rgba(175, 66, 97, 1) 0%,
+        rgba(243, 236, 120, 1) 70%
       );
       background-size: 100%;
       background-repeat: repeat;
@@ -434,8 +434,116 @@ const Background = styled.div`
     background-color: red;
     background: linear-gradient(
       72deg,
-      rgba(243, 236, 120, 1) 0%,
-      rgba(175, 66, 97, 1) 99%
+      rgba(243, 236, 120, 1) 40%,
+      rgba(175, 66, 97, 1) 100%
+    );
+    background-size: 100%;
+    background-repeat: repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+
+    }
+    .br-bottom {
+      display: none;
+    }
+
+    /* p br {
+      display: none;
+    } */
+  }
+  @media (max-width: 920px) and (orientation: landscape) {
+    z-index: 998;
+    .masthead::after,
+    .masthead::before {
+      height: 150% !important;
+      margin-top: -6em !important;
+    }
+    .modal-wrapper {
+      height: 85vh;
+      margin-top: -1rem;
+    }
+    .cancel-wrapper {
+      z-index: 999;
+    }
+  .modal-content-top-paragraph-wrapper {
+    margin-top: 0.1em;
+    height: 60%;
+  }
+  .modal-content-top-paragraph-wrapper p {
+    line-height: 2em;
+  }
+    .left.p-content {
+      text-align: right;
+      background-color: red;
+      background: linear-gradient(
+        115deg,
+        rgba(175, 66, 97, 1) 1%,
+        rgba(243, 236, 120, 1) 90%
+      );
+      background-size: 100%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-background-clip: text;
+      -moz-text-fill-color: transparent;
+    }
+    .right.p-content {
+      background-color: red;
+      background: linear-gradient(
+        72deg,
+        rgba(243, 236, 120, 1) 1%,
+        rgba(175, 66, 97, 1) 99%
+      );
+      background-size: 100%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-background-clip: text;
+      -moz-text-fill-color: transparent;
+    }
+
+    .modal-content-bottom-absolute-wrapper p {
+      padding-top: 0em;
+      font-size: 14px;
+      width: 50%;
+      height: 100%;
+      line-height: 1.4;
+      font-weight: 300;
+    }
+    .modal-content-bottom-absolute-wrapper p:first-of-type {
+      padding-left: 1em;
+      padding-right: .7em;
+    }
+    .modal-content-bottom-absolute-wrapper p:last-of-type {
+      padding-right: 1em;
+      padding-left: .7em;
+    }
+    .left.p-content-bottom {
+      background-color: red;
+      background: linear-gradient(
+        102deg,
+        rgba(175, 66, 97, 1) 0%,
+        rgba(243, 236, 120, 1) 70%
+      );
+      background-size: 100%;
+      background-repeat: repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -moz-background-clip: text;
+      -moz-text-fill-color: transparent;
+    }
+    .right.p-content-bottom {
+    background-color: red;
+    background: linear-gradient(
+      72deg,
+      rgba(243, 236, 120, 1) 40%,
+      rgba(175, 66, 97, 1) 100%
     );
     background-size: 100%;
     background-repeat: repeat;

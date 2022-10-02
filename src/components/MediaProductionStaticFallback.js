@@ -43,8 +43,8 @@ const StyledBanner = styled.div`
   }
   p {
     font-size: clamp(1.5rem, 2vw, 2.6rem);
-    max-width: 100%;
     /* margin: 0; */
+    /* max-width: 60%; */
     margin: 1em 0;
   }
   .gradient-overlay {
@@ -92,6 +92,9 @@ const StyledBanner = styled.div`
       top: 28% !important;
       transform: scale(1.7) translate(15%, 0%);
     }
+    .br-desktop {
+      display: none;
+    }
   }
   @media screen and (min-width: 621px) and (max-width: 1199px) {
     .headline-wrapper {
@@ -101,8 +104,8 @@ const StyledBanner = styled.div`
   }
   @media screen and (min-width: 1200px) {
     .headline-wrapper {
-      padding-left: 2em !important;
-      right: 62% !important;
+      padding-left: 4em !important;
+      /* right: 62% !important; */
     }
   }
   @media screen and (max-width: 620px) {
@@ -115,6 +118,7 @@ const StyledBanner = styled.div`
     }
     p {
       font-size: clamp(2rem, 0vw, 0rem) !important;
+      /* max-width: 100%; */
     }
   }
   @media screen and (max-width: 379px) {
@@ -212,7 +216,7 @@ const MediaProductionStaticFallback = ({setShowModalMore, setParallaxLoaded}) =>
                 for quality clients
               </h2>
               <p>
-                <span>Rubicon</span> — your limitless source for creative audio/visual.
+                <span>Rubicon</span> — your limitless source for <br className="br-desktop"/> creative audio/visuals.
               </p>
               <button onClick={() => setShowModalMore(true)}>more...</button>
             </div>

@@ -125,7 +125,7 @@ const OriginalStoriesMobile = ({ isBottom, setShowAboutUsModal }) => {
                       transition={{duration: 0.3, delay: i * 0.1}}
                       // id="stories-text-wrapper"
                       >
-                        <h3 className="text-outline">{child.title} <motion.span className="text-outline-span" initial={{opacity: 0, x: -15}} animate={{ opacity: 1, x: 10}} transition={{ ease: "easeIn", duration: .2, delay: .7 + i * 0.1  }}>{child.subtitle}</motion.span></h3>
+                        <h3 className="text-outline">{child.title} <motion.span className="text-outline-span" initial={{opacity: 0, x: -15}} animate={{ opacity: 1, x: 5}} transition={{ ease: "easeIn", duration: .2, delay: .7 + i * 0.1  }}>{child.subtitle}</motion.span></h3>
 
                         {/* <span>{child.subtitle}</span> */}
                       </motion.div>
@@ -178,14 +178,14 @@ const StyledBackgrounds = styled.section`
     justify-content: flex-start;
     align-items: center;
     opacity: 1 !important;
-    z-index: 20;
+    z-index: 1;
   }
   .gradient {
     display: flex;
     align-items: center;
     width: 100%;
     height: 100%;
-    z-index: 20;
+    /* z-index: 20; */
     background: linear-gradient(360deg, #161616 15%, rgba(0, 0, 0, 0) 43.45%),
     linear-gradient(180deg, #161616 15%, rgba(22, 22, 22, 0) 38.09%),
       linear-gradient(
@@ -338,6 +338,7 @@ const StyledBackgrounds = styled.section`
   @media screen and (max-width: 450px) {
     .masthead::before,
     .masthead::after {
+      background-position: 54% !important;
       height: 78% !important;
       top: 85px !important;
     }

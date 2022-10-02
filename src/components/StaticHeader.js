@@ -55,6 +55,11 @@ const StyledHeader = styled.header`
     text-align: center;
     color: var(--beige);
   }
+
+  @media (max-width: 920px) and (orientation: landscape) {
+    padding-top: 0;
+    margin-top: -2em;
+  }
   @media screen and (min-width: 620px) {
     h1 {
       font-size: var(--h1);

@@ -74,7 +74,8 @@ const StyledNavigation = styled.div`
   top: 80px;
   transform: translateY(-80px);
   height: 70px;
-  z-index: 99;
+  z-index: 2;
+  /* z-index: -1; */
   @media screen and (max-width: 620px) {
     height: 6vh;
     transform: translateY(-8vh);
@@ -291,7 +292,7 @@ const Navigation = ({
     if (isMobilePortrait) {
       window.addEventListener('scroll', function() {
 
-          console.log(window.scrollY)
+          // console.log(window.scrollY)
           if (window.scrollY <= 5) {
             setIsTop(true)
     // document.documentElement.style.setProperty('--transformVh', `-170px`)
@@ -335,13 +336,14 @@ const Navigation = ({
         </StyledNavigationHidden>
       ) : (
         <StyledNavigation>
-          {/* {!isVideoVisible && ( */}
+        {!isVideoVisible && (
             <StyledCta>
               <motion.div
                 className="nav-rubi-cta"
                 variants={rubiAnimationVariants}
-                initial="visible"
+                initial="hidden"
                 animate="visible"
+                transition={{duration: 0.2}}
                 // onMouseLeave={() => {
                 //   if(!isMobilePortrait && !isClick) {
                 //     let rubiList = document.getElementById('rubi-cta-list')
@@ -457,7 +459,7 @@ const Navigation = ({
                 </>
               </motion.div>
             </StyledCta>
-          {/* )} */}
+           )}
         </StyledNavigation>
       )}
     </>

@@ -30,7 +30,7 @@ export default function Layout({ children }) {
   const childrenWithProps = React.Children.map(children, (child) =>
     React.cloneElement(child, {
       isVideoVisible: { isVideoVisible },
-      videoFailed: {videoFailed},
+      videoFailed: { videoFailed },
       // anything you want to pass down can go here
     })
   )
@@ -54,7 +54,7 @@ export default function Layout({ children }) {
   }, [dimensions])
 
   useEffect(() => {
-    if (dimensions.width / dimensions.height < 0.9) {
+    if (dimensions.width / dimensions.height < 1) {
       setIsMobilePortrait(true)
     } else {
       setIsMobilePortrait(false)
@@ -76,17 +76,24 @@ export default function Layout({ children }) {
   //   }
   // })
 
-
   return (
     <div>
       <GlobalStyles />
       <Typography />
       <div ref={ref}>
-        {isMobilePortrait ? (
+        <VideoTopSectionMobile
+          src={Story}
+          noControls={true}
+          setVideoFailed={setVideoFailed}
+          isMobilePortrait={isMobilePortrait}
+          videoFailed={videoFailed}
+        />
+        {/* <Video src={Story} noControls={true} /> */}
+        {/* {isMobilePortrait ? (
           <VideoTopSectionMobile src={Story} noControls={true} setVideoFailed={setVideoFailed} videoFailed={videoFailed}/>
         ) : (
           <VideoTopSection src={Story} noControls={true} setVideoFailed={setVideoFailed} videoFailed={videoFailed}/>
-        )}
+        )} */}
         {/* <Video src={Story} noControls={true} /> */}
       </div>
       <Navigation

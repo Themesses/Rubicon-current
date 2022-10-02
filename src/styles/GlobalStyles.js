@@ -45,6 +45,7 @@ const GlobalStyles = createGlobalStyle`
         background-color: var(--black);
         transform: translate3d(0px, 0px, 0px,);
         transition: all 700ms ease;
+        height: 100%;
         /* scroll-behavior: smooth; */
         /* overflow-x: visible !important; */
         /* min-height: -webkit-fill-available; */

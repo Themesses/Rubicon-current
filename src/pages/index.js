@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import SEO from '../components/SEO'
 import Header from "../components/Header"
 import StaticHeader from "../components/StaticHeader"
 import MediaProduction from "../components/MediaProduction"
@@ -320,30 +321,21 @@ const Agency = ({videoFailed}) => {
       setIsAnimationTriggered(true)
       return () => window.removeEventListener("scroll", handleScroll)
     }
-    if (
-      isFirstLoad &&
-      isWindowTop &&
-      isMobilePortrait
-    ) {
-      // window.addEventListener("scroll", handleScrollMobile)
-      // setIsAnimationTriggered(true)
-      // return () => window.removeEventListener("scroll", handleScrollMobile, { passive: true})
-      let fired = false
-      window.addEventListener("scroll", function(){
-        if (document.body.scrollTop === 0 && fired === false) {
-          // alert('This will happen only once');
-      // window.scrollTo(0, window.innerHeight)
-        // window.requestAnimationFrame(() => {
-          window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
-        // })
-
-          fired = true;
-
-        }
-      }, true)
-      setIsAnimationTriggered(true)
-      return () => window.removeEventListener("scroll", handleScrollMobile, { passive: true})
-    }
+    // if (
+    //   isFirstLoad &&
+    //   isWindowTop &&
+    //   isMobilePortrait
+    // ) {
+    //   let fired = false
+    //   window.addEventListener("scroll", function(){
+    //     if (document.body.scrollTop === 0 && fired === false) {
+    //       window.scrollTo({ top: window.innerHeight, behavior: "smooth" })
+    //       fired = true;
+    //     }
+    //   }, true)
+    //   setIsAnimationTriggered(true)
+    //   return () => window.removeEventListener("scroll", handleScrollMobile, { passive: true})
+    // }
     if (!isFirstLoad) {
       // console.log("out")
       return
@@ -405,8 +397,9 @@ const Agency = ({videoFailed}) => {
   return (
     // <AnimatePresence exitBeforeEnter>
     <ParallaxProvider>
+      <SEO title='Service'/>
       {/* {isFirstLoad && isWindowTop && !isMobilePortrait && !isMobileLandscape ? ( */}
-      {isFirstLoad && isWindowTop && !isMobileLandscape ? (
+      {isFirstLoad && isWindowTop && !isMobilePortrait && !isMobileLandscape ? (
         <>
           {/* <Navigation
             isFirstLoad={isFirstLoad}
@@ -484,6 +477,8 @@ const Agency = ({videoFailed}) => {
               ) : isMobileLandscape ? (
                 <>
                   <VideoLogosMobileLandscape />
+                  <ClientGallery isJank={isJank} />
+                  <ClientCarousel dimensions={dimensions} />
                   <OriginalStories setShowAboutUsModal={setShowAboutUsModal} />
                 </>
               ) : isMedium ? (
