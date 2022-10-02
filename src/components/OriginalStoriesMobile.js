@@ -178,14 +178,14 @@ const StyledBackgrounds = styled.section`
     justify-content: flex-start;
     align-items: center;
     opacity: 1 !important;
-    z-index: 20;
+    z-index: 1;
   }
   .gradient {
     display: flex;
     align-items: center;
     width: 100%;
     height: 100%;
-    z-index: 20;
+    /* z-index: 20; */
     background: linear-gradient(360deg, #161616 15%, rgba(0, 0, 0, 0) 43.45%),
     linear-gradient(180deg, #161616 15%, rgba(22, 22, 22, 0) 38.09%),
       linear-gradient(
