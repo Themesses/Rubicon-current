@@ -61,7 +61,6 @@ const StyledSection = styled.div`
     transform: scale(1.2, 1.2);
     opacity: 1 !important;
     padding: 1em;
-    margin-top: .2em;
   }
   @media (max-width: 920px) and (orientation: landscape) {
     /* .top-section {
@@ -89,7 +88,6 @@ const StyledButton = styled.div`
     display: flex;
     justify-content: center;
     z-index: 102;
-    transform: scale(0.98);
     /* transition:  all 0.8s; */
   }
 
@@ -127,16 +125,16 @@ const StyledImage = styled.div`
     z-index: 200;
     transition: 0.8s;
     filter: blur(2px) drop-shadow(0 0 0.3em var(--gold));
-    /* height: 3.5em;
-    width: 6em; */
-    margin-left: 0.4em;
-    /* margin-bottom: 0.2em; */
+    height: 3.15em;
+    /* width: 3em; */
+    margin-left: 0em;
+    margin-bottom: 0.1em;
     /* border: 1px solid red; */
-    /* width: 10em; */
+    width: 5em;
   }
   svg path {
     stroke: var(--beige);
-    stroke-width: 5 !important;
+    stroke-width: 5.5 !important;
   }
   svg:hover {
     opacity: 1;
@@ -186,12 +184,6 @@ const StyledImage = styled.div`
   @media (max-aspect-ratio: 1/1) {
     svg {
       margin-bottom: 0;
-      margin-top: .2em;
-    }
-  }
-  @media (max-width: 920px) and (orientation: landscape) {
-    svg {
-      margin-top: .2em;
     }
   }
 `
@@ -442,8 +434,7 @@ const renderVideo = ({
               className="play-button"
               initial={{ scale: 1.5 }}
               animate={{ scale: 1 }}
-              // transition={{ duration: 2.6, delay: 0.8 }}
-              transition={{ duration: 2.6, delay: 1.2 }}
+              transition={{ duration: 2.6, delay: 0.8 }}
             >
               <motion.div
                 className="button play-button play-icon gold-play-icon"
@@ -458,7 +449,7 @@ const renderVideo = ({
                     className="toggle-button"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 1.7 }}
+                    transition={{ duration: 1, delay: 1 }}
                     onClick={handleToggleVideo}
                   >
                     <svg
@@ -531,15 +522,9 @@ const renderVideo = ({
                       initial={{ opacity: 0.1 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 2.5, repeat: Infinity }}
-                      // width="111"
-                      // height="102"
-                      // viewBox="0 0 111 102"
-                      // width="92"
-                      // height="110"
-                      // viewBox="0 0 92 110"
-                      width="100"
-                      height="118"
-                      viewBox="0 0 110 118"
+                      width="111"
+                      height="102"
+                      viewBox="0 0 111 102"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -551,10 +536,7 @@ const renderVideo = ({
                           duration: 1.4,
                           ease: "easeInOut",
                         }}
-                        // d="M2 25.5688V79.1696C2 79.4355 2.10593 79.6905 2.29436 79.8782L21.9703 99.4725C22.2844 99.7853 22.7669 99.854 23.1558 99.6412L108.433 52.9925C109.119 52.6175 109.129 51.6361 108.45 51.2476L23.2068 2.405C22.7953 2.16917 22.2746 2.25495 21.9605 2.61035L2.25077 24.9065C2.08919 25.0893 2 25.3249 2 25.5688Z"
-                        // d="M22.6501 2H18.0802C17.7214 2 17.3901 2.19222 17.212 2.50372L2.13184 28.8834C2.04545 29.0346 2 29.2056 2 29.3797V56.2281V81.765C2 81.9455 2.04886 82.1227 2.14141 82.2776L17.209 107.513C17.3895 107.815 17.7156 108 18.0676 108H22.6626C22.8815 108 23.0943 107.928 23.2684 107.796L89.979 57.0055C90.4972 56.6109 90.5059 55.8341 89.9967 55.428L23.2736 2.21817C23.0965 2.07693 22.8766 2 22.6501 2Z"
-                        // d="M23.3446 2H18.6165C18.2504 2 17.9135 2.20012 17.7383 2.52167L2.12182 31.1926C2.04188 31.3393 2 31.5038 2 31.6709V60.8324V88.5722C2 88.7456 2.04508 88.916 2.13082 89.0667L17.7349 116.494C17.9127 116.807 18.2445 117 18.6041 117H23.3574C23.5843 117 23.8044 116.923 23.9817 116.781L93.0448 61.5957C93.5385 61.2012 93.547 60.4533 93.0623 60.0476L23.9864 2.23315C23.8065 2.08253 23.5793 2 23.3446 2Z"
-                        d="M24.3147 2.00001H19.2855C18.9341 2.00001 18.6085 2.1844 18.4278 2.48573L2.14237 29.644C2.04921 29.7994 2 29.9771 2 30.1583V57.7629V84.0188C2 84.2066 2.05285 84.3905 2.15251 84.5496L18.4252 110.531C18.6081 110.823 18.9283 111 19.2727 111H24.327C24.538 111 24.7437 110.933 24.9144 110.809L96.9106 58.5536C97.4532 58.1598 97.4622 57.354 96.9284 56.9482L24.9199 2.20394C24.7459 2.07164 24.5333 2.00001 24.3147 2.00001Z"
+                        d="M2 25.5688V79.1696C2 79.4355 2.10593 79.6905 2.29436 79.8782L21.9703 99.4725C22.2844 99.7853 22.7669 99.854 23.1558 99.6412L108.433 52.9925C109.119 52.6175 109.129 51.6361 108.45 51.2476L23.2068 2.405C22.7953 2.16917 22.2746 2.25495 21.9605 2.61035L2.25077 24.9065C2.08919 25.0893 2 25.3249 2 25.5688Z"
                         stroke="white"
                         stroke-width="5"
                       />
@@ -584,7 +566,7 @@ const renderVideo = ({
                 opacity: 0,
                 display: "block",
                 visibility: "hidden",
-                zIndex: 3,
+                zIndex: 2,
               }}
             ></video>
           </div>
