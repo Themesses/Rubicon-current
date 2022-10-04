@@ -62,6 +62,7 @@ const ctaAnimationVariants = {
 
 const StyledNavigation = styled.div`
   display: flex;
+  /* display: none; */
   position: sticky;
   position: -webkit-sticky;
   /* background: var(--black); */
@@ -74,7 +75,7 @@ const StyledNavigation = styled.div`
   top: 80px;
   transform: translateY(-80px);
   height: 70px;
-  z-index: 2;
+  z-index: 2 !important;
   /* z-index: -1; */
   @media screen and (max-width: 620px) {
     height: 6vh;

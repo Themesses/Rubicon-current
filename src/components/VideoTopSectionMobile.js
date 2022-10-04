@@ -566,7 +566,7 @@ const renderVideo = ({
                 opacity: 0,
                 display: "block",
                 visibility: "hidden",
-                zIndex: 2,
+                zIndex: 3,
               }}
             ></video>
           </div>
