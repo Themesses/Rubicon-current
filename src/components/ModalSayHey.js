@@ -107,7 +107,7 @@ const Background = styled.div`
   }
   @media screen and (max-width: 620px) {
     .modal-wrapper {
-      min-width: 90vw;
+      min-width: 95vw;
     }
   }
 `

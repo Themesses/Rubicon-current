@@ -479,7 +479,7 @@ const Agency = ({videoFailed}) => {
                   <VideoLogosMobileLandscape />
                   <ClientGallery isJank={isJank} />
                   <ClientCarousel dimensions={dimensions} />
-                  <OriginalStories setShowAboutUsModal={setShowAboutUsModal} />
+                  <OriginalStories setShowAboutUsModal={setShowAboutUsModal} isMobileLandscape={isMobileLandscape} />
                 </>
               ) : isMedium ? (
                 <>

@@ -9,7 +9,7 @@ import Footer from "./Footer"
 import styled from "styled-components"
 
 
-const OriginalStories = ({ isBottom, setShowAboutUsModal }) => {
+const OriginalStories = ({ isBottom, setShowAboutUsModal, isMobileLandscape }) => {
   const [bottom, setBottom] = useState(false)
 
   const { ref, inView } = useInView({
@@ -104,12 +104,12 @@ const OriginalStories = ({ isBottom, setShowAboutUsModal }) => {
                     children.map((child, i) => (
                       <motion.div
                       key={child.id}
-                      initial={{ opacity: 0, translateY: -40}}
+                      initial={isMobileLandscape ? {opacity: 0, translateY: 0} : { opacity: 0, translateY: -40}}
                       animate={{ opacity: 1, translateY: 0}}
                       transition={{duration: 0.3, delay: i * 0.1}}
                       // id="stories-text-wrapper"
                       >
-                        <h3 className="text-outline">{child.title} <motion.span className="text-outline-span" initial={{opacity: 0, x: -15}} animate={{ opacity: 1, x: 15}} transition={{ ease: "easeIn", duration: .2, delay: .7 + i * 0.1  }}>{child.subtitle}</motion.span></h3>
+                        <h3 className="text-outline">{child.title} <motion.span className="text-outline-span" initial={ isMobileLandscape ? {opacity: 0, x: 0} : {opacity: 0, x: -15}} animate={ isMobileLandscape ? {opacity: 1, x: 5} : { opacity: 1, x: 15}} transition={{ ease: "easeIn", duration: .2, delay: .7 + i * 0.1  }}>{child.subtitle}</motion.span></h3>
 
                         {/* <span>{child.subtitle}</span> */}
                       </motion.div>
@@ -324,6 +324,13 @@ const StyledBackgrounds = styled.section`
     }
     button {
       font-size: 1.5rem;
+    }
+  }
+  @media screen and (min-width: 300px ) and (max-width:900px ) and (orientation: landscape) {
+
+    .masthead .flex-wrapper h3 {
+      font-size: 2.5rem;
+      margin-bottom: .1rem;
     }
   }
 `
