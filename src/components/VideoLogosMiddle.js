@@ -83,7 +83,7 @@ const StyledSectionLogoScroll = styled.section`
 const ImageCanvas = ({ scrollHeight, numFrames, width, height, setTrigger, }) => {
   const { allFile } = useStaticQuery(graphql`
     query {
-      allFile(filter: { relativeDirectory: { eq: "framesv2middle" } }) {
+      allFile(filter: { relativeDirectory: { eq: "framesv3middle" } }) {
         nodes {
           base
           childImageSharp {
@@ -228,7 +228,7 @@ const VideoLogosMiddle = ({ isBottom }) => {
                     >
                       produced 700+{" "}
                       <span className="custom shimmer-logos">
-                        custom projects
+                        creative projects
                       </span>{" "}
                       for
                     </motion.h3>

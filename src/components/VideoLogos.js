@@ -223,7 +223,7 @@ const VideoLogos = ({ isBottom }) => {
                     >
                       produced 700+{" "}
                       <span className="custom shimmer-logos">
-                        custom projects
+                        creative projects
                       </span>{" "}
                       for
                     </motion.h3>
