@@ -78,7 +78,7 @@ const ImageCanvas = ({
 }) => {
   const { allFile } = useStaticQuery(graphql`
     query {
-      allFile(filter: { relativeDirectory: { eq: "framesv2desktop" } }) {
+      allFile(filter: { relativeDirectory: { eq: "framesv3desktop" } }) {
         nodes {
           base
           childImageSharp {
