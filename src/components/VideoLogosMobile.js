@@ -200,7 +200,7 @@ const VideoLogosMobile = ({ isBottom }) => {
                   exit={{ opacity: 0 }}
                 >
                   produced 700+{" "}
-                  <span className="custom shimmer-logos">custom projects</span>{" "}
+                  <span className="custom shimmer-logos">creative projects</span>{" "}
                   for
                 </motion.h3>
               )}

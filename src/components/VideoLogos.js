@@ -37,7 +37,7 @@ const StyledSectionLogoScroll = styled.section`
     top: 25%;
     display: block;
   }
-  .shimmer-logos {
+  /* .shimmer-logos {
     display: inline;
     text-align: center;
     color: rgba(255, 255, 255, 0.1);
@@ -57,11 +57,32 @@ const StyledSectionLogoScroll = styled.section`
     background-repeat: no-repeat;
     background-position: 0 0;
     background-color: rgba(255, 185, 4, 1);
+  } */
+  .shimmer-logos {
+    display: inline;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(
+      140deg,
+      rgba(255, 185, 4, 0.7) 45%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(255, 185, 4, 0.7) 55% 100%
+    );
+    background-size: 500% 200%;
+    animation: shimmer-logos .40s;
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -1s);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: rgba(255, 185, 4, 1);
   }
   @keyframes shimmer-logos {
     0% {
       /* background-position: top center; */
-      background-position: 80% top;
+      background-position: 90% top;
     }
     100% {
       background-position: left top;
@@ -223,7 +244,7 @@ const VideoLogos = ({ isBottom }) => {
                     >
                       produced 700+{" "}
                       <span className="custom shimmer-logos">
-                        custom projects
+                        creative projects
                       </span>{" "}
                       for
                     </motion.h3>

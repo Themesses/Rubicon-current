@@ -432,7 +432,8 @@ const renderVideo = ({
             <motion.div
               isMobilePortrait
               className="play-button"
-              initial={{ scale: 1.5 }}
+              // initial={{ scale: 1.5 }}
+              initial={{ scale: 1 }}
               animate={{ scale: 1 }}
               transition={{ duration: 2.6, delay: 0.8 }}
             >
@@ -532,8 +533,8 @@ const renderVideo = ({
                         initial={{ opacity: 0, pathLength: 0 }}
                         animate={{ opacity: 1, pathLength: 1 }}
                         transition={{
-                          delay: 2,
-                          duration: 1.4,
+                          delay: 1,
+                          duration: 1.6,
                           ease: "easeInOut",
                         }}
                         d="M2 25.5688V79.1696C2 79.4355 2.10593 79.6905 2.29436 79.8782L21.9703 99.4725C22.2844 99.7853 22.7669 99.854 23.1558 99.6412L108.433 52.9925C109.119 52.6175 109.129 51.6361 108.45 51.2476L23.2068 2.405C22.7953 2.16917 22.2746 2.25495 21.9605 2.61035L2.25077 24.9065C2.08919 25.0893 2 25.3249 2 25.5688Z"
