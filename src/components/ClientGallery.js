@@ -21,7 +21,7 @@ const StyledSection = styled.section`
   flex-direction: column;
   justify-content: center;
 
-  .shimmer-communications {
+  /* .shimmer-communications {
     display: inline;
     text-align: center;
     color: rgba(255, 255, 255, 0.1);
@@ -35,6 +35,27 @@ const StyledSection = styled.section`
     animation: shimmer .012s infinite;
     animation-play-state: paused;
     animation-delay: calc(var(--scroll) * -.11s);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: rgba(255, 185, 4, 1);
+  } */
+  .shimmer-communications {
+    display: inline;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(
+      140deg,
+      rgba(255, 185, 4, 0.7) 45%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(255, 185, 4, 0.7) 65% 100%
+    );
+    background-size: 400% 550%;
+    animation: shimmer .012s infinite;
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -.1s);
     -webkit-background-clip: text;
     -moz-background-clip: text;
     background-clip: text;

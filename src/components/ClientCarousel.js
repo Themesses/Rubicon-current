@@ -40,7 +40,7 @@ const StyledSection = styled.section`
     background-size: 400% 550%;
     animation: shimmer 0.012s infinite;
     animation-play-state: paused;
-    animation-delay: calc(var(--scroll) * -0.19s);
+    animation-delay: calc(var(--scroll) * -0.21s);
     -webkit-background-clip: text;
     -moz-background-clip: text;
     background-clip: text;
