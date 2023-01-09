@@ -57,7 +57,7 @@ const ImageCanvas = ({
 }) => {
   const { allFile } = useStaticQuery(graphql`
     query {
-      allFile(filter: { relativeDirectory: { eq: "framesv3mobile" } }) {
+      allFile(filter: { relativeDirectory: { eq: "framesv4mobile" } }) {
         nodes {
           base
           childImageSharp {
@@ -76,7 +76,7 @@ const ImageCanvas = ({
   const [frameIndex, setFrameIndex] = useState(0)
   function getCurrentFrame(index) {
     const imageFrame = allFile.nodes.find(
-      (frame) => frame.base === `${index.toString().padStart(5, "0")}.webp`
+      (frame) => frame.base === `${index.toString().padStart(5, "0")}.jpeg`
     )
     const srcImage = getSrc(imageFrame)
     return srcImage
