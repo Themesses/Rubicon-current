@@ -83,7 +83,7 @@ const StyledSectionLogoScroll = styled.section`
 const ImageCanvas = ({ scrollHeight, numFrames, width, height, setTrigger, }) => {
   const { allFile } = useStaticQuery(graphql`
     query {
-      allFile(filter: { relativeDirectory: { eq: "framesv3middle" } }) {
+      allFile(filter: { relativeDirectory: { eq: "framesv4middle" } }) {
         nodes {
           base
           childImageSharp {
@@ -102,7 +102,7 @@ const ImageCanvas = ({ scrollHeight, numFrames, width, height, setTrigger, }) =>
   const [frameIndex, setFrameIndex] = useState(0)
   function getCurrentFrame(index) {
     const imageFrame = allFile.nodes.find(
-      (frame) => frame.base === `${index.toString().padStart(5, "0")}.webp`
+      (frame) => frame.base === `${index.toString().padStart(5, "0")}.jpeg`
     )
     const srcImage = getSrc(imageFrame)
     return srcImage
