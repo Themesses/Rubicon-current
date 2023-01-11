@@ -7,6 +7,7 @@ import VideoTopSectionMobile from "../components/VideoTopSectionMobile"
 import Story from "../assets/video/Story-lg.mp4"
 import { useInView } from "react-intersection-observer"
 import Navigation from "../components/Navigation"
+import ContactFormPage from "../components/ContactFormPage"
 
 //modals
 import ModalSayHey from "../components/ModalSayHey"
@@ -80,6 +81,9 @@ export default function Layout({ children }) {
     <div>
       <GlobalStyles />
       <Typography />
+       <div style={{display: "none"}}>
+        <ContactFormPage />
+       </div>
       <div ref={ref}>
         <VideoTopSectionMobile
           src={Story}
@@ -91,9 +95,9 @@ export default function Layout({ children }) {
         {/* <Video src={Story} noControls={true} /> */}
         {/* {isMobilePortrait ? (
           <VideoTopSectionMobile src={Story} noControls={true} setVideoFailed={setVideoFailed} videoFailed={videoFailed}/>
-        ) : (
-          <VideoTopSection src={Story} noControls={true} setVideoFailed={setVideoFailed} videoFailed={videoFailed}/>
-        )} */}
+          ) : (
+            <VideoTopSection src={Story} noControls={true} setVideoFailed={setVideoFailed} videoFailed={videoFailed}/>
+          )} */}
         {/* <Video src={Story} noControls={true} /> */}
       </div>
       <Navigation

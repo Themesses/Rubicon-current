@@ -50,10 +50,11 @@ const StyledSectionLogoScroll = styled.section`
       rgba(255, 255, 255, 0.7) 50%,
       rgba(255, 185, 4, 0.7) 55% 100%
     );
-    background-size: 500% 200%;
-    animation: shimmer-logos .08s;
+    background-size: 900% 200%;
+    animation: shimmer-logos .006s;
     animation-play-state: paused;
-    animation-delay: calc(var(--scroll) * -.1s);
+    /* animation-delay: calc(var(--scroll) * -.008s); */
+    animation-delay: calc(var(--scroll) * -.0098s);
     -webkit-background-clip: text;
     -moz-background-clip: text;
     background-clip: text;
