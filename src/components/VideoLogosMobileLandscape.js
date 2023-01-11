@@ -2,17 +2,16 @@ import React, { useState, useEffect, useRef } from "react"
 import styled from "styled-components"
 import { graphql, useStaticQuery } from "gatsby"
 import { getSrc } from "gatsby-plugin-image"
-import { motion} from "framer-motion"
+import { AnimatePresence, motion} from "framer-motion"
 
 const StyledSectionLogoScroll = styled.section`
   position: relative;
   z-index: -2;
   background: #161616;
-  /* background: white; */
   padding-bottom: 0;
   .video-end {
     height: 1px;
-    transform: translateY(-100vh);
+    transform: t4anslateY(-100vh);
     z-index: 999;
   }
   .sticky-title {
@@ -21,17 +20,23 @@ const StyledSectionLogoScroll = styled.section`
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* top: 10%; */
-    top: 5%;
+    top: 15%;
     height: 5rem;
-    /* padding-top: 5rem; */
     margin-top: 8rem;
-    /* opacity: 0; */
-    /* transition: opacity 0.3s; */
     h3 {
       font-size: var(--h3-banner-clamp);
     }
-    .shimmer-custom {
+
+  }
+  canvas {
+    margin: 0 auto;
+    /* padding-top: 1em; */
+    position: sticky;
+    z-index: -1;
+    top: 30%;
+    display: block;
+  }
+  .shimmer-logos {
       display: inline;
       text-align: center;
       color: rgba(255, 255, 255, 0.1);
@@ -42,21 +47,18 @@ const StyledSectionLogoScroll = styled.section`
         rgba(255, 185, 4, 0.5) 65% 100%
       );
       background-size: 600% 400%;
-      /* animation-name: shimmer; */
-      /* animation-duration: 2s; */
       -webkit-background-clip: text;
       -moz-background-clip: text;
       background-clip: text;
-      animation: shimmer-custom 0.1s infinite;
+      animation: shimmer-logos 0.3s;
       animation-play-state: paused;
-      animation-delay: calc(var(--scroll) * -0.4s);
-      /* animation-iteration-count: 1; */
+      animation-delay: calc(var(--scroll) * -1s);
       background-repeat: no-repeat;
       background-position: 0 0;
       background-color: rgba(255, 185, 4, 1);
     }
 
-    @keyframes shimmer-custom {
+    @keyframes shimmer-logos {
       0% {
         background-position: top left;
       }
@@ -64,15 +66,6 @@ const StyledSectionLogoScroll = styled.section`
         background-position: top right;
       }
     }
-  }
-  canvas {
-    margin: 0 auto;
-    /* padding-top: 1em; */
-    position: sticky;
-    z-index: -1;
-    top: 15%;
-    display: block;
-  }
 
   /* @media screen and (max-width: 600px) {
     .sticky-title {
@@ -81,10 +74,10 @@ const StyledSectionLogoScroll = styled.section`
   } */
 `
 
-const ImageCanvas = ({ scrollHeight, numFrames, width, height }) => {
+const ImageCanvas = ({ scrollHeight, numFrames, width, height, setTrigger }) => {
   const { allFile } = useStaticQuery(graphql`
     query {
-      allFile(filter: { relativeDirectory: { eq: "framesv2desktop" } }) {
+      allFile(filter: { relativeDirectory: { eq: "framesv4desktop" } }) {
         nodes {
           base
           childImageSharp {
@@ -103,7 +96,7 @@ const ImageCanvas = ({ scrollHeight, numFrames, width, height }) => {
   const [frameIndex, setFrameIndex] = useState(0)
   function getCurrentFrame(index) {
     const imageFrame = allFile.nodes.find(
-      (frame) => frame.base === `${index.toString().padStart(5, "0")}.webp`
+      (frame) => frame.base === `${index.toString().padStart(5, "0")}.jpeg`
     )
     const srcImage = getSrc(imageFrame)
     return srcImage
@@ -116,10 +109,19 @@ const ImageCanvas = ({ scrollHeight, numFrames, width, height }) => {
       setImages((prevImages) => [...prevImages, img])
     }
   }
+  useEffect(() => {
+    if (frameIndex <= 600) {
+      setTrigger(true)
+    }
+    if (frameIndex > 600) {
+      setTrigger(false)
+    }
+  }, [frameIndex])
 
   const handleScroll = () => {
     const scrollFraction =
-      (window.scrollY - window.innerHeight) / (scrollHeight - window.innerHeight + 1100)
+      // (window.scrollY - window.innerHeight) / (scrollHeight - window.innerHeight + 1100)
+      (window.scrollY - window.innerHeight) / (scrollHeight - window.innerHeight + 500)
       // window.innerWidth < 600
       //   ? (window.scrollY - window.innerHeight - 150) /
       //     (scrollHeight - window.innerHeight)
@@ -173,6 +175,7 @@ const ImageCanvas = ({ scrollHeight, numFrames, width, height }) => {
 }
 
 const VideoLogosMobile = ({ isBottom }) => {
+  const [trigger, setTrigger] = useState(false)
   //   const { isVideoTitleHidden, setIsVideoTitleHidden} = useContext(Context)
   //   const [isMobileLandscape, setIsMobileLandscape] = useState(false)
   //   const [isMobilePortrait, setIsMobilePortrait] = useState(false)
@@ -208,18 +211,36 @@ const VideoLogosMobile = ({ isBottom }) => {
           <div>
             <StyledSectionLogoScroll>
               <div className="sticky-title" id="videoscroll-title">
-                <h3>
+                <AnimatePresence>
+
+                  {trigger && (
+                    <motion.h3
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ ease: "easeOut", duration: 0.3 }}
+                      exit={{ opacity: 0}}
+                    >
+                      produced 700+{" "}
+                      <span className="custom shimmer-logos">
+                        creative projects
+                      </span>{" "}
+                      for
+                    </motion.h3>
+                  )}
+                </AnimatePresence>
+                {/* <h3>
                   produced 700+ <span className="custom">creative projects</span>{" "}
                   for
-                </h3>
+                </h3> */}
               </div>
               <div id="video-scroll">
                 <ImageCanvas
-                  scrollHeight={4500}
+                  scrollHeight={6500}
                   width="500"
-                  height="230"
-                  numFrames={485}
+                  height="240"
+                  numFrames={680}
                   id="video-scroll"
+                  setTrigger={setTrigger}
                 />
               </div>
             </StyledSectionLogoScroll>

@@ -40,6 +40,37 @@ const StyledSectionLogoScroll = styled.section`
     /* border: 1px solid yellow; */
     margin-top: 10rem;
   }
+  .shimmer-logos {
+    display: inline;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(
+      140deg,
+      rgba(255, 185, 4, 0.7) 45%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(255, 185, 4, 0.7) 55% 100%
+    );
+    background-size: 900% 200%;
+    animation: shimmer-logos .006s;
+    animation-play-state: paused;
+    /* animation-delay: calc(var(--scroll) * -.008s); */
+    animation-delay: calc(var(--scroll) * -.0098s);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: rgba(255, 185, 4, 1);
+  }
+  @keyframes shimmer-logos {
+    0% {
+      /* background-position: top center; */
+      background-position: 90% top;
+    }
+    100% {
+      background-position: left top;
+    }
+  }
 
   /* @media screen and (max-width: 600px) {
     .sticky-title {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import Button from "@mui/material/Button"
 import { motion, useMotionValue, useTransform } from "framer-motion"
-
+import { NetlifyForm } from "react-netlify-forms"
 const isBrowser = typeof window !== "undefined"
 
 function CircularProgressSuccess({ progress }) {
@@ -91,6 +91,10 @@ const ContactFormPage = ({ setCompletedSuccessAnimation }) => {
   })
   // }
   useEffect(() => {
+    console.log("name:",formData.name)
+
+  }, [formData.name])
+  useEffect(() => {
     if (
       formData.name.length > 1 ||
       formData.email.length > 4 ||
@@ -116,6 +120,7 @@ const ContactFormPage = ({ setCompletedSuccessAnimation }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    console.log('submit')
     setToggle(false)
     if (isBrowser) {
       const hey = document.getElementById("modal-hey")
@@ -128,7 +133,8 @@ const ContactFormPage = ({ setCompletedSuccessAnimation }) => {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
-        "form-name": form.getAttribute("name"),
+        // "form-name": form.getAttribute("name"),
+        "form-name": "Contact-Rubicon",
         ...formData,
       }).toString(),
     }).then((response) => {
@@ -148,11 +154,13 @@ const ContactFormPage = ({ setCompletedSuccessAnimation }) => {
   return (
     <StyledForm>
       {toggle && !error ? (
-        <form
+        <NetlifyForm
+         name='Contact-Rubicon'
+        // <form
           onSubmit={(e) => handleSubmit(e)}
           action={THIS_PAGE}
         >
-          <input type="hidden" name="form-name" value="contact-form1" />
+          <input type="hidden" name="form-name" value="Contact-Rubicon" />
           <div>
             <p>who are you?</p>
             <input
@@ -187,6 +195,7 @@ const ContactFormPage = ({ setCompletedSuccessAnimation }) => {
           </div>
           <div className="icon-wrapper">
             <Button
+              onClick={handleSubmit}
               type="submit"
               aria-label="submit"
               sx={{ width: "100%", fontSize: '.55em' }}
@@ -195,7 +204,8 @@ const ContactFormPage = ({ setCompletedSuccessAnimation }) => {
               connect
             </Button>
           </div>
-        </form>
+          </NetlifyForm>
+        // </form>
       ) : !toggle && !error ? (
         <StyledSuccess>
           <motion.div

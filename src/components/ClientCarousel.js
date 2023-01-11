@@ -103,6 +103,27 @@ const StyledSection = styled.section`
    margin-bottom: -13rem;
   }
   @media screen and (max-width: 439px) {
+  .shimmer-marketing {
+    display: inline;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(
+      140deg,
+      rgba(255, 185, 4, 0.7) 35%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(255, 185, 4, 0.7) 65% 100%
+    );
+    background-size: 400% 550%;
+    animation: shimmer 0.018s infinite;
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -0.15s);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: rgba(255, 185, 4, 1);
+  }
     h3 {
       font-size: 4.6vw;
       margin: 3rem 0;
