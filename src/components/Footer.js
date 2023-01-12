@@ -97,22 +97,22 @@ export default function Footer({isBottom}) {
         <li>
           <ul className="socials">
             <li>
-              <a href="#">
+              <a href="mailto:contact@rubiconpm.com" target="_blank">
                 <EmailIcon fontSize="large" />
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="https://www.linkedin.com/company/rubicon-story/" target="_blank">
                 <LinkedInIcon fontSize="large" />
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="https://www.instagram.com/rubiconstory/" target="_blank">
                 <InstagramIcon fontSize="large" />
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="https://www.facebook.com/rubiconstory/" target="_blank">
                 <FacebookIcon fontSize="large" />
               </a>
             </li>

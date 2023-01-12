@@ -246,7 +246,7 @@ const ModalMore = ({ showModalMore, setShowModalMore }) => {
               variants={sayHeyAnimationVariants}
               initial="hidden"
               animate="visible"
-              onClick={(e) => e.stopPropagation()}
+              // onClick={(e) => e.stopPropagation()}
               // style={
               //   showSayHeyModal
               //     ? { transform: "translateX(0px)", opacity: 1 }

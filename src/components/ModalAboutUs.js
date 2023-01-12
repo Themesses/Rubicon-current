@@ -75,6 +75,7 @@ const Background = styled.div`
     border-radius: 15px;
     width: 65vw;
     height: 85vh;
+    min-height:80vh;
     position: relative;
     background: #373434;
     z-index: 992;
@@ -92,15 +93,14 @@ const Background = styled.div`
     justify-content: space-between;
     margin-top: 1em;
     width: 100%;
-    height: 50%;
+    height: 55%;
   }
   .modal-content-top-paragraph-wrapper p {
-    /* padding: 0.5em 2.8em 0.5em 4em; */
     margin-right: 1em;
     margin-left: 1em;
     font-size: 2.5rem;
     font-size: clamp(1.6rem, 1.6vw, 2.5rem);
-    line-height: 2.4em;
+    line-height: 2.2em;
     font-weight: 400;
   }
   .left.p-content {
@@ -157,7 +157,7 @@ const Background = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 40%;
+    height: 38%;
     bottom: 0;
     width: 100%;
   }
@@ -237,10 +237,26 @@ const Background = styled.div`
     .modal-wrapper {
       width: 95vw;
     }
+    .modal-content-bottom-absolute-wrapper {
+      padding-top: 5vh;
+    }
+    .modal-content-bottom-absolute-wrapper p {
+      /* padding-top: 15vh; */
+      /* padding: 0.5em 5.5em 0.5em 5.5em; */
+      /* padding-top: 2.5em;
+      font-size: 14px;
+      width: 50%;
+      height: 100%;
+      line-height: 1.6;
+      font-weight: 200; */
+    }
   }
   @media screen and (max-width: 790px) {
     .modal-wrapper {
       width: 99vw;
+    }
+    .modal-content-bottom-absolute-wrapper {
+      padding-top: 0vh;
     }
 
     .modal-content-top-paragraph-wrapper p {

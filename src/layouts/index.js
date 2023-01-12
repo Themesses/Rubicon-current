@@ -76,11 +76,28 @@ export default function Layout({ children }) {
   //     if (document)
   //   }
   // })
+  useEffect(() => {
+    //select body and set overflow to hidden when modal is open
+
+    if (showSayHeyModal || showAboutUsModal ) {
+      document.body.style.overflow = "hidden"
+      // document.body.style.paddingRight = "12px"
+    } else {
+      document.body.style.overflow = "auto"
+      // document.body.style.paddingRight = "0px"
+    }
+  }, [showSayHeyModal, showAboutUsModal])
+
+  const componentAnimation = {
+    hidden: { y: -50, opacity: 0 },
+    visible: { y: 0, opacity: 1, transition: { duration: 0.7 } },
+  }
 
   return (
     <div>
       <GlobalStyles />
       <Typography />
+      {/* NetlifyForm needs to be in the dom for netlify to find it. dont remove */}
        <div style={{display: "none"}}>
         <ContactFormPage />
        </div>
