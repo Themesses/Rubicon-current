@@ -40,7 +40,7 @@ const StyledSectionLogoScroll = styled.section`
     /* border: 1px solid yellow; */
     margin-top: 10rem;
   }
-  .shimmer-logos {
+  .shimmer-logos-mobile {
     display: inline;
     text-align: center;
     color: rgba(255, 255, 255, 0.1);
@@ -50,11 +50,12 @@ const StyledSectionLogoScroll = styled.section`
       rgba(255, 255, 255, 0.7) 50%,
       rgba(255, 185, 4, 0.7) 55% 100%
     );
-    background-size: 900% 200%;
-    animation: shimmer-logos .006s;
+    background-size: 400% 200%;
+    /* animation: shimmer-logos-mobile .005s; */
+    animation: shimmer-logos-mobile .02s;
     animation-play-state: paused;
-    /* animation-delay: calc(var(--scroll) * -.008s); */
-    animation-delay: calc(var(--scroll) * -.0098s);
+    /* animation-delay: calc(var(--scroll) * -.01s); */
+    animation-delay: calc(var(--scroll) * -.04s);
     -webkit-background-clip: text;
     -moz-background-clip: text;
     background-clip: text;
@@ -62,10 +63,9 @@ const StyledSectionLogoScroll = styled.section`
     background-position: 0 0;
     background-color: rgba(255, 185, 4, 1);
   }
-  @keyframes shimmer-logos {
+  @keyframes shimmer-logos-mobile {
     0% {
-      /* background-position: top center; */
-      background-position: 90% top;
+      background-position: 150% top;
     }
     100% {
       background-position: left top;
@@ -231,7 +231,7 @@ const VideoLogosMobile = ({ isBottom }) => {
                   exit={{ opacity: 0 }}
                 >
                   produced 700+{" "}
-                  <span className="custom shimmer-logos">creative projects</span>{" "}
+                  <span className="custom shimmer-logos-mobile">creative projects</span>{" "}
                   for
                 </motion.h3>
               )}
