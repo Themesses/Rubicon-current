@@ -22,6 +22,7 @@ import VideoLogosMobileLandscape from "../components/VideoLogosMobileLandscape"
 import Navigation from "../components/Navigation"
 import jankcb from "../components/functions/jankcb.js"
 import ClientCarousel from "../components/ClientCarousel"
+
 // import { smoothScrollTo } from "../components/functions/smoothScrollTo"
 // import useDeviceDetect from "../components/hooks/useDeviceDetect"
 
@@ -462,6 +463,7 @@ const Agency = ({videoFailed}) => {
                 isMobilePortrait={isMobilePortrait}
                 setShowModalMore={setShowModalMore}
                 setParallaxLoaded={setParallaxLoaded}
+                parallaxLoaded={parallaxLoaded}
               />
             )}
             <>

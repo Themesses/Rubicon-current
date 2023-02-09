@@ -95,6 +95,35 @@ const StyledSection = styled.section`
     }
   }
   @media screen and (max-width: 439px) {
+  .shimmer-communications {
+    display: inline;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(
+      140deg,
+      rgba(255, 185, 4, 0.7) 45%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(255, 185, 4, 0.7) 55% 100%
+    );
+    background-size: 500% 300%;
+    animation: shimmer-logos-mobile .02s infinite;
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -.037s);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: rgba(255, 185, 4, 1);
+  }
+  @keyframes shimmer {
+    0% {
+      background-position: 80% top;
+    }
+    100% {
+      background-position: left top;
+    }
+  }
     h3 {
       font-size: 4.6vw;
       margin: 3rem 0;

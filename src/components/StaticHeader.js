@@ -69,6 +69,35 @@ const StyledHeader = styled.header`
     }
   }
   @media screen and (max-width: 619px) {
+  .shimmer-header {
+    display: inline;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(
+      140deg,
+      rgba(255, 185, 4, 0.7) 47%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(255, 185, 4, 0.7) 53% 100%
+    );
+    background-size: 600% 300%;
+    animation: shimmer-header 0.11s infinite;
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -0.4s);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: rgba(255, 185, 4, 1);
+  }
+  @keyframes shimmer-header {
+    0% {
+      background-position: top right;
+    }
+    100% {
+      background-position: top left;
+    }
+  }
     h1 {
       font-size: 7vw !important;
     }

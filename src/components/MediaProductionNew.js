@@ -368,6 +368,13 @@ const MediaProduction = ({ setShowModalMore, parallaxLoaded, setParallaxLoaded }
         //   headling[0].style.visibility = "visible"
       }
     }
+    // even if all the components arent loaded after timeout, load it after 10s.
+    setTimeout(()=> {
+      if(!parallaxLoaded) {
+        setParallaxLoaded(true)
+      }
+    }, 10000)
+
   }
 
   const handForeground = {
