@@ -30,39 +30,6 @@ const StyledSectionLogoScroll = styled.section`
     h3 {
       font-size: var(--h3-banner-clamp);
     }
-    .shimmer-custom {
-      display: inline;
-      text-align: center;
-      color: rgba(255, 255, 255, 0.1);
-      background: linear-gradient(
-        140deg,
-        rgba(255, 185, 4, 0.5) 35%,
-        rgba(255, 255, 255, 0.6) 50%,
-        rgba(255, 185, 4, 0.5) 65% 100%
-      );
-      background-size: 600% 400%;
-      /* animation-name: shimmer; */
-      /* animation-duration: 2s; */
-      -webkit-background-clip: text;
-      -moz-background-clip: text;
-      background-clip: text;
-      animation: shimmer-custom 0.1s infinite;
-      animation-play-state: paused;
-      animation-delay: calc(var(--scroll) * -0.4s);
-      /* animation-iteration-count: 1; */
-      background-repeat: no-repeat;
-      background-position: 0 0;
-      background-color: rgba(255, 185, 4, 1);
-    }
-
-    @keyframes shimmer-custom {
-      0% {
-        background-position: top left;
-      }
-      100% {
-        background-position: top right;
-      }
-    }
   }
   canvas {
     margin: 0 auto;
@@ -71,6 +38,36 @@ const StyledSectionLogoScroll = styled.section`
     z-index: -1;
     top: 25%;
     display: block;
+  }
+  .shimmer-logos {
+    display: inline;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.1);
+    background: linear-gradient(
+      140deg,
+      rgba(255, 185, 4, 0.7) 45%,
+      rgba(255, 255, 255, 0.7) 50%,
+      rgba(255, 185, 4, 0.7) 55% 100%
+    );
+    background-size: 400% 200%;
+    animation: shimmer-logos .29s;
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -1s);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-color: rgba(255, 185, 4, 1);
+  }
+  @keyframes shimmer-logos {
+    0% {
+      /* background-position: top center; */
+      background-position: 90% top;
+    }
+    100% {
+      background-position: left top;
+    }
   }
 
   /* @media screen and (max-width: 600px) {
