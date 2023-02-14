@@ -686,6 +686,10 @@ export default function VideoTopSection({
     const videoClass = isBrowser
       ? document.getElementsByClassName("video-class")
       : ""
+    const playIcon = isBrowser
+      ? document.getElementsByClassName("play-icon")
+      : ""
+
 
     vidButtonRef.current.classList.remove("is-playing")
     vidButtonRef.current.style.display = "flex"
@@ -698,6 +702,7 @@ export default function VideoTopSection({
     videoClass[0].style.zIndex = 1
     initialVideo[0].style.width = "90%"
     initialVideo[0].style.opacity = 0
+    playIcon[1].style.paddingBottom = "12px"
     closeIcon[0].style.display = "none"
     initialVideo[0].style.visibility = "hidden"
     topSection[0].style.display = "flex"
