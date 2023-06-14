@@ -159,7 +159,7 @@ const StyledBanner = styled.div`
   }
 `
 
-const MediaProductionStaticFallback = ({setShowModalMore, setParallaxLoaded}) => {
+const MediaProductionStaticFallback = ({setShowModalMore, setParallaxLoaded, parallaxLoaded}) => {
   const [waterfallImage, setWaterfallImage] = useState(false)
   const [handImage, setHandImage] = useState(false)
 
@@ -185,6 +185,12 @@ const MediaProductionStaticFallback = ({setShowModalMore, setParallaxLoaded}) =>
   const pluginImage = getImage(backgroundImage)
 
   const loadAllITems = () => {
+    // even if all the components arent loaded after timeout, load it after 5s.
+    setTimeout(()=> {
+      if(!parallaxLoaded) {
+        setParallaxLoaded(true)
+      }
+    }, 5000)
     if (waterfallImage && handImage ) {
       const foreground = document.getElementsByClassName("foreground-image")
       const mainImage = document.getElementsByClassName("c-bgImage")
