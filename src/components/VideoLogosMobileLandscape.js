@@ -220,7 +220,7 @@ const VideoLogosMobile = ({ isBottom }) => {
                       transition={{ ease: "easeOut", duration: 0.3 }}
                       exit={{ opacity: 0}}
                     >
-                      produced 700+{" "}
+                      produced 800+{" "}
                       <span className="custom shimmer-logos">
                         creative projects
                       </span>{" "}

@@ -336,7 +336,7 @@ const Agency = ({videoFailed}) => {
                 <>
                   <VideoLogosMobile />
                   <ClientGallery isJank={isJank} />
-                  <ClientCarousel dimensions={dimensions} />
+                  {/* <ClientCarousel dimensions={dimensions} /> */}
                   <OriginalStoriesMobile
                     setShowAboutUsModal={setShowAboutUsModal}
                   />
@@ -345,14 +345,14 @@ const Agency = ({videoFailed}) => {
                 <>
                   <VideoLogosMobileLandscape />
                   <ClientGallery isJank={isJank} />
-                  <ClientCarousel dimensions={dimensions} />
+                  {/* <ClientCarousel dimensions={dimensions} /> */}
                   <OriginalStories setShowAboutUsModal={setShowAboutUsModal} isMobileLandscape={isMobileLandscape} />
                 </>
               ) : isMedium ? (
                 <>
                   <VideoLogosMiddle isBottom={isBottom} />
                   <ClientGallery />
-                  <ClientCarousel dimensions={dimensions} />
+                  {/* <ClientCarousel dimensions={dimensions} /> */}
                   <OriginalStories
                     isBottom={isBottom}
                     setShowAboutUsModal={setShowAboutUsModal}
@@ -362,7 +362,7 @@ const Agency = ({videoFailed}) => {
                 <>
                   <VideoLogos isBottom={isBottom} />
                   <ClientGallery />
-                  <ClientCarousel dimensions={dimensions} />
+                  {/* <ClientCarousel dimensions={dimensions} /> */}
                   <OriginalStories setShowAboutUsModal={setShowAboutUsModal} isBottom={isBottom}/>
                 </>
               ) : (

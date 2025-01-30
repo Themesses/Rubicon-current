@@ -88,13 +88,17 @@ const StyledSection = styled.section`
     }
   }
   @media screen and (max-width: 700px) {
-    margin-bottom: 15rem;
+    margin-bottom: 0rem;
     h3 {
       margin: 5rem 0;
       font-size: 4.6vw;
     }
   }
+  @media screen and (max-width: 600px) {
+    margin-bottom: -15rem;
+  }
   @media screen and (max-width: 439px) {
+    margin-bottom: -20rem;
   .shimmer-communications {
     display: inline;
     text-align: center;
@@ -191,7 +195,7 @@ export default function ClientGallery({isJank}) {
     query {
       allMarkdownRemark(
         filter: {
-          frontmatter: { title: { in: ["Louis Vuitton", "Essilor Luxottica"] } }
+          frontmatter: { title: { in: ["Louis Vuitton", "Essilor Luxottica", "Sephora", "Ikea"] } }
         }
       ) {
         nodes {
@@ -219,7 +223,7 @@ export default function ClientGallery({isJank}) {
   return (
     <StyledSection ref={componentRef}>
       <h3 ref={ref2}>
-        supporting <span className="shimmer-communications">communications teams</span> at
+        partners <span className="shimmer-communications">in storytelling</span>
       </h3>
       <motion.div animate={animation}>
         <StyledWrapper >
